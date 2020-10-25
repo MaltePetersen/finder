@@ -12,6 +12,16 @@
       "sourceRoot": "apps/finder/src",
       "prefix": "finder",
       "architect": {
+        "compodoc": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "npx compodoc -p apps/finder/tsconfig.app.json"
+              }
+            ]
+          }
+        },
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {

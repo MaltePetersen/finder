@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "files": [
+    "src//app/app.component.spec.ts",
+    "src//app/app.module.ts",
+    "src//app/app.component.ts",
+    "src//main.ts",
+    "src//environments/environment.prod.ts",
+    "src//environments/environment.ts",
+    "src//test-setup.ts",
+    "src//polyfills.ts",
+  ],
+}

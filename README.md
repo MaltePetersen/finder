@@ -1,5 +1,118 @@
 # Finder
 
+A university project to build a file explorer with Angular and the progressive Node-JS Framework Nest-Js
+To organize the project we are using NX.
+
+## Summary
+
+  - [Getting Started](#getting-started)
+  - [Runing the tests](#running-the-tests)
+  - [Deployment](#deployment)
+  - [API Documentation](#api-documentation)
+  - [Documentation](#documentation)
+  - [Authors](#authors)
+  - [License](#license)
+
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on
+your local machine for development and testing purposes. See deployment
+for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+What things you need to install the software and how to install them
+
+    Docker
+    Docker-Compose
+    npm
+
+
+### Installing
+
+For development we recommend using npm directly
+
+Installing npm
+
+    https://www.npmjs.com/get-npm
+
+Download the dependencies
+    
+    npm install
+
+Download nx
+
+    npm install -g nx
+
+Run the frontend
+
+    nx serve finder
+
+run the backend
+
+    nx serve api
+
+## Running the tests
+
+To run the unit tests for the backend run
+
+    nx test finder
+
+To run the unit test for the frontend run
+
+    nx test api
+
+### Break down into end to end tests
+
+To run the e2e Test for the frontend run
+
+    nx e2e finder
+
+### And coding style tests
+
+To lint a project run
+
+    nx lint <project> 
+
+## Deployment
+
+The project comes shipped with two docker images for the backend and frontend. 
+You can use the docker-compose file to start both together with 
+
+docker-compose up
+
+With this config the application should be easily deployed on any server
+
+## API Documentation
+
+For the API Documenation we stick to the Open Api 3.0 specification.  
+Our API Documentation can be found after serving the frontend under localhost:3333/api
+
+## Documentation
+
+The Angular Application structure can be explored through the documentation tool compodoc.
+Compodoc has some pending problems with Angular 10 therefore we using a workaround with an 
+shell script.
+To generate the documentation just run
+
+npm run-script documentation
+
+and to explore it install a web-server like test-server and serve it locally like this 
+
+npm run-script serve-doc 
+
+to explore the documentation go to localhost:8080
+## Authors
+
+  - **Markus Hansenn** -
+  - **Philip Herrmann** -
+  - **Johanna Flechtner** -  
+  - **Malte Petersen** -
+
+
+
+# NX Explanation
 This project was generated using [Nx](https://nx.dev).
 
 <p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
