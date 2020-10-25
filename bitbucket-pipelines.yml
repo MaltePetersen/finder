@@ -7,6 +7,6 @@ pipelines:
   default:
     - step:
         script:
-          - chmod +x dependencies.sh
+          - sh dependencies.sh
           - docker-compose up -d
           - docker-compose down
