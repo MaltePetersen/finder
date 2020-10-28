@@ -36,8 +36,8 @@ Installing npm
     https://www.npmjs.com/get-npm
 
 Download the dependencies
-  
- npm install
+
+npm install
 
 Download nx
 
@@ -78,9 +78,9 @@ To lint a project run
 The project comes shipped with two docker images for the backend and frontend.
 You can use the docker-compose file to start both together with
 
-docker image build -t frontend -f frontend.Dockerfile .
-docker image build -t backend -f backend.Dockerfile .
-docker-compose up
+    docker image build -t frontend -f frontend.Dockerfile .
+    docker image build -t backend -f backend.Dockerfile .
+    docker-compose up
 
 With this config the application should be easily deployed on any server
 
@@ -96,18 +96,16 @@ Compodoc has some pending problems with Angular 10 therefore we using a workarou
 shell script.
 To generate the documentation just run
 
-npm run-script documentation
+    npm run-script documentation
 
 and to explore it install a web-server like test-server and serve it locally like this
 
-npm run-script serve-doc
+    npm run-script serve-doc
 
 to explore the documentation go to localhost:8080
 
 ## Authors
 
-- **Markus Hansenn** -
-- **Philip Herrmann** -
 - **Johanna Flechtner** -
 - **Malte Petersen** -
 
