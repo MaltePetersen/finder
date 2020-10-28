@@ -9,3 +9,9 @@ done
 echo '  ],' >> tsconfig.compodoc.json
 echo '}' >> tsconfig.compodoc.json
 npx @compodoc/compodoc -p tsconfig.compodoc.json --output ../../documentation
+cd ..
+cd ..
+compodoc -p apps/api/tsconfig.app.json --output documentationNest
+compodoc -p tsconfig.base.json
+compodoc -p tsconfig.base.json --output documentationNest
+

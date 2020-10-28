@@ -26,6 +26,8 @@ What things you need to install the software and how to install them
     Docker
     Docker-Compose
     npm
+    live-server (for the documentation)
+    compodoc (for the documentation)
 
 ### Installing
 
@@ -37,7 +39,7 @@ Installing npm
 
 Download the dependencies
 
-npm install
+    npm install
 
 Download nx
 
@@ -78,9 +80,9 @@ To lint a project run
 The project comes shipped with two docker images for the backend and frontend.
 You can use the docker-compose file to start both together with
 
-    docker image build -t frontend -f frontend.Dockerfile .
-    docker image build -t backend -f backend.Dockerfile .
-    docker-compose up
+    npm run-script docker:buildFrontend
+    npm run-script docker:buildBackend
+    npm run-script docker:run
 
 With this config the application should be easily deployed on any server
 
@@ -93,14 +95,14 @@ Our API Documentation can be found after serving the frontend under localhost:33
 
 The Angular Application structure can be explored through the documentation tool compodoc.
 Compodoc has some pending problems with Angular 10 therefore we using a workaround with an
-shell script.
-To generate the documentation just run
+shell script. The shell script is saved in documentation.sh.
+To generate and serve the documentation on localhost:8080 just run
 
-    npm run-script documentation
+    npm run-script documentation:generateAndServe
 
-and to explore it install a web-server like test-server and serve it locally like this
+and to explore it without generating the documentation everytime just use this script
 
-    npm run-script serve-doc
+    npm run-script documentation:serve
 
 to explore the documentation go to localhost:8080
 

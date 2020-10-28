@@ -26,8 +26,12 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "documentation": "sh documentation.sh",
-    "serve-doc": "live-server documentation/ ."
+    "documentation:generate": "sh documentation.sh",
+    "documentation:frontend": "live-server documentation/ .",
+    "documentation:backend": "live-server documentationNest/ .  --port=8081",
+    "docker:buildBackend": "docker image build -t backend -f backend.Dockerfile .",
+    "docker:buildFrontend": "docker image build -t frontend -f frontend.Dockerfile .",
+    "docker:run": "docker-compose up"
   },
   "private": true,
   "dependencies": {
