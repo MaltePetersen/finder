@@ -12,9 +12,4 @@ export class AppController {
   getData(): Message {
     return this.appService.getData();
   }
-  @Get('test')
-  getTest(): string {
-    return 'Hallo Henrikje';
-  }
-
 }
