@@ -1,41 +1,47 @@
-import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import { DirectoryDTO, UpdateDirectoryDTO } from '@finder/shared';
+import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
 import { DirectoryHandlingService } from './directory-handling.service';
 
-@Controller('directory-handling')
+@Controller('directory')
 export class DirectoryHandlingController {
   constructor(private directoryHandlingService: DirectoryHandlingService) {}
 
   @Get()
-  readDirectory() {
-    this.directoryHandlingService.readDirectory(__dirname);
+  async readDirectory() {
+    return await this.directoryHandlingService.readDirectory(__dirname);
   }
   @Post()
-  createDirectory() {
-    this.directoryHandlingService.createDirectory(__dirname, 'testDir');
-    this.directoryHandlingService.readDirectory(__dirname);
+  async createDirectory(@Body() directoryDTO: DirectoryDTO) {
+    await this.directoryHandlingService.createDirectory(
+      directoryDTO.path,
+      directoryDTO.name
+    );
+    return await this.directoryHandlingService.readDirectory(directoryDTO.path);
   }
   @Put()
-  updateDirectory() {
-    this.directoryHandlingService.updateDirectoryName(
-      __dirname,
-      'testDir',
-      'testDir2'
+  async updateDirectory(@Body() updateDirectoryDTO: UpdateDirectoryDTO) {
+    await this.directoryHandlingService.updateDirectoryName(
+      updateDirectoryDTO.path,
+      updateDirectoryDTO.name,
+      updateDirectoryDTO.newName
     );
-    this.directoryHandlingService.readDirectory(__dirname);
+    return await this.directoryHandlingService.readDirectory(
+      updateDirectoryDTO.path
+    );
   }
   @Delete()
-  deleteDirectory() {
-    this.directoryHandlingService.deleteDirectory(__dirname, 'testDir3');
-    this.directoryHandlingService.readDirectory(__dirname);
+  async deleteDirectory() {
+    await this.directoryHandlingService.deleteDirectory(__dirname, 'testDir3');
+    return await this.directoryHandlingService.readDirectory(__dirname);
   }
   @Post('/copy')
-  copyDirectory() {
+  async copyDirectory() {
     this.directoryHandlingService.copyDirectory(
       __dirname,
       'testDir2',
       __dirname,
       'testDir3'
     );
-    this.directoryHandlingService.readDirectory(__dirname);
+    return await this.directoryHandlingService.readDirectory(__dirname);
   }
 }

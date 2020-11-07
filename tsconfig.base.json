@@ -16,7 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@finder/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@finder/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@finder/shared": ["libs/shared/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
