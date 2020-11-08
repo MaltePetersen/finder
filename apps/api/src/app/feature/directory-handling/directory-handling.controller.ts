@@ -1,13 +1,22 @@
 import { DirectoryDTO, UpdateDirectoryDTO } from '@finder/shared';
-import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { DirectoryHandlingService } from './directory-handling.service';
-
+//default __dirname /Users/mpetersen/finder/dist/apps/api
 @Controller('directory')
 export class DirectoryHandlingController {
   constructor(private directoryHandlingService: DirectoryHandlingService) {}
 
   @Get()
   async readDirectory() {
+    console.log(__dirname);
     return await this.directoryHandlingService.readDirectory(__dirname);
   }
   @Post()
@@ -29,19 +38,27 @@ export class DirectoryHandlingController {
       updateDirectoryDTO.path
     );
   }
-  @Delete()
-  async deleteDirectory() {
-    await this.directoryHandlingService.deleteDirectory(__dirname, 'testDir3');
-    return await this.directoryHandlingService.readDirectory(__dirname);
+  @Delete('::name::path')
+  async deleteDirectory(
+    @Param('name') directory: string,
+    @Param('path') path: string
+  ) {
+    await this.directoryHandlingService.deleteDirectory(path, directory);
+    return await this.directoryHandlingService.readDirectory(path);
   }
-  @Post('/copy')
-  async copyDirectory() {
+  @Get('/copy::from::to::name::newname')
+  async copyDirectory(
+    @Param('from') fromPath: string,
+    @Param('to') toPath: string,
+    @Param('name') name: string,
+    @Param('newname') newName: string
+  ) {
     this.directoryHandlingService.copyDirectory(
-      __dirname,
-      'testDir2',
-      __dirname,
-      'testDir3'
+      fromPath,
+      name,
+      toPath,
+      newName
     );
-    return await this.directoryHandlingService.readDirectory(__dirname);
+    return await this.directoryHandlingService.readDirectory(fromPath);
   }
 }
