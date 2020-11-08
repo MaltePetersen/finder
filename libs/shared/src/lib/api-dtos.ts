@@ -7,3 +7,12 @@ export class UpdateDirectoryDTO {
   path: string;
   newName: string;
 }
+export class FileDTO {
+  name: string;
+  path: string;
+}
+export class UpdateFileDTO {
+  name: string;
+  path: string;
+  newName: string;
+}

@@ -1,57 +1,53 @@
 import { Injectable } from '@nestjs/common';
-import {
-  constants,
-  copyFile,
-  readdir,
-  readdirSync,
-  readFile,
-  rename,
+import { constants } from 'fs';
+const {
   unlink,
+  copyFile,
+  readFile,
+  readdir,
+  rename,
   writeFile,
-} from 'fs';
-import { homedir } from 'os';
+} = require('fs').promises;
 
 @Injectable()
 export class FileHandlingService {
-  readDirectory(path: string) {
-    readdir(__dirname, (err, files) => {
-      console.table(files);
-    });
+  async readFile(path: string, file: string): Promise<any> {
+    return readFile(this.constructFilePath(path, file), {
+      encoding: 'utf-8',
+    }).catch((err: NodeJS.ErrnoException) => this.errorLog(err));
   }
 
-  readFile(path: string, file: string) {
-    readFile(
+  async createFile(path: string, file: string): Promise<any> {
+    return writeFile(
       this.constructFilePath(path, file),
-      { encoding: 'utf-8' },
-      (err, data) => console.log(data)
-    );
+      ''
+    ).catch((err: NodeJS.ErrnoException) => this.errorLog(err));
   }
 
-  createFile(path: string, file: string) {
-    writeFile(this.constructFilePath(path, file), '', (err) =>
-      this.errorLog(err)
-    );
-  }
-
-  updateFileName(path: string, file: string, name: string) {
-    rename(
+  async updateFileName(path: string, file: string, name: string): Promise<any> {
+    return rename(
       this.constructFilePath(path, file),
-      this.constructFilePath(path, name),
-      (err) => this.errorLog(err)
-    );
+      this.constructFilePath(path, name)
+    ).catch((err: NodeJS.ErrnoException) => this.errorLog(err));
   }
 
-  copyFile(path: string, file: string, newPath: string, newFile: string) {
-    copyFile(
+  async copyFile(
+    path: string,
+    file: string,
+    newPath: string,
+    newFile: string
+  ): Promise<any> {
+    return copyFile(
       this.constructFilePath(path, file),
       this.constructFilePath(newPath, newFile),
-      constants.COPYFILE_EXCL,
-      (err) => this.errorLog(err)
-    );
+      constants.COPYFILE_EXCL
+    ).catch((err: NodeJS.ErrnoException) => this.errorLog(err));
   }
 
-  deleteFile(path: string, file: string) {
-    unlink(this.constructFilePath(path, file), (err) => this.errorLog(err));
+  async deleteFile(path: string, file: string): Promise<any> {
+    return unlink(
+      this.constructFilePath(path, file)
+    ).catch((err: NodeJS.ErrnoException) => this.errorLog(err));
   }
 
   private errorLog(err: NodeJS.ErrnoException): void {

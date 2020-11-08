@@ -1,41 +1,52 @@
-import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { FileDTO, UpdateFileDTO } from '@finder/shared';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { SharedDirectoryService } from '../../common/service/shared-directory/shared-directory.service';
 import { FileHandlingService } from './file-handling.service';
-@Controller('file-handling')
+@Controller('file')
 export class FileHandlingController {
-  constructor(private filehandlerService: FileHandlingService) {}
-  @Get('/files')
-  getAllFiles() {
-    return 'test';
+  constructor(
+    private filehandlerService: FileHandlingService,
+    private sharedDirectoryService: SharedDirectoryService
+  ) {}
+  @Get('::path::file')
+  async getFile(@Param('path') path: string, @Param('file') file: string) {
+    return await this.filehandlerService.readFile(path, file);
   }
-  @Get('/file::path::file')
-  getFile(@Param('path') path: string, @Param('file') file: string) {
-    console.log(__dirname === path);
-    console.log(path);
-    console.log(file === 'main.js');
-    console.log(file);
-    this.filehandlerService.readFile(path, file);
+  @Post()
+  async createFile(@Body() fileDTO: FileDTO) {
+    await this.filehandlerService.createFile(fileDTO.path, fileDTO.name);
+    return await this.sharedDirectoryService.readDirectory(fileDTO.path);
   }
-  @Get('/rootPath')
-  getRootPath() {
-    return 'rootPath';
+  @Put()
+  async updateFileName(@Body() updateFileDTO: UpdateFileDTO) {
+    await this.filehandlerService.updateFileName(
+      updateFileDTO.path,
+      updateFileDTO.name,
+      updateFileDTO.newName
+    );
+    return await this.sharedDirectoryService.readDirectory(updateFileDTO.path);
   }
-  @Post('/file')
-  createFile() {
-    this.filehandlerService.createFile(__dirname, 'test');
+  @Get('/copy::frompath::topath::name::newname')
+  async copy(
+    @Param('frompath') fromPath: string,
+    @Param('topath') toPath: string,
+    @Param('name') name: string,
+    @Param('newname') newName: string
+  ) {
+    await this.filehandlerService.copyFile(fromPath, name, toPath, newName);
+    return await this.sharedDirectoryService.readDirectory(toPath);
   }
-  @Put('/fileName')
-  updateFileName() {
-    this.filehandlerService.updateFileName(__dirname, 'test', 'hallo');
-    this.filehandlerService.readDirectory(__dirname);
-  }
-  @Post('/copy')
-  copy() {
-    this.filehandlerService.copyFile(__dirname, 'hallo', __dirname, 'hallo2');
-    this.filehandlerService.readDirectory(__dirname);
-  }
-  @Delete('/file')
-  delete() {
-    this.filehandlerService.deleteFile(__dirname, 'hallo');
-    this.filehandlerService.readDirectory(__dirname);
+  @Delete('::path::name')
+  async delete(@Param('path') path: string, @Param('name') name: string) {
+    await this.filehandlerService.deleteFile(path, name);
+    return await this.sharedDirectoryService.readDirectory(path);
   }
 }

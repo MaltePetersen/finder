@@ -3,12 +3,6 @@ import { copySync } from 'fs-extra';
 const { mkdir, readdir, rename, rmdir } = require('fs').promises;
 @Injectable()
 export class DirectoryHandlingService {
-  readDirectory(path: string): Promise<any> {
-    return readdir(__dirname).catch((err: NodeJS.ErrnoException) =>
-      this.errorLog(err)
-    );
-  }
-
   createDirectory(path: string, dir: string): Promise<any> {
     return mkdir(
       this.constructDirectoryPath(path, dir)

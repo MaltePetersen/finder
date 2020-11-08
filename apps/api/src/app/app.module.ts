@@ -1,13 +1,10 @@
 import { Module } from '@nestjs/common';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { FileHandlingModule } from './feature/file-handling/file-handling.module';
 import { DirectoryHandlingModule } from './feature/directory-handling/directory-handling.module';
+import { CommonModule } from './common/common.module';
 
 @Module({
-  imports: [FileHandlingModule, DirectoryHandlingModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [FileHandlingModule, DirectoryHandlingModule, CommonModule],
 })
 export class AppModule {}

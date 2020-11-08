@@ -8,16 +8,18 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { SharedDirectoryService } from '../../common/service/shared-directory/shared-directory.service';
 import { DirectoryHandlingService } from './directory-handling.service';
-//default __dirname /Users/mpetersen/finder/dist/apps/api
 @Controller('directory')
 export class DirectoryHandlingController {
-  constructor(private directoryHandlingService: DirectoryHandlingService) {}
+  constructor(
+    private directoryHandlingService: DirectoryHandlingService,
+    private sharedDirectoryService: SharedDirectoryService
+  ) {}
 
-  @Get()
-  async readDirectory() {
-    console.log(__dirname);
-    return await this.directoryHandlingService.readDirectory(__dirname);
+  @Get('::path')
+  async readDirectory(@Param('path') path: string) {
+    return await this.sharedDirectoryService.readDirectory(path);
   }
   @Post()
   async createDirectory(@Body() directoryDTO: DirectoryDTO) {
@@ -25,7 +27,7 @@ export class DirectoryHandlingController {
       directoryDTO.path,
       directoryDTO.name
     );
-    return await this.directoryHandlingService.readDirectory(directoryDTO.path);
+    return await this.sharedDirectoryService.readDirectory(directoryDTO.path);
   }
   @Put()
   async updateDirectory(@Body() updateDirectoryDTO: UpdateDirectoryDTO) {
@@ -34,7 +36,7 @@ export class DirectoryHandlingController {
       updateDirectoryDTO.name,
       updateDirectoryDTO.newName
     );
-    return await this.directoryHandlingService.readDirectory(
+    return await this.sharedDirectoryService.readDirectory(
       updateDirectoryDTO.path
     );
   }
@@ -44,7 +46,7 @@ export class DirectoryHandlingController {
     @Param('path') path: string
   ) {
     await this.directoryHandlingService.deleteDirectory(path, directory);
-    return await this.directoryHandlingService.readDirectory(path);
+    return await this.sharedDirectoryService.readDirectory(path);
   }
   @Get('/copy::from::to::name::newname')
   async copyDirectory(
@@ -59,6 +61,6 @@ export class DirectoryHandlingController {
       toPath,
       newName
     );
-    return await this.directoryHandlingService.readDirectory(fromPath);
+    return await this.sharedDirectoryService.readDirectory(fromPath);
   }
 }
