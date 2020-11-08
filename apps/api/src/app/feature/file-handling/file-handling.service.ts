@@ -24,10 +24,14 @@ export class FileHandlingService {
     ).catch((err: NodeJS.ErrnoException) => this.errorLog(err));
   }
 
-  async updateFileName(path: string, file: string, name: string): Promise<any> {
+  async updateFileName(
+    path: string,
+    name: string,
+    nameNew: string
+  ): Promise<any> {
     return rename(
-      this.constructFilePath(path, file),
-      this.constructFilePath(path, name)
+      this.constructFilePath(path, name),
+      this.constructFilePath(path, nameNew)
     ).catch((err: NodeJS.ErrnoException) => this.errorLog(err));
   }
 
