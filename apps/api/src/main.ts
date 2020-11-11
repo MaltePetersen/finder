@@ -18,9 +18,7 @@ async function bootstrap() {
 
   const options = new DocumentBuilder()
     .setTitle('Finder API')
-    .setDescription(
-      'This is the finder api Default path: /Users/mpetersen/finder/dist/apps/api'
-    )
+    .setDescription('This is the finder api Default path: /Users/mpetersen/finder/dist/apps/api')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, options);

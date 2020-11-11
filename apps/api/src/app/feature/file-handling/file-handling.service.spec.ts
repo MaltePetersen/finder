@@ -43,9 +43,7 @@ describe('FileHandlingService', () => {
     beforeEach(async () => await service.createFile(__dirname, 'test'));
     it('Delete test', async () => {
       await service.deleteFile(__dirname, 'test');
-      expect(await sharedService.readDirectory(__dirname)).not.toContain(
-        'test'
-      );
+      expect(await sharedService.readDirectory(__dirname)).not.toContain('test');
     });
   });
 });

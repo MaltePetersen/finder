@@ -8,6 +8,6 @@
     "src//environments/environment.prod.ts",
     "src//environments/environment.ts",
     "src//test-setup.ts",
-    "src//polyfills.ts",
-  ],
+    "src//polyfills.ts"
+  ]
 }

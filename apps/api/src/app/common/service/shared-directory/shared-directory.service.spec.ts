@@ -18,8 +18,6 @@ describe('SharedDirectoryService', () => {
   });
   describe('Functions', () => {
     it('shouldRead ', async () =>
-      expect(await service.readDirectory(__dirname)).toContain(
-        'shared-directory.service.spec.ts'
-      ));
+      expect(await service.readDirectory(__dirname)).toContain('shared-directory.service.spec.ts'));
   });
 });

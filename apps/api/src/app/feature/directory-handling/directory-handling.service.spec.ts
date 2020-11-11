@@ -22,9 +22,7 @@ describe('DirectoryHandlingService', () => {
       expect(await sharedService.readDirectory(__dirname)).not.toBeNull();
     });
     it('should contain testFile', async () => {
-      expect(await sharedService.readDirectory(__dirname)).toContain(
-        'directory-handling.controller.spec.ts'
-      );
+      expect(await sharedService.readDirectory(__dirname)).toContain('directory-handling.controller.spec.ts');
     });
     describe('createDirectory tests', () => {
       afterEach(async () => {
@@ -41,9 +39,7 @@ describe('DirectoryHandlingService', () => {
       });
       it('should delete folder', async () => {
         await service.deleteDirectory(__dirname, 'test');
-        expect(await sharedService.readDirectory(__dirname)).not.toContain(
-          'test'
-        );
+        expect(await sharedService.readDirectory(__dirname)).not.toContain('test');
       });
     });
     describe('updateDirectory tests', () => {
@@ -56,9 +52,7 @@ describe('DirectoryHandlingService', () => {
         expect(directoryContent).not.toContain('test');
       });
       describe('copyDirectory tests', () => {
-        beforeEach(
-          async () => await service.createDirectory(__dirname, 'test')
-        );
+        beforeEach(async () => await service.createDirectory(__dirname, 'test'));
         afterEach(async () => {
           await service.deleteDirectory(__dirname, 'test');
           await service.deleteDirectory(__dirname, 'test2');
