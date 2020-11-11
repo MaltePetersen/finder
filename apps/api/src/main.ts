@@ -6,7 +6,7 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-
+import { ErrnoExeptionFilter} from './app/common/exeptions/nodejs.exception'
 import { AppModule } from './app/app.module';
 import { logger } from './app/common/logger/logger.middleware';
 
@@ -15,6 +15,7 @@ async function bootstrap() {
   app.enableCors();
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
+  app.useGlobalFilters(new ErrnoExeptionFilter());
 
   const options = new DocumentBuilder()
     .setTitle('Finder API')

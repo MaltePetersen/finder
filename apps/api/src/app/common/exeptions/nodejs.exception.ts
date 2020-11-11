@@ -1,8 +1,9 @@
 import { ExceptionFilter, Catch, ArgumentsHost } from '@nestjs/common';
+import { throwError } from 'rxjs';
 
 @Catch()
-export class ErrnoExeption implements ExceptionFilter {
+export class ErrnoExeptionFilter implements ExceptionFilter {
   catch(exeption: NodeJS.ErrnoException, host: ArgumentsHost) {
-    const ctx = host.switchToHttp;
+    console.log(exeption);
   }
 }
