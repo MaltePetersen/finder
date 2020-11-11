@@ -51,6 +51,7 @@ describe('DirectoryHandlingService', () => {
         expect(directoryContent).toContain('test2');
         expect(directoryContent).not.toContain('test');
       });
+    });
       describe('copyDirectory tests', () => {
         beforeEach(async () => await service.createDirectory(__dirname, 'test'));
         afterEach(async () => {
@@ -65,5 +66,4 @@ describe('DirectoryHandlingService', () => {
         });
       });
     });
-  });
 });

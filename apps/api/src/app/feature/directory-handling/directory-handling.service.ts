@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { copySync } from 'fs-extra';
 const { mkdir, readdir, rename, rmdir } = require('fs').promises;
-
 @Injectable()
 export class DirectoryHandlingService {
   createDirectory(path: string, dir: string): Promise<any> {
