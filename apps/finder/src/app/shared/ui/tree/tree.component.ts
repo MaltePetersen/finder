@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { files } from './example-data';
-
 /** File node data with possible child nodes. */
 export interface FileNode {
   name: string;
@@ -27,6 +26,7 @@ export interface FlatTreeNode {
   styleUrls: ['./tree.component.scss'],
 })
 export class TreeComponent {
+  @Input() files = '';
   /** The TreeControl controls the expand/collapse state of tree nodes.  */
   treeControl: FlatTreeControl<FlatTreeNode>;
 
