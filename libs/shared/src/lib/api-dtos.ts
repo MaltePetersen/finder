@@ -16,3 +16,4 @@ export class UpdateFileDTO {
   path: string;
   newName: string;
 }
+export type FileNode = { name: string; type: string; children: fileNode[] };
