@@ -1,35 +1,42 @@
 import { Injectable } from '@nestjs/common';
 import { constants } from 'fs';
+import { stat } from 'fs-extra';
+import { SharedDirectoryService } from '../../common/service/shared-directory/shared-directory.service';
 const { unlink, copyFile, readFile, readdir, rename, writeFile } = require('fs').promises;
 @Injectable()
 export class FileHandlingService {
+  constructor(private sharedDirectoryService: SharedDirectoryService) {}
+
+  async getStats(path: string, file: string): Promise<any> {
+    return (await stat(this.sharedDirectoryService.constructPath(path, file))).isDirectory();
+  }
+
   async readFile(path: string, file: string): Promise<any> {
-    return readFile(this.constructFilePath(path, file), {
+    return readFile(this.sharedDirectoryService.constructPath(path, file), {
       encoding: 'utf-8',
     });
   }
 
   async createFile(path: string, file: string): Promise<any> {
-    return writeFile(this.constructFilePath(path, file), '');
+    return writeFile(this.sharedDirectoryService.constructPath(path, file), '');
   }
 
   async updateFileName(path: string, name: string, nameNew: string): Promise<any> {
-    return rename(this.constructFilePath(path, name), this.constructFilePath(path, nameNew));
+    return rename(
+      this.sharedDirectoryService.constructPath(path, name),
+      this.sharedDirectoryService.constructPath(path, nameNew)
+    );
   }
 
   async copyFile(path: string, file: string, newPath: string, newFile: string): Promise<any> {
     return copyFile(
-      this.constructFilePath(path, file),
-      this.constructFilePath(newPath, newFile),
+      this.sharedDirectoryService.constructPath(path, file),
+      this.sharedDirectoryService.constructPath(newPath, newFile),
       constants.COPYFILE_EXCL
     );
   }
 
   async deleteFile(path: string, file: string): Promise<any> {
-    return unlink(this.constructFilePath(path, file));
-  }
-
-  private constructFilePath(path: string, file: string): string {
-    return `${path}/${file}`;
+    return unlink(this.sharedDirectoryService.constructPath(path, file));
   }
 }
