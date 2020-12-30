@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from './services/api-service.service';
+import { ApiService } from '../../services/api-service.service';
 @Component({
   selector: 'finder-file-manager',
   templateUrl: './file-manager.component.html',

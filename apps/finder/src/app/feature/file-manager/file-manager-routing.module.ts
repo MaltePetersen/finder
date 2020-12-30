@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FileManagerComponent } from './file-manager.component';
+import { FileManagerComponent } from './containers/file-manager-container/file-manager.component';
 
 const routes: Routes = [{ path: '', component: FileManagerComponent }];
 
