@@ -12,6 +12,7 @@ import { logger } from './app/common/logger/logger.middleware';
 const { mkdir, access } = require('fs').promises;
 import { stat } from 'fs-extra';
 import { environment } from './environments/environment.prod';
+import { userInfo } from 'os';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
@@ -34,16 +35,14 @@ async function bootstrap() {
 }
 async function checkWorkspace() {
   try {
-    let username = require('os').userInfo().username;
+    let username = userInfo().username;
     await access(getWorkspace());
   } catch (error) {
     mkdir(getWorkspace()).catch((error) => console.log(error));
   }
 }
 function getWorkspace() {
-  return (
-    environment.workspace.substring(0, 7) + require('os').userInfo().username + environment.workspace.substring(12)
-  );
+  return environment.workspace.substring(0, 7) + userInfo().username + environment.workspace.substring(12);
 }
 
 bootstrap();
