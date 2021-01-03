@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { constants } from 'fs';
 import { stat } from 'fs-extra';
 import { SharedDirectoryService } from '../../common/service/shared-directory/shared-directory.service';
-const { unlink, copyFile, readFile, readdir, rename, writeFile } = require('fs').promises;
+import { unlink, copyFile, readFile, rename, writeFile } from 'fs/promises';
+
 @Injectable()
 export class FileHandlingService {
   constructor(private sharedDirectoryService: SharedDirectoryService) {}

@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { copySync } from 'fs-extra';
 import { SharedDirectoryService } from '../../common/service/shared-directory/shared-directory.service';
-const { mkdir, readdir, rename, rmdir } = require('fs').promises;
+import { mkdir, rename, rmdir } from 'fs/promises';
+
 @Injectable()
 export class DirectoryHandlingService {
   constructor(private sharedDirectoryService: SharedDirectoryService) {}

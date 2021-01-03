@@ -1,10 +1,9 @@
 import { FileNode } from '@finder/shared';
 import { Injectable } from '@nestjs/common';
 import { environment } from 'apps/api/src/environments/environment.prod';
-import { fstat } from 'fs';
-import { copySync } from 'fs-extra';
-import { BehaviorSubject, Observable } from 'rxjs';
-const { mkdir, readdir, rename, rmdir, stat } = require('fs').promises;
+import { BehaviorSubject } from 'rxjs';
+import { readdir, stat } from 'fs/promises';
+import { userInfo } from 'os';
 
 @Injectable()
 export class SharedDirectoryService {
@@ -22,9 +21,7 @@ export class SharedDirectoryService {
     return `${path}/${file}`;
   }
   public getWorkspace() {
-    return (
-      environment.workspace.substring(0, 7) + require('os').userInfo().username + environment.workspace.substring(12)
-    );
+    return environment.workspace.substring(0, 7) + userInfo().username + environment.workspace.substring(12);
   }
 
   private async getDirectoryContent(path: string) {
