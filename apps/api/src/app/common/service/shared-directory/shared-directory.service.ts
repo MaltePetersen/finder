@@ -9,11 +9,12 @@ const { mkdir, readdir, rename, rmdir, stat } = require('fs').promises;
 @Injectable()
 export class SharedDirectoryService {
   constructor() {
-    this.constructFileNode();
+    this.getDirectoryContent(this.getWorkspace());
   }
+
   private fileNode$$ = new BehaviorSubject<FileNode[]>(null);
   public fileNode$ = this.fileNode$$.asObservable();
-  async readDirectory(path: string): Promise<any> {
+  async readDirectory(path: string): Promise<string[]> {
     return readdir(path);
   }
 
@@ -25,37 +26,48 @@ export class SharedDirectoryService {
       environment.workspace.substring(0, 7) + require('os').userInfo().username + environment.workspace.substring(12)
     );
   }
-  public async constructFileNode() {
-    let fileNodes = new Array();
 
-    const content = await this.readDirectory(this.getWorkspace());
-    await Promise.all(
-      content.map(async (name) => {
-        if ((await stat(this.getWorkspace() + '/' + name)).isDirectory()) {
-          let fileNode = { name: name, type: 'folder', children: [] };
-          let currentPath = this.getWorkspace() + '/' + fileNode.name;
-          fileNodes.push(await this.recursiveFileNodeAssembling(fileNode, currentPath));
+  private async getDirectoryContent(path: string) {
+    const content = await this.readDirectory(path);
+    let fileNodes = await this.constructNodes(path, content);
+    console.log(JSON.stringify(await this.extractDirectoryContent(fileNodes, path), null, 1));
+  }
+
+  private async extractDirectoryContent(content: FileNode[], path: string): Promise<any> {
+    let fileNode = await Promise.all(
+      content.map(async (node) => {
+        if (node.type === 'folder') {
+          let nodes = await this.constructNodes(
+            path + '/' + node.name,
+            await this.readDirectory(`${path}/${node.name}`)
+          );
+          node.children = nodes;
+          await this.extractDirectoryContent(node.children, `${path}/${node.name}`);
+          return node;
         } else {
-          fileNodes.push({ name: name, type: 'file', children: [] });
+          return node;
         }
       })
     );
-    console.log(fileNodes);
+    return fileNode;
   }
-  private async recursiveFileNodeAssembling(fileNode: FileNode, currentPath: string): Promise<FileNode> {
-    const content = await this.readDirectory(currentPath);
-    await content.map(async (name) => {
-      if ((await stat(currentPath + '/' + name)).isDirectory()) {
-        let newFileNode = { name: name, type: 'folder', children: [] };
-        currentPath = currentPath + '/' + name;
-        newFileNode = await this.recursiveFileNodeAssembling(newFileNode, currentPath);
-        fileNode.children.push(newFileNode);
-        console.log(fileNode);
-        return Promise.resolve(fileNode);
-      } else {
-        return Promise.resolve(fileNode);
-      }
-    });
-    return Promise.resolve(fileNode);
+
+  private async constructNodes(path: string, content: any): Promise<FileNode[]> {
+    let fileNodes = new Array<FileNode>();
+    fileNodes = await Promise.all(
+      content.map(async (data) => {
+        let a = await { name: data, type: await this.isFolder(path, data), children: [] };
+        return Promise.resolve(a);
+      })
+    );
+    return fileNodes;
+  }
+
+  private async isFolder(path: string, name: string) {
+    if ((await stat(path + '/' + name)).isDirectory()) {
+      return 'folder';
+    } else {
+      return 'file';
+    }
   }
 }
