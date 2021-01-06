@@ -7,7 +7,9 @@ import { userInfo } from 'os';
 
 @Injectable()
 export class SharedDirectoryService {
-  constructor() {}
+  constructor() {
+    this.getDirectoryContent(this.getWorkspace()).then((data) => console.log(JSON.stringify(data, null, 2)));
+  }
 
   private fileNode$$ = new BehaviorSubject<FileNode[]>(null);
   public fileNode$ = this.fileNode$$.asObservable();
@@ -51,7 +53,7 @@ export class SharedDirectoryService {
     let fileNodes = new Array<FileNode>();
     fileNodes = await Promise.all(
       content.map(async (data) => {
-        let a = await { name: data, type: await this.isFolder(path, data), children: [] };
+        let a = await { name: data, type: await this.isFolder(path, data), path: `${path}/${data}`, children: [] };
         return Promise.resolve(a);
       })
     );
