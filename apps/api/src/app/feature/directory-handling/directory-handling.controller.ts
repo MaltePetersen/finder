@@ -47,4 +47,9 @@ export class DirectoryHandlingController {
     this.directoryHandlingService.copyDirectory(fromPath, name, toPath, newName);
     return await this.sharedDirectoryService.readDirectory(fromPath);
   }
+
+  @Get('/filenode')
+  async getFileNode() {
+    return await this.sharedDirectoryService.getDirectoryContent(this.sharedDirectoryService.getWorkspace());
+  }
 }

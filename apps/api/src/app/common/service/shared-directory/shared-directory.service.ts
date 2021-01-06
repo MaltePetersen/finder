@@ -7,9 +7,7 @@ import { userInfo } from 'os';
 
 @Injectable()
 export class SharedDirectoryService {
-  constructor() {
-    this.getDirectoryContent(this.getWorkspace());
-  }
+  constructor() {}
 
   private fileNode$$ = new BehaviorSubject<FileNode[]>(null);
   public fileNode$ = this.fileNode$$.asObservable();
@@ -24,10 +22,10 @@ export class SharedDirectoryService {
     return environment.workspace.substring(0, 7) + userInfo().username + environment.workspace.substring(12);
   }
 
-  private async getDirectoryContent(path: string) {
+  public async getDirectoryContent(path: string) {
     const content = await this.readDirectory(path);
     let fileNodes = await this.constructNodes(path, content);
-    console.log(JSON.stringify(await this.extractDirectoryContent(fileNodes, path), null, 1));
+    return await this.extractDirectoryContent(fileNodes, path);
   }
 
   private async extractDirectoryContent(content: FileNode[], path: string): Promise<any> {

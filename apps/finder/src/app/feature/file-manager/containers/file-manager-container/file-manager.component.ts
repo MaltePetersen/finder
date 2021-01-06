@@ -7,7 +7,7 @@ import { ApiService } from '../../services/api-service.service';
 })
 export class FileManagerComponent implements OnInit {
   constructor(private api: ApiService) {}
-
+  files$ = this.api.getFileNode();
   data$ = this.api.getFolder();
   ngOnInit(): void {
     this.api.getFolder().subscribe((data) => console.log(data));

@@ -26,7 +26,7 @@ export interface FlatTreeNode {
   styleUrls: ['./tree.component.scss'],
 })
 export class TreeComponent {
-  @Input() files = '';
+  @Input() files;
   /** The TreeControl controls the expand/collapse state of tree nodes.  */
   treeControl: FlatTreeControl<FlatTreeNode>;
 
@@ -41,7 +41,7 @@ export class TreeComponent {
 
     this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-    this.dataSource.data = files;
+    this.dataSource.data = this.files;
   }
 
   /** Transform the data to something the tree can read. */
