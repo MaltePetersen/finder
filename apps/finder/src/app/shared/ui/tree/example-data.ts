@@ -1,5 +1,5 @@
 /** Example file/folder data. */
-export const files = [
+export const exampleFiles = [
   {
     name: 'components',
     type: 'folder',

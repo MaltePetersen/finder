@@ -16,6 +16,6 @@ export class ApiService {
     )*/
   }
   public getFileNode() {
-    return this.http.get<FileNode>('http://localhost:3333/api/directory/filenode');
+    return this.http.get<FileNode[]>('http://localhost:3333/api/directory/filenode');
   }
 }

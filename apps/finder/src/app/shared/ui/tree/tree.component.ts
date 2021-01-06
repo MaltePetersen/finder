@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { files } from './example-data';
+import { exampleFiles } from './example-data';
+import { of } from 'rxjs';
+import { CommunicationService } from '../services/communication.service';
 /** File node data with possible child nodes. */
 export interface FileNode {
   name: string;
@@ -26,7 +28,7 @@ export interface FlatTreeNode {
   styleUrls: ['./tree.component.scss'],
 })
 export class TreeComponent {
-  @Input() files;
+  @Input() files = exampleFiles;
   /** The TreeControl controls the expand/collapse state of tree nodes.  */
   treeControl: FlatTreeControl<FlatTreeNode>;
 
@@ -36,12 +38,12 @@ export class TreeComponent {
   /** The MatTreeFlatDataSource connects the control and flattener to provide data. */
   dataSource: MatTreeFlatDataSource<FileNode, FlatTreeNode>;
 
-  constructor() {
+  constructor(private communication: CommunicationService) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
 
     this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-    this.dataSource.data = this.files;
+    this.communication.fileNode$.subscribe((data) => (this.dataSource.data = data));
   }
 
   /** Transform the data to something the tree can read. */
