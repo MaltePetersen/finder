@@ -53,8 +53,14 @@ export class SharedDirectoryService {
     let fileNodes = new Array<FileNode>();
     fileNodes = await Promise.all(
       content.map(async (data) => {
-        let a = await { name: data, type: await this.isFolder(path, data), path: `${path}/${data}`, children: [] };
-        return Promise.resolve(a);
+        const isFolder = (await this.isFolder(path, data)) == 'folder';
+        if (isFolder) {
+          let a = await { name: data, type: 'folder', path: `${path}/${data}`, children: [] };
+          return Promise.resolve(a);
+        } else {
+          let a = await { name: data, type: 'file', path: `${path}/${data}` };
+          return Promise.resolve(a);
+        }
       })
     );
     return fileNodes;
