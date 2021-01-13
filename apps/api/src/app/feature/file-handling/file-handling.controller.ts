@@ -10,9 +10,9 @@ export class FileHandlingController {
     private sharedDirectoryService: SharedDirectoryService
   ) {}
 
-  @Get('/stats::path::file')
-  async getStats(@Param('path') path: string, @Param('file') file: string) {
-    return await this.filehandlerService.getStats(path, file);
+  @Get('/stats::path')
+  async getStats(@Param('path') path: string) {
+    return await this.filehandlerService.getStats(path);
   }
 
   @Get('::path::file')

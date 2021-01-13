@@ -1,0 +1,74 @@
+<div *ngIf="file$ | async as file">
+  <div *ngIf="file[0]">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{ file[0].name }}</mat-card-title>
+        <mat-card-subtitle>{{ file[0].type | titlecase }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="container">
+          <mat-list>
+            <div mat-subheader>File Information</div>
+            <mat-list-item>
+              <div mat-line>dev: {{ file[1].dev }}</div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>atime: {{ file[1].atime }}</div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>atimeMs: {{ file[1].atimeMs }}</div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>birthtime: {{ file[1].birthtime }}</div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>birthtimeMs: {{ file[1].birthtimeMs }}</div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>blksize: {{ file[1].blksize }}</div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>blocks: {{ file[1].blocks }}</div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>ctime: {{ file[1].ctime }}</div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>ctimeMs: {{ file[1].ctimeMs }}</div>
+            </mat-list-item>
+          </mat-list>
+          <mat-list class="list2">
+            <mat-list-item>
+              <div mat-line>gid: {{ file[1].gid }}</div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>ino: {{ file[1].ino }}</div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>mode: {{ file[1].mode }}</div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>mtime: {{ file[1].mtime }}</div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>mtimeMs: {{ file[1].mtimeMs }}</div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>nlink: {{ file[1].nlink }}</div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>rdev: {{ file[1].rdev }}</div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>size: {{ file[1].size }}</div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>uid: {{ file[1].uid }}</div>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

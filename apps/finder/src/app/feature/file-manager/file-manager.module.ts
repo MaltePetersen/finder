@@ -7,9 +7,22 @@ import { UiModule } from '../../shared/ui/ui.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FileManagerToolbarComponent } from './components/file-manager-toolbar/file-manager-toolbar.component';
 import { MatButtonModule } from '@angular/material/button';
+import { FileComponent } from './components/file/file.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [FileManagerComponent, FileManagerToolbarComponent],
-  imports: [CommonModule, HttpClientModule, FileManagerRoutingModule, UiModule, MatButtonModule],
+  declarations: [FileManagerComponent, FileManagerToolbarComponent, FileComponent],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    FileManagerRoutingModule,
+    MatIconModule,
+    UiModule,
+    MatListModule,
+    MatButtonModule,
+    MatCardModule,
+  ],
 })
 export class FileManagerModule {}

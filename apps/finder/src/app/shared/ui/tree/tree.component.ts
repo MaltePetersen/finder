@@ -4,20 +4,12 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { exampleFiles } from './example-data';
 import { of } from 'rxjs';
 import { CommunicationService } from '../services/communication.service';
-/** File node data with possible child nodes. */
-export interface FileNode {
-  name: string;
-  type: string;
-  children?: FileNode[];
-}
+import { FileNode } from '../../../../../../../libs/shared/src/lib/api-dtos';
 
-/**
- * Flattened tree node that has been created from a FileNode through the flattener. Flattened
- * nodes include level index and whether they can be expanded or not.
- */
 export interface FlatTreeNode {
   name: string;
   type: string;
+  path: string;
   level: number;
   expandable: boolean;
 }
@@ -52,6 +44,7 @@ export class TreeComponent {
       name: node.name,
       type: node.type,
       level: level,
+      path: node.path,
       expandable: !!node.children,
     };
   }
@@ -74,5 +67,9 @@ export class TreeComponent {
   /** Get the children for the node. */
   getChildren(node: FileNode): FileNode[] | null | undefined {
     return node.children;
+  }
+  clicked(event) {
+    console.log(event);
+    this.communication.updateCurrentFile(event);
   }
 }

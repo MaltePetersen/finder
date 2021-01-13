@@ -8,8 +8,8 @@ import { unlink, copyFile, readFile, rename, writeFile } from 'fs/promises';
 export class FileHandlingService {
   constructor(private sharedDirectoryService: SharedDirectoryService) {}
 
-  async getStats(path: string, file: string): Promise<any> {
-    return (await stat(this.sharedDirectoryService.constructPath(path, file))).isDirectory();
+  async getStats(path: string): Promise<any> {
+    return await stat(path);
   }
 
   async readFile(path: string, file: string): Promise<any> {

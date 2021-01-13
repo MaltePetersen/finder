@@ -1,10 +1,12 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
     <button mat-icon-button disabled></button>
-    <mat-icon class="type-icon" [attr.aria-label]="node.type + 'icon'">
-      {{ node.type === 'file' ? 'description' : 'folder' }}
-    </mat-icon>
-    {{ node.name }}
+    <div (click)="clicked(node)">
+      <mat-icon class="type-icon" [attr.aria-label]="node.type + 'icon'">
+        {{ node.type === 'file' ? 'description' : 'folder' }}
+      </mat-icon>
+      {{ node.name }}
+    </div>
   </mat-tree-node>
 
   <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
@@ -13,9 +15,11 @@
         {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
       </mat-icon>
     </button>
-    <mat-icon class="type-icon" [attr.aria-label]="node.type + 'icon'">
-      {{ node.type === 'file' ? 'description' : 'folder' }}
-    </mat-icon>
-    {{ node.name }}
+    <div (click)="clicked(node)">
+      <mat-icon class="type-icon" [attr.aria-label]="node.type + 'icon'">
+        {{ node.type === 'file' ? 'description' : 'folder' }}
+      </mat-icon>
+      {{ node.name }}
+    </div>
   </mat-tree-node>
 </mat-tree>
