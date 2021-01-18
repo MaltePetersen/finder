@@ -1,4 +1,9 @@
-.container {
+:host {
+  display: flex;
+  flex-direction: row;
+}
+.container-file-options {
+  flex: 1;
   margin-top: 1%;
   margin-bottom: 1%;
   display: flex;
@@ -7,4 +12,10 @@
 }
 .flex-items {
   margin-right: 1%;
+}
+.flex-create {
+  margin-left: 1%;
+  flex: 1;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }

@@ -12,9 +12,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { TreeComponent } from './tree/tree.component';
 import { MatTreeModule } from '@angular/material/tree';
 import { RouterModule } from '@angular/router';
+import { FolderCardComponent } from './folder-card/folder-card.component';
 
 @NgModule({
-  declarations: [NavigationComponent, TreeComponent],
+  declarations: [NavigationComponent, TreeComponent, FolderCardComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -29,6 +30,6 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     MatTreeModule,
   ],
-  exports: [NavigationComponent, TreeComponent],
+  exports: [NavigationComponent, TreeComponent, FolderCardComponent],
 })
 export class UiModule {}

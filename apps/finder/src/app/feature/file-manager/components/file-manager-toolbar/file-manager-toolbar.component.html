@@ -1,6 +1,11 @@
-<div class="container">
-  <button class="flex-items" mat-raised-button>Open</button>
-  <button class="flex-items" mat-raised-button color="primary">Copy</button>
-  <button class="flex-items" mat-raised-button color="accent">Cut</button>
-  <button class="flex-items" mat-raised-button color="warn">Delete</button>
+<div class="flex-create">
+  <button mat-raised-button (click)="create()">Create</button>
+</div>
+
+<div class="container-file-options">
+  <button class="flex-items" mat-raised-button (click)="open()">Open</button>
+  <button class="flex-items" mat-raised-button (click)="copy()" color="primary">Copy</button>
+  <button class="flex-items" mat-raised-button (click)="cut()" color="accent">Cut</button>
+  <button class="flex-items" mat-raised-button (click)="delete()" color="warn">Delete</button>
+  <div></div>
 </div>
