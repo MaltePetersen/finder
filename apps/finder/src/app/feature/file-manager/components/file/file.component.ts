@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CommunicationService } from 'apps/finder/src/app/shared/ui/services/communication.service';
 import { FileNode, Stats } from 'libs/shared/src/lib/api-dtos';
-import { from, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { ApiService } from '../../services/api-service.service';
+import { ApiService } from '../../services/api/api-service.service';
+import { CommunicationService } from '../../services/communication/communication.service';
 @Component({
   selector: 'finder-file',
   templateUrl: './file.component.html',

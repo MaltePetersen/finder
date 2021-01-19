@@ -1,10 +1,9 @@
+import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, Input } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { FlatTreeControl } from '@angular/cdk/tree';
+import { FileNode } from 'libs/shared/src/lib/api-dtos';
+import { CommunicationService } from '../../services/communication/communication.service';
 import { exampleFiles } from './example-data';
-import { of } from 'rxjs';
-import { CommunicationService } from '../services/communication.service';
-import { FileNode } from '../../../../../../../libs/shared/src/lib/api-dtos';
 
 export interface FlatTreeNode {
   name: string;

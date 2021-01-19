@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Folder } from '../../../feature/file-manager/components/file-manager-toolbar/create/create.component';
+import { Folder } from '../file-manager-toolbar/create/create.component';
 
 @Component({
   selector: 'finder-folder-card',

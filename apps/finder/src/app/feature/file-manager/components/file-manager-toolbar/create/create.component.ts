@@ -28,4 +28,7 @@ export class CreateComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
+  choose(folder: Folder) {
+    console.log(folder);
+  }
 }

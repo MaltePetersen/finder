@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api-service.service';
-import { CommunicationService } from '../../../../shared/ui/services/communication.service';
+import { ApiService } from '../../services/api/api-service.service';
+import { CommunicationService } from '../../services/communication/communication.service';
 @Component({
   selector: 'finder-file-manager',
   templateUrl: './file-manager.component.html',

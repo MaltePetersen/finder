@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { CommunicationService } from 'apps/finder/src/app/shared/ui/services/communication.service';
 import { FileNode } from 'libs/shared/src/lib/api-dtos';
+import { CommunicationService } from '../../services/communication/communication.service';
 import { CopyComponent } from './copy/copy.component';
 import { CreateComponent, Folder } from './create/create.component';
 import { CutComponent } from './cut/cut.component';
