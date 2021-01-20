@@ -12,8 +12,8 @@ export class FileHandlingService {
     return await stat(path);
   }
 
-  async readFile(path: string, file: string): Promise<any> {
-    return readFile(this.sharedDirectoryService.constructPath(path, file), {
+  async readFile(path: string): Promise<any> {
+    return readFile(path, {
       encoding: 'utf-8',
     });
   }
