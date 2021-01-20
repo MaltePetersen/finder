@@ -1,8 +1,10 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, Input } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { FileNode } from 'libs/shared/src/lib/api-dtos';
 import { CommunicationService } from '../../services/communication/communication.service';
+import { CreateComponent } from './create/create.component';
 import { exampleFiles } from './example-data';
 
 export interface FlatTreeNode {
@@ -28,13 +30,19 @@ export class TreeComponent {
 
   /** The MatTreeFlatDataSource connects the control and flattener to provide data. */
   dataSource: MatTreeFlatDataSource<FileNode, FlatTreeNode>;
+  dialogConfig = new MatDialogConfig();
 
-  constructor(private communication: CommunicationService) {
+  constructor(private dialog: MatDialog, private communication: CommunicationService) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
 
     this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
     this.communication.fileNode$.subscribe((data) => (this.dataSource.data = data));
+    this.dialogConfig.disableClose = true;
+    this.dialogConfig.autoFocus = true;
+  }
+  create() {
+    this.dialog.open(CreateComponent, this.dialogConfig);
   }
 
   /** Transform the data to something the tree can read. */

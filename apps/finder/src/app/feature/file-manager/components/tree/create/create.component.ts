@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-export type Folder = { name: string; path: string };
+import { Observable } from 'rxjs';
+import { CommunicationService } from '../../../services/communication/communication.service';
+import { Folder } from '../../../model/folder.interface';
 @Component({
   selector: 'finder-create',
   templateUrl: './create.component.html',
@@ -9,14 +11,13 @@ export type Folder = { name: string; path: string };
 })
 export class CreateComponent implements OnInit {
   form: FormGroup;
-  folders: Folder[];
+  folders$: Observable<Folder[]>;
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<CreateComponent>,
-    @Inject(MAT_DIALOG_DATA) data
+    private communicationSerice: CommunicationService
   ) {
-    console.log(data);
-    this.folders = data.folders;
+    this.folders$ = this.communicationSerice.folders$;
     this.form = this.fb.group({
       fileName: [''],
     });

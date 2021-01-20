@@ -1,3 +1,14 @@
 .icon {
-  font-size: 64px;
+  font-size: 36px;
+}
+.card {
+  margin: 10px;
+}
+.choosen-card {
+  margin: 10px;
+  background-color: blue;
+}
+::ng-deep .mat-list .mat-list-item .mat-line {
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }

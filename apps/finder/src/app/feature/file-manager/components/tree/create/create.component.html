@@ -4,14 +4,10 @@
   <mat-form-field>
     <input matInput placeholder="File" formControlName="fileName" />
   </mat-form-field>
-  <div class="basic-grid">
-    <div *ngFor="let folder of folders">
-      <finder-folder-card (click)="choose(folder)" [folder]="folder"> </finder-folder-card>
-    </div>
-  </div>
+  <finder-folderchoser></finder-folderchoser>
 </mat-dialog-content>
 
-<mat-dialog-actions>
+<mat-dialog-actions align="start">
   <button class="mat-raised-button" (click)="close()">Close</button>
   <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
 </mat-dialog-actions>
