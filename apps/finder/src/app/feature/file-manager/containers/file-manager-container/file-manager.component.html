@@ -1,5 +1,6 @@
 <finder-file-manager-toolbar [description]="'File Manager'"></finder-file-manager-toolbar>
 <div class="container">
-  <finder-tree class="file--tree"></finder-tree>
+  <mat-spinner class="overlay" *ngIf="isLoading"></mat-spinner>
+  <finder-tree [files]="files$ | async" class="file--tree"></finder-tree>
   <finder-file class="file"></finder-file>
 </div>

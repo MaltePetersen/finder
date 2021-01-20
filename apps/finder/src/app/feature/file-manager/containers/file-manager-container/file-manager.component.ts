@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FileNode } from 'libs/shared/src/lib/api-dtos';
 import { Observable } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
 import { ApiService } from '../../services/api/api-service.service';
 import { FileNodeService } from '../../services/filenode/filenode.service';
 @Component({
@@ -10,9 +11,15 @@ import { FileNodeService } from '../../services/filenode/filenode.service';
 })
 export class FileManagerComponent implements OnInit {
   files$: Observable<FileNode[]>;
-
+  isLoading = true;
   constructor(private fileNodeService: FileNodeService) {
-    this.files$ = this.fileNodeService.fileNode$;
+    this.files$ = this.fileNodeService.fileNode$.pipe(
+      tap((data) => {
+        this.isLoading = true;
+      }),
+      delay(1000),
+      tap(() => (this.isLoading = false))
+    );
   }
   ngOnInit(): void {}
 }

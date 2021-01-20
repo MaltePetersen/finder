@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Folder } from '../../model/folder.interface';
-import { CommunicationService } from '../../services/communication/communication.service';
+import { FileNodeService } from '../../services/filenode/filenode.service';
 
 @Component({
   selector: 'finder-folderchoser',
@@ -12,8 +12,8 @@ export class FolderchoserComponent implements OnInit {
   folders$: Observable<Folder[]>;
   currentFolder: Folder;
 
-  constructor(private communicationSerice: CommunicationService) {
-    this.folders$ = this.communicationSerice.folders$;
+  constructor(private fileNodeService: FileNodeService) {
+    this.folders$ = this.fileNodeService.folders$;
   }
 
   ngOnInit(): void {}

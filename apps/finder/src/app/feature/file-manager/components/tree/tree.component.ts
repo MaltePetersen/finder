@@ -22,6 +22,13 @@ export interface FlatTreeNode {
   styleUrls: ['./tree.component.scss'],
 })
 export class TreeComponent {
+  @Input() set files(value: FileNode[]) {
+    if (value) {
+      this.dataSource.data = value;
+    }
+  }
+
+  isLoading = true;
   /** The TreeControl controls the expand/collapse state of tree nodes.  */
   treeControl: FlatTreeControl<FlatTreeNode>;
 
@@ -32,16 +39,11 @@ export class TreeComponent {
   dataSource: MatTreeFlatDataSource<FileNode, FlatTreeNode>;
   dialogConfig = new MatDialogConfig();
 
-  constructor(
-    private dialog: MatDialog,
-    private currentFileService: CurrentFileService,
-    private fileNodeService: FileNodeService
-  ) {
+  constructor(private dialog: MatDialog, private currentFileService: CurrentFileService) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
 
     this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-    this.fileNodeService.fileNode$.subscribe((data) => (this.dataSource.data = data));
     this.dialogConfig.disableClose = true;
     this.dialogConfig.autoFocus = true;
   }

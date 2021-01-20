@@ -1,9 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { CommunicationService } from '../../../services/communication/communication.service';
 import { Folder } from '../../../model/folder.interface';
+import { FileNodeService } from '../../../services/filenode/filenode.service';
 @Component({
   selector: 'finder-create',
   templateUrl: './create.component.html',
@@ -15,9 +15,9 @@ export class CreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<CreateComponent>,
-    private communicationSerice: CommunicationService
+    private fileNodeService: FileNodeService
   ) {
-    this.folders$ = this.communicationSerice.folders$;
+    this.folders$ = this.fileNodeService.folders$;
     this.form = this.fb.group({
       fileName: [''],
     });
