@@ -3,17 +3,17 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'finder-delete',
-  templateUrl: './delete.component.html',
-  styleUrls: ['./delete.component.scss'],
+  selector: 'finder-cut',
+  templateUrl: './cut.component.html',
+  styleUrls: ['./cut.component.scss'],
 })
-export class DeleteComponent implements OnInit {
+export class CutComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<DeleteComponent>) {}
+  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<CutComponent>) {}
 
   ngOnInit(): void {}
-  save() {
+  cut() {
     this.dialogRef.close();
   }
   close() {

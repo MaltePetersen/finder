@@ -23,13 +23,10 @@ export class CreateComponent implements OnInit {
     });
   }
   ngOnInit(): void {}
-  save() {
+  create() {
     this.dialogRef.close();
   }
   close() {
     this.dialogRef.close();
-  }
-  choose(folder: Folder) {
-    console.log(folder);
   }
 }

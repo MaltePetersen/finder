@@ -10,9 +10,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { NavigationComponent } from './navigation/navigation.component';
-
+import { FileManagerToolbarComponent } from './file-manager-toolbar/file-manager-toolbar.component';
 @NgModule({
-  declarations: [NavigationComponent],
+  declarations: [NavigationComponent, FileManagerToolbarComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -26,6 +26,6 @@ import { NavigationComponent } from './navigation/navigation.component';
     MatMenuModule,
     MatButtonModule,
   ],
-  exports: [NavigationComponent],
+  exports: [NavigationComponent, FileManagerToolbarComponent],
 })
 export class UiModule {}

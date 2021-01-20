@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Folder } from '../../model/folder.interface';
+import { Folder } from '../../../model/folder.interface';
 
 @Component({
   selector: 'finder-folder-card',

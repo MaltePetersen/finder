@@ -1,12 +1,13 @@
-<h2 mat-dialog-title>Cut File</h2>
+<h2 mat-dialog-title>Copy File</h2>
 
 <mat-dialog-content [formGroup]="form">
   <mat-form-field>
     <input matInput placeholder="Course Description" formControlName="description" />
   </mat-form-field>
+  <finder-folderchoser></finder-folderchoser>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button class="mat-raised-button" (click)="close()">Close</button>
-  <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+  <button mat-raised-button (click)="close()">Cancel</button>
+  <button mat-raised-button [color]="'primary'" (click)="copy()">Confirm</button>
 </mat-dialog-actions>

@@ -3,17 +3,17 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'finder-cut',
-  templateUrl: './cut.component.html',
-  styleUrls: ['./cut.component.scss'],
+  selector: 'finder-copy',
+  templateUrl: './copy.component.html',
+  styleUrls: ['./copy.component.scss'],
 })
-export class CutComponent implements OnInit {
+export class CopyComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<CutComponent>) {}
+  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<CopyComponent>) {}
 
   ngOnInit(): void {}
-  save() {
+  copy() {
     this.dialogRef.close();
   }
   close() {
