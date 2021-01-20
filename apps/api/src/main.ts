@@ -2,7 +2,6 @@
  * This is not a production server yet!
  * This is only a minimal backend to get started.
  */
-
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
@@ -10,9 +9,9 @@ import { ErrnoExeptionFilter } from './app/common/exeptions/nodejs.exception';
 import { AppModule } from './app/app.module';
 import { logger } from './app/common/logger/logger.middleware';
 const { mkdir, access } = require('fs').promises;
-import { stat } from 'fs-extra';
 import { environment } from './environments/environment.prod';
 import { userInfo } from 'os';
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
@@ -29,10 +28,12 @@ async function bootstrap() {
   const port = process.env.PORT || 3333;
   app.use(logger);
   await checkWorkspace();
+
   await app.listen(port, () => {
     Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);
   });
 }
+
 async function checkWorkspace() {
   try {
     let username = userInfo().username;
@@ -41,6 +42,7 @@ async function checkWorkspace() {
     mkdir(getWorkspace()).catch((error) => console.log(error));
   }
 }
+
 function getWorkspace() {
   return environment.workspace.substring(0, 7) + userInfo().username + environment.workspace.substring(12);
 }
