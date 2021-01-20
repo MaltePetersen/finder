@@ -69,10 +69,10 @@
           </mat-list>
         </div>
         <mat-card-actions [align]="'start'">
-          <button class="flex-items" (click)="open()" mat-raised-button>Open</button>
-          <button class="flex-items" (click)="copy()" mat-raised-button color="primary">Copy</button>
-          <button class="flex-items" (click)="cut()" mat-raised-button color="accent">Cut</button>
-          <button class="flex-items" (click)="delete()" mat-raised-button color="warn">Delete</button>
+          <button class="flex-items" (click)="open(file[0])" mat-raised-button>Open</button>
+          <button class="flex-items" (click)="copy(file[0])" mat-raised-button color="primary">Copy</button>
+          <button class="flex-items" (click)="cut(file[0])" mat-raised-button color="accent">Cut</button>
+          <button class="flex-items" (click)="delete(file[0])" mat-raised-button color="warn">Delete</button>
         </mat-card-actions>
       </mat-card-content>
     </mat-card>

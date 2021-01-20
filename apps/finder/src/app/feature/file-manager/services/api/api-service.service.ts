@@ -25,4 +25,7 @@ export class ApiService {
   transformSlashes(path: string) {
     return path.replace(/\//g, '%2F');
   }
+  readFile(path: string) {
+    return this.http.get<any>(`http://localhost:3333/api/file/:${this.transformSlashes(path)}`);
+  }
 }

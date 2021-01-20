@@ -17,7 +17,7 @@ export class FileHandlingController {
 
   @Get('::path')
   async getFile(@Param('path') path: string) {
-    return await this.filehandlerService.readFile(path);
+    return { file: await this.filehandlerService.readFile(path) };
   }
 
   @Post()

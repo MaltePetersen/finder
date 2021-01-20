@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { ApiService } from '../../../services/api/api-service.service';
 
 @Component({
   selector: 'finder-open',
@@ -8,9 +10,14 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./open.component.scss'],
 })
 export class OpenComponent implements OnInit {
-  form: FormGroup;
-
-  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<OpenComponent>) {}
+  contentsOfFile$: Observable<any>;
+  constructor(
+    private dialogRef: MatDialogRef<OpenComponent>,
+    @Inject(MAT_DIALOG_DATA) data,
+    private apiService: ApiService
+  ) {
+    this.contentsOfFile$ = this.apiService.readFile(data.file.path);
+  }
 
   ngOnInit(): void {}
   save() {

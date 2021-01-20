@@ -34,13 +34,15 @@ export class FileComponent implements OnInit {
           return obs2.pipe(map((value) => [obs1, value]));
         }
         return of([null, null]);
-      }),
-      tap((data) => console.log(data))
+      })
     );
   }
 
   ngOnInit(): void {}
-  open() {
+  open(file: FileNode) {
+    this.dialogConfig.data = {
+      file: file,
+    };
     this.dialog.open(OpenComponent, this.dialogConfig);
   }
 

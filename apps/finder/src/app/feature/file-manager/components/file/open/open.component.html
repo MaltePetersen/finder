@@ -1,9 +1,7 @@
 <h2 mat-dialog-title>Open File</h2>
 
-<mat-dialog-content [formGroup]="form">
-  <mat-form-field>
-    <input matInput placeholder="Course Description" formControlName="description" />
-  </mat-form-field>
+<mat-dialog-content *ngIf="contentsOfFile$ | async as content">
+  <textarea disabled [value]="content.file" [rows]="50" [cols]="100" matInput></textarea>
 </mat-dialog-content>
 
 <mat-dialog-actions>
