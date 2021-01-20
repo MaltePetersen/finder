@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { ApiService } from '../../services/api/api-service.service';
 import { CommunicationService } from '../../services/communication/communication.service';
+import { CurrentFileService } from '../../services/currentFile/current-file.service';
 import { CopyComponent } from './copy/copy.component';
 import { CutComponent } from './cut/cut.component';
 import { DeleteComponent } from './delete/delete.component';
@@ -21,13 +22,13 @@ export class FileComponent implements OnInit {
   test: Stats<any>;
   loading = true;
   constructor(
-    private communicationService: CommunicationService,
+    private currentFileService: CurrentFileService,
     private apiService: ApiService,
     private dialog: MatDialog
   ) {
     this.dialogConfig.disableClose = true;
     this.dialogConfig.autoFocus = true;
-    this.file$ = this.communicationService.currentFile$.pipe(
+    this.file$ = this.currentFileService.currentFile$.pipe(
       switchMap((obs1: FileNode) => {
         if (obs1) {
           const obs2 = this.apiService.getStatsOfFile(obs1?.path);
@@ -46,13 +47,16 @@ export class FileComponent implements OnInit {
     this.dialog.open(OpenComponent, this.dialogConfig);
   }
 
-  cut() {
+  cut(file: FileNode) {
     this.dialog.open(CutComponent, this.dialogConfig);
   }
-  copy() {
+  copy(file: FileNode) {
     this.dialog.open(CopyComponent, this.dialogConfig);
   }
-  delete() {
+  delete(file: FileNode) {
+    this.dialogConfig.data = {
+      file: file,
+    };
     this.dialog.open(DeleteComponent, this.dialogConfig);
   }
 }

@@ -28,4 +28,7 @@ export class ApiService {
   readFile(path: string) {
     return this.http.get<any>(`http://localhost:3333/api/file/:${this.transformSlashes(path)}`);
   }
+  deleteFile(path: string) {
+    return this.http.delete(`http://localhost:3333/api/file/:${this.transformSlashes(path)}`);
+  }
 }

@@ -37,7 +37,7 @@ export class FileHandlingService {
     );
   }
 
-  async deleteFile(path: string, file: string): Promise<any> {
-    return unlink(this.sharedDirectoryService.constructPath(path, file));
+  async deleteFile(path: string): Promise<any> {
+    return unlink(path);
   }
 }

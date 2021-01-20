@@ -43,9 +43,8 @@ export class FileHandlingController {
     return await this.sharedDirectoryService.readDirectory(toPath);
   }
 
-  @Delete('::path::name')
-  async delete(@Param('path') path: string, @Param('name') name: string) {
-    await this.filehandlerService.deleteFile(path, name);
-    return await this.sharedDirectoryService.readDirectory(path);
+  @Delete('::path')
+  async delete(@Param('path') path: string) {
+    await this.filehandlerService.deleteFile(path);
   }
 }

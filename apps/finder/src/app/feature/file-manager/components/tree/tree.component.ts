@@ -3,9 +3,10 @@ import { Component, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { FileNode } from 'libs/shared/src/lib/api-dtos';
-import { CommunicationService } from '../../services/communication/communication.service';
+import { tap } from 'rxjs/operators';
+import { CurrentFileService } from '../../services/currentFile/current-file.service';
+import { FileNodeService } from '../../services/filenode/filenode.service';
 import { CreateComponent } from './create/create.component';
-import { exampleFiles } from './example-data';
 
 export interface FlatTreeNode {
   name: string;
@@ -21,7 +22,6 @@ export interface FlatTreeNode {
   styleUrls: ['./tree.component.scss'],
 })
 export class TreeComponent {
-  @Input() files = exampleFiles;
   /** The TreeControl controls the expand/collapse state of tree nodes.  */
   treeControl: FlatTreeControl<FlatTreeNode>;
 
@@ -32,12 +32,16 @@ export class TreeComponent {
   dataSource: MatTreeFlatDataSource<FileNode, FlatTreeNode>;
   dialogConfig = new MatDialogConfig();
 
-  constructor(private dialog: MatDialog, private communication: CommunicationService) {
+  constructor(
+    private dialog: MatDialog,
+    private currentFileService: CurrentFileService,
+    private fileNodeService: FileNodeService
+  ) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
 
     this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-    this.communication.fileNode$.subscribe((data) => (this.dataSource.data = data));
+    this.fileNodeService.fileNode$.subscribe((data) => (this.dataSource.data = data));
     this.dialogConfig.disableClose = true;
     this.dialogConfig.autoFocus = true;
   }
@@ -75,8 +79,7 @@ export class TreeComponent {
   getChildren(node: FileNode): FileNode[] | null | undefined {
     return node.children;
   }
-  clicked(event) {
-    console.log(event);
-    this.communication.updateCurrentFile(event);
+  clicked(node: FileNode) {
+    this.currentFileService.updateCurrentFile(node);
   }
 }

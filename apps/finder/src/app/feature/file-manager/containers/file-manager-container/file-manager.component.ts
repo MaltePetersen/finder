@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { FileNode } from 'libs/shared/src/lib/api-dtos';
+import { Observable } from 'rxjs';
 import { ApiService } from '../../services/api/api-service.service';
-import { CommunicationService } from '../../services/communication/communication.service';
+import { FileNodeService } from '../../services/filenode/filenode.service';
 @Component({
   selector: 'finder-file-manager',
   templateUrl: './file-manager.component.html',
   styleUrls: ['./file-manager.component.scss'],
 })
 export class FileManagerComponent implements OnInit {
-  files$ = this.api.getFileNode();
+  files$: Observable<FileNode[]>;
 
-  constructor(private api: ApiService, private communication: CommunicationService) {}
-  data$ = this.api.getFolder();
-  ngOnInit(): void {
-    this.files$.subscribe((data) => this.communication.addFileNode(data));
+  constructor(private fileNodeService: FileNodeService) {
+    this.files$ = this.fileNodeService.fileNode$;
   }
+  ngOnInit(): void {}
 }

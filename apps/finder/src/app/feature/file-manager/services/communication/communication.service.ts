@@ -12,6 +12,7 @@ export class CommunicationService {
   public fileNode$ = this.fileNode$$.asObservable();
   private currentFile$$ = new BehaviorSubject<FileNode>(null);
   public currentFile$ = this.currentFile$$.asObservable();
+
   public folders$ = this.fileNode$.pipe(
     map((fileNodes: FileNode[]) => {
       this.folders = [];
@@ -19,16 +20,14 @@ export class CommunicationService {
       return this.folders;
     })
   );
+
   folders = new Array<Folder>();
   path = new Array<string>();
   constructor() {}
-  addFileNode(node: FileNode[]) {
-    this.fileNode$$.next(node);
-  }
+
   updateCurrentFile(node: FileNode) {
     this.currentFile$$.next(node);
   }
-
   recursiveFolderSearch(fileNodes: FileNode[]) {
     return fileNodes.map((fileNode: FileNode) => {
       if (fileNode.type === 'folder') {

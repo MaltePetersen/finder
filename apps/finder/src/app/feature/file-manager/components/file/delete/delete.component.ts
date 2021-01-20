@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ThrowStmt } from '@angular/compiler';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { ApiService } from '../../../services/api/api-service.service';
+import { CurrentFileService } from '../../../services/currentFile/current-file.service';
+import { FileNodeService } from '../../../services/filenode/filenode.service';
 
 @Component({
   selector: 'finder-delete',
@@ -9,11 +14,24 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DeleteComponent implements OnInit {
   form: FormGroup;
-
-  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<DeleteComponent>) {}
+  deleteFile$: Observable<any>;
+  constructor(
+    private fileNodeService: FileNodeService,
+    private currentFileService: CurrentFileService,
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) data,
+    private apiService: ApiService,
+    private dialogRef: MatDialogRef<DeleteComponent>
+  ) {
+    this.deleteFile$ = this.apiService.deleteFile(data.file.path);
+  }
 
   ngOnInit(): void {}
   delete() {
+    this.deleteFile$.subscribe(() => {
+      this.fileNodeService.load();
+      this.currentFileService.updateCurrentFile(null);
+    });
     this.dialogRef.close();
   }
   close() {
