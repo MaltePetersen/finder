@@ -1,37 +1,38 @@
-import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { DatabaseHandlingService } from './database-handling.service';
 
 @Controller('database-handling')
 export class DatabaseHandlingController {
   constructor(private databaseHandlingService: DatabaseHandlingService) {}
 
-  @Get('::colname')
+  @Get('/collections')
+  async getAllCollections() {
+    return await this.databaseHandlingService.getallCollections();
+  }
+
+  @Get('/collection::colname')
   async getCollection(@Param('colname') colname: string) {
     return await this.databaseHandlingService.getCollection(colname);
   }
 
-  @Delete('::colname')
+  @Delete('/collection::colname')
   async deleteCollection(@Param('colname') colname: string) {
     return await this.databaseHandlingService.deleteCollection(colname);
   }
 
-  @Post('::colname::name')
-  async createEntry(@Param('colname') colname: string, @Param('name') name: string) {
-    return await this.databaseHandlingService.createEntry(colname, name);
+  @Post('/collection::colname/entry')
+  async createEntry(@Body() entry: Object, @Param('colname') colname: string) {
+    console.log(entry);
+    return await this.databaseHandlingService.createEntry(colname, entry);
   }
 
-  @Put('::colname::oldname::newname')
-  async updateEntry(
-    @Param('colname') colname: string,
-    @Param('oldname') oldname: string,
-    @Param('newname') newname: string
-  ) {
-    return await this.databaseHandlingService.updateEntry(colname, oldname, newname);
+  @Put('/collection::colname/entry::id')
+  async updateEntry(@Body() entry: Object, @Param('colname') colname: string, @Param('id') id: string) {
+    return await this.databaseHandlingService.updateEntry(colname, id, entry);
   }
 
-  @Delete('::colname::name')
-  async deleteEntry(@Param('colname') colname: string, @Param('name') name: string) {
-    console.log('Colname: ' + colname + ', Name: ' + name);
-    // return await this.databaseHandlingService.deleteEntry(colname, name);
+  @Delete('/collection::colname/entry::id')
+  async deleteEntry(@Param('colname') colname: string, @Param('id') id: string) {
+    return await this.databaseHandlingService.deleteEntry(colname, id);
   }
 }

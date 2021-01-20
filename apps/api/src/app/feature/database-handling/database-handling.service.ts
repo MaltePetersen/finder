@@ -10,13 +10,23 @@ export class DatabaseHandlingService {
   constructor() {
     this.Client.connect();
   }
+
   destructor() {
     this.Client.close();
   }
 
+  getallCollections() {
+    try {
+      console.log(this.Client.db(this.Dbname).listCollections().toArray());
+      return this.Client.db(this.Dbname).listCollections().toArray();
+    } catch (err) {
+      console.log(err.stack);
+    }
+  }
+
   getCollection(colname: string) {
     try {
-      return this.Client.db(this.Dbname).collection(colname).findOne({});
+      return this.Client.db(this.Dbname).collection(colname).find().toArray();
     } catch (err) {
       console.log(err.stack);
     }
@@ -30,32 +40,25 @@ export class DatabaseHandlingService {
     }
   }
 
-  createEntry(colname: string, name: string) {
+  createEntry(colname: string, entry: Object) {
     try {
-      let data = {
-        name: name,
-        colname: colname,
-      };
-      return this.Client.db(this.Dbname).collection(colname).insertOne(data);
+      return this.Client.db(this.Dbname).collection(colname).insertOne(entry);
     } catch (err) {
       console.log(err.stack);
     }
   }
 
-  updateEntry(colname: string, oldname: string, newname) {
+  updateEntry(colname: string, id: string, entry: Object) {
     try {
-      return this.Client.db(this.Dbname)
-        .collection(colname)
-        .updateOne({ name: oldname }, { $set: { name: newname } }, { upsert: true });
+      return this.Client.db(this.Dbname).collection(colname).updateOne({ _id: id }, { $set: entry }, { upsert: true });
     } catch (err) {
       console.log(err.stack);
     }
   }
 
-  deleteEntry(colname: string, name: string): Promise<any> {
+  deleteEntry(colname: string, id: string) {
     try {
-      console.log('Colname: ' + colname + ', Name: ' + name);
-      return this.Client.db(this.Dbname).collection(colname).deleteOne({ name: name });
+      return this.Client.db(this.Dbname).collection(colname).deleteOne({ _id: id });
     } catch (err) {
       console.log(err.stack);
     }
