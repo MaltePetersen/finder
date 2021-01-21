@@ -8,7 +8,7 @@ import { userInfo } from 'os';
 @Injectable()
 export class SharedDirectoryService {
   constructor() {
-    this.getDirectoryContent(this.getWorkspace()).then((data) => console.log(JSON.stringify(data, null, 2)));
+    this.getDirectoryContent(this.getWorkspace()); //.then((data) => console.log(JSON.stringify(data, null, 2)));
   }
 
   private fileNode$$ = new BehaviorSubject<FileNode[]>(null);
