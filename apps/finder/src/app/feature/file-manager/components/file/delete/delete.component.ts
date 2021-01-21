@@ -29,8 +29,8 @@ export class DeleteComponent implements OnInit {
   ngOnInit(): void {}
   delete() {
     this.deleteFile$.subscribe(() => {
-      this.fileNodeService.load();
       this.currentFileService.updateCurrentFile(null);
+      this.fileNodeService.load();
     });
     this.dialogRef.close();
   }

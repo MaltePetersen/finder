@@ -9,6 +9,7 @@ import { CopyComponent } from './copy/copy.component';
 import { CutComponent } from './cut/cut.component';
 import { DeleteComponent } from './delete/delete.component';
 import { OpenComponent } from './open/open.component';
+import { ChangeNameComponent } from './change-name/change-name.component';
 @Component({
   selector: 'finder-file',
   templateUrl: './file.component.html',
@@ -27,7 +28,7 @@ export class FileComponent implements OnInit {
     this.dialogConfig.autoFocus = true;
     this.file$ = this.currentFileService.currentFile$.pipe(
       tap((data) => (data !== null ? (this.isLoading = true) : '')),
-      delay(1000),
+      delay(300),
       switchMap((obs1: FileNode) => {
         if (obs1) {
           const obs2 = this.apiService.getStatsOfFile(obs1?.path);
@@ -46,11 +47,23 @@ export class FileComponent implements OnInit {
     };
     this.dialog.open(OpenComponent, this.dialogConfig);
   }
+  change(file: FileNode) {
+    this.dialogConfig.data = {
+      file: file,
+    };
+    this.dialog.open(ChangeNameComponent, this.dialogConfig);
+  }
 
   cut(file: FileNode) {
+    this.dialogConfig.data = {
+      file: file,
+    };
     this.dialog.open(CutComponent, this.dialogConfig);
   }
   copy(file: FileNode) {
+    this.dialogConfig.data = {
+      file: file,
+    };
     this.dialog.open(CopyComponent, this.dialogConfig);
   }
   delete(file: FileNode) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Folder } from '../../model/folder.interface';
 import { FileNodeService } from '../../services/filenode/filenode.service';
@@ -11,7 +11,7 @@ import { FileNodeService } from '../../services/filenode/filenode.service';
 export class FolderchoserComponent implements OnInit {
   folders$: Observable<Folder[]>;
   currentFolder: Folder;
-
+  @Output() changeCurrentFolder = new EventEmitter<Folder>();
   constructor(private fileNodeService: FileNodeService) {
     this.folders$ = this.fileNodeService.folders$;
   }
@@ -19,6 +19,6 @@ export class FolderchoserComponent implements OnInit {
   ngOnInit(): void {}
   choose(folder: Folder) {
     this.currentFolder = folder;
-    console.log(folder);
+    this.changeCurrentFolder.emit(folder);
   }
 }

@@ -1,6 +1,8 @@
-<div class="basic-grid">
-  <div *ngFor="let folder of folders$ | async">
-    <finder-folder-card [currentFolder]="currentFolder" (click)="choose(folder)" [folder]="folder">
-    </finder-folder-card>
+<mat-card class="card">
+  <div class="basic-grid">
+    <div *ngFor="let folder of folders$ | async">
+      <finder-folder-card [currentFolder]="currentFolder" (click)="choose(folder)" [folder]="folder">
+      </finder-folder-card>
+    </div>
   </div>
-</div>
+</mat-card>

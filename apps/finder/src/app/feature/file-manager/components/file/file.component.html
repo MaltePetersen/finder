@@ -68,8 +68,10 @@
             </mat-list-item>
           </mat-list>
         </div>
-        <mat-card-actions [align]="'start'">
+        <mat-card-actions *ngIf="file[0].type === 'file'" [align]="'start'">
           <button class="flex-items" (click)="open(file[0])" mat-raised-button>Open</button>
+          <button class="flex-items" (click)="change(file[0])" mat-raised-button>Change Name</button>
+
           <button class="flex-items" (click)="copy(file[0])" mat-raised-button color="primary">Copy</button>
           <button class="flex-items" (click)="cut(file[0])" mat-raised-button color="accent">Cut</button>
           <button class="flex-items" (click)="delete(file[0])" mat-raised-button color="warn">Delete</button>

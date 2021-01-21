@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Update Filename</h2>
+
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field>
+    <input matInput placeholder="New Filename" formControlName="file" />
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button (click)="close()">Cancel</button>
+  <button mat-raised-button [disabled]="disabled" [color]="'primary'" (click)="changeName()">Confirm</button>
+</mat-dialog-actions>

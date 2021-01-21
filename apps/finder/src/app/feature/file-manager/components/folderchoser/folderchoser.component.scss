@@ -1,13 +1,10 @@
-@import '../../../../../styles/variables';
-
 .basic-grid {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(3, minmax(240px, 1fr));
 }
-.chosen-card {
-  background-color: blue;
-}
+
 .card {
-  background-color: green;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }

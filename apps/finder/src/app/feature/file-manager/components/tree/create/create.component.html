@@ -1,13 +1,25 @@
-<h2 mat-dialog-title>Create File</h2>
+<h2 mat-dialog-title>Create a File or a Folder</h2>
 
 <mat-dialog-content [formGroup]="form">
-  <mat-form-field>
-    <input matInput placeholder="File" formControlName="fileName" />
-  </mat-form-field>
-  <finder-folderchoser></finder-folderchoser>
+  <div class="container">
+    <div class="innerContainer">
+      <mat-form-field class="input">
+        <input matInput placeholder="Name of File or Folder" formControlName="fileName" />
+      </mat-form-field>
+      <mat-radio-group formControlName="radio" aria-label="Select an option">
+        <mat-radio-button value="folder">Folder</mat-radio-button>
+        <mat-radio-button value="file">File</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <p class="textfield">Below you can see all your folders. Just click on one to select him</p>
+  </div>
+
+  <finder-folderchoser (changeCurrentFolder)="updateCurrentFolder($event)"></finder-folderchoser>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button mat-raised-button (click)="close()">Cancel</button>
-  <button mat-raised-button [color]="'primary'" (click)="create()">Confirm</button>
+  <button mat-raised-button [disabled]="!currentFolder || disabled" [color]="'primary'" (click)="create()">
+    Confirm
+  </button>
 </mat-dialog-actions>

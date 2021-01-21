@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTreeModule } from '@angular/material/tree';
@@ -25,6 +26,7 @@ import { FolderchoserComponent } from './components/folderchoser/folderchoser.co
 import { CreateComponent } from './components/tree/create/create.component';
 import { FileManagerComponent } from './containers/file-manager-container/file-manager.component';
 import { FileManagerRoutingModule } from './file-manager-routing.module';
+import { ChangeNameComponent } from './components/file/change-name/change-name.component';
 
 @NgModule({
   declarations: [
@@ -38,10 +40,12 @@ import { FileManagerRoutingModule } from './file-manager-routing.module';
     FolderCardComponent,
     TreeComponent,
     FolderchoserComponent,
+    ChangeNameComponent,
   ],
   imports: [
     CommonModule,
     MatCardModule,
+    MatRadioModule,
     MatProgressSpinnerModule,
     MatTreeModule,
     HttpClientModule,

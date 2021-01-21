@@ -2,12 +2,14 @@
 
 <mat-dialog-content [formGroup]="form">
   <mat-form-field>
-    <input matInput placeholder="Course Description" formControlName="description" />
+    <input matInput placeholder="Name of File" formControlName="file" />
   </mat-form-field>
-  <finder-folderchoser></finder-folderchoser>
+  <finder-folderchoser (changeCurrentFolder)="updateCurrentFolder($event)"></finder-folderchoser>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button mat-raised-button (click)="close()">Cancel</button>
-  <button mat-raised-button [color]="'primary'" (click)="copy()">Confirm</button>
+  <button mat-raised-button [disabled]="!currentFolder || disabled" [color]="'primary'" (click)="copy()">
+    Confirm
+  </button>
 </mat-dialog-actions>

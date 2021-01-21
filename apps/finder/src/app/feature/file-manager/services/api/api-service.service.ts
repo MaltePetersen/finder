@@ -1,6 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FileNode, Stats } from 'libs/shared/src/lib/api-dtos';
+import {
+  DirectoryDTO,
+  FileDTO,
+  FileNode,
+  Stats,
+  UpdateDirectoryDTO,
+  UpdateFileDTO,
+} from 'libs/shared/src/lib/api-dtos';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +26,6 @@ export class ApiService {
   }
   getStatsOfFile(path: string) {
     path = this.transformSlashes(path);
-    console.log(path);
     return this.http.get<Stats<any>>(`http://localhost:3333/api/file/stats:${path}`);
   }
   transformSlashes(path: string) {
@@ -30,5 +36,30 @@ export class ApiService {
   }
   deleteFile(path: string) {
     return this.http.delete(`http://localhost:3333/api/file/:${this.transformSlashes(path)}`);
+  }
+  createFile(fileDTO: FileDTO) {
+    return this.http.post('http://localhost:3333/api/file', fileDTO);
+  }
+  copyFile(fromPath: string, toPath: string) {
+    return this.http.get(
+      `http://localhost:3333/api/file/copy:${this.transformSlashes(fromPath)}:${this.transformSlashes(toPath)}`
+    );
+  }
+  updateFileName(updateFileDTO: UpdateFileDTO) {
+    return this.http.put('http://localhost:3333/api/file', updateFileDTO);
+  }
+  createDirectory(directoryDTO: DirectoryDTO) {
+    return this.http.post('/api/directory', directoryDTO);
+  }
+  updateDirectory(updateDirectoryDTO: UpdateDirectoryDTO) {
+    return this.http.put('​http://localhost:3333/api​/directory', updateDirectoryDTO);
+  }
+  deleteDirectory(path: string) {
+    return this.http.delete(`​http://localhost:3333/api​/directory;${this.transformSlashes(path)}`);
+  }
+  copyDirectory(fromPath: string, toPath: string) {
+    return this.http.get(
+      `http://localhost:3333/api/directory/copy:${this.transformSlashes(fromPath)}:${this.transformSlashes(toPath)}`
+    );
   }
 }

@@ -22,19 +22,12 @@ export class FileHandlingService {
     return writeFile(this.sharedDirectoryService.constructPath(path, file), '');
   }
 
-  async updateFileName(path: string, name: string, nameNew: string): Promise<any> {
-    return rename(
-      this.sharedDirectoryService.constructPath(path, name),
-      this.sharedDirectoryService.constructPath(path, nameNew)
-    );
+  async updateFileName(path: string, newPath: string): Promise<any> {
+    return rename(path, newPath);
   }
 
-  async copyFile(path: string, file: string, newPath: string, newFile: string): Promise<any> {
-    return copyFile(
-      this.sharedDirectoryService.constructPath(path, file),
-      this.sharedDirectoryService.constructPath(newPath, newFile),
-      constants.COPYFILE_EXCL
-    );
+  async copyFile(path: string, newPath: string): Promise<any> {
+    return copyFile(path, newPath, constants.COPYFILE_EXCL);
   }
 
   async deleteFile(path: string): Promise<any> {

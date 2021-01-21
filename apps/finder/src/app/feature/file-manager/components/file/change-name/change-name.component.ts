@@ -1,17 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Folder } from '../../../model/folder.interface';
 import { ApiService } from '../../../services/api/api-service.service';
 import { CurrentFileService } from '../../../services/currentFile/current-file.service';
 import { FileNodeService } from '../../../services/filenode/filenode.service';
+import { CopyComponent } from '../copy/copy.component';
 
 @Component({
-  selector: 'finder-copy',
-  templateUrl: './copy.component.html',
-  styleUrls: ['./copy.component.scss'],
+  selector: 'finder-change-name',
+  templateUrl: './change-name.component.html',
+  styleUrls: ['./change-name.component.scss'],
 })
-export class CopyComponent implements OnInit {
+export class ChangeNameComponent implements OnInit {
   form: FormGroup;
   currentFolder: Folder;
   disabled = true;
@@ -30,18 +31,16 @@ export class CopyComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-  copy() {
-    const fromPath = this.data.file.path;
-    const toPath = `${this.currentFolder.path}/${this.form.get('file').value}`;
-
-    this.apiService.copyFile(fromPath, toPath).subscribe();
+  changeName() {
+    const oldPath: string = this.data.file.path;
+    const newPath = `${oldPath.substring(0, oldPath.lastIndexOf('/'))}/${this.form.get('file').value}`;
+    this.apiService.updateFileName({ path: oldPath, newPath: newPath }).subscribe();
+    this.currentFileService.updateCurrentFile(null);
+    this.currentFileService.updateCurrentFile(this.data.file);
     this.fileNodeService.load();
     this.dialogRef.close();
   }
   close() {
     this.dialogRef.close();
-  }
-  updateCurrentFolder(folder: Folder) {
-    this.currentFolder = folder;
   }
 }
