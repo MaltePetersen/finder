@@ -24,19 +24,16 @@ export class DirectoryHandlingController {
   @Put()
   async updateDirectory(@Body() updateDirectoryDTO: UpdateDirectoryDTO) {
     await this.directoryHandlingService.updateDirectoryName(updateDirectoryDTO.path, updateDirectoryDTO.newPath);
-    return await this.sharedDirectoryService.readDirectory(updateDirectoryDTO.path);
   }
 
   @Delete('::path')
   async deleteDirectory(@Param('path') path: string) {
     await this.directoryHandlingService.deleteDirectory(path);
-    return await this.sharedDirectoryService.readDirectory(path);
   }
 
   @Get('/copy::from::to')
   async copyDirectory(@Param('from') fromPath: string, @Param('to') toPath: string) {
     this.directoryHandlingService.copyDirectory(fromPath, toPath);
-    return await this.sharedDirectoryService.readDirectory(fromPath);
   }
 
   @Get('/filenode')

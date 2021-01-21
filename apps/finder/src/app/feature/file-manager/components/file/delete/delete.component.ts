@@ -14,21 +14,24 @@ import { FileNodeService } from '../../../services/filenode/filenode.service';
 })
 export class DeleteComponent implements OnInit {
   form: FormGroup;
-  deleteFile$: Observable<any>;
+  delete$: Observable<any>;
   constructor(
     private fileNodeService: FileNodeService,
     private currentFileService: CurrentFileService,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) data,
+    @Inject(MAT_DIALOG_DATA) private data,
     private apiService: ApiService,
     private dialogRef: MatDialogRef<DeleteComponent>
   ) {
-    this.deleteFile$ = this.apiService.deleteFile(data.file.path);
+    this.delete$ =
+      data.file.type === 'file'
+        ? this.apiService.deleteFile(data.file.path)
+        : this.apiService.deleteDirectory(data.file.path);
   }
 
   ngOnInit(): void {}
   delete() {
-    this.deleteFile$.subscribe(() => {
+    this.delete$.subscribe(() => {
       this.currentFileService.updateCurrentFile(null);
       this.fileNodeService.load();
     });

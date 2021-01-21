@@ -50,10 +50,11 @@ export class ApiService {
     return this.http.post('/api/directory', directoryDTO);
   }
   updateDirectory(updateDirectoryDTO: UpdateDirectoryDTO) {
-    return this.http.put('​/api​/directory', updateDirectoryDTO);
+    return this.http.put('/api/directory', updateDirectoryDTO);
   }
   deleteDirectory(path: string) {
-    return this.http.delete(`​/api​/directory;${this.transformSlashes(path)}`);
+    path = this.transformSlashes(path);
+    return this.http.delete('/api/directory/:' + path);
   }
   copyDirectory(fromPath: string, toPath: string) {
     return this.http.get(`/api/directory/copy:${this.transformSlashes(fromPath)}:${this.transformSlashes(toPath)}`);

@@ -33,8 +33,11 @@ export class CopyComponent implements OnInit {
   copy() {
     const fromPath = this.data.file.path;
     const toPath = `${this.currentFolder.path}/${this.form.get('file').value}`;
-
-    this.apiService.copyFile(fromPath, toPath).subscribe();
+    if (this.data.file.type === 'file') {
+      this.apiService.copyFile(fromPath, toPath).subscribe();
+    } else {
+      this.apiService.copyDirectory(fromPath, toPath).subscribe();
+    }
     this.fileNodeService.load();
     this.dialogRef.close();
   }
