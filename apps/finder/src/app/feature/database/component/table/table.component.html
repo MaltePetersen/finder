@@ -1,0 +1,58 @@
+<cdk-virtual-scroll-viewport class="scroll-viewport mat-elevation-z8" [tvsItemSize]="rowHeight" bufferMultiplier="10">
+  <table [dataSource]="dataSource" class="table" mat-table matSort multiTemplateDataRows>
+    <ng-container matColumnDef="expansion-arrow">
+      <th *matHeaderCellDef mat-header-cell class="expansion-arrow-headercell"></th>
+      <td *matCellDef="let element" mat-cell class="expansion-arrow-cell">
+        <mat-icon class="expansion-arrow" color="primary">play_arrow</mat-icon>
+      </td>
+    </ng-container>
+
+    <ng-content></ng-content>
+
+    <ng-container matColumnDef="expandedDetail">
+      <td
+        *matCellDef="let element"
+        [attr.colspan]="'' + columns.length"
+        class="expanded-detail-cell"
+        [class.expanded-detail-cell--highlighted]="element[highlightProperty]"
+        [class.expanded-detail-cell--highlighted-animated]="element[highlightAnimatedProperty]"
+        mat-cell
+      >
+        <div
+          *ngIf="element === expandedElement"
+          [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'"
+          class="expanded-row__detail"
+        >
+          <go-expanded-detail-container>
+            <ng-container
+              *ngTemplateOutlet="expandedDetailDef?.templateRef; context: { $implicit: element }"
+            ></ng-container>
+          </go-expanded-detail-container>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container *ngIf="hasHeader">
+      <tr *matHeaderRowDef="columns; sticky: true" mat-header-row></tr>
+    </ng-container>
+    <tr
+      *matRowDef="let element; columns: columns"
+      mat-row
+      class="row"
+      [style.height.px]="rowHeight"
+      [class.row--highlighted]="element[highlightProperty]"
+      [class.row--highlighted-animated]="element[highlightAnimatedProperty]"
+      [class.row--with-open-details]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element"
+    ></tr>
+    <ng-container *ngIf="expandedDetailDef">
+      <tr *matRowDef="let row; columns: ['expandedDetail']" class="expanded-row" mat-row></tr>
+    </ng-container>
+  </table>
+</cdk-virtual-scroll-viewport>
+<div *ngIf="isLoading" class="table-overlay">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!isLoading && dataSource?.data?.length === 0" class="table-overlay" data-testId="table-no-data-message">
+  {{ noDataText }}
+</div>

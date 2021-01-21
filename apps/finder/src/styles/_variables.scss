@@ -9,3 +9,25 @@ $finder-accent-dark: #fcce8a;
 $finder-warn: #bbc8ba;
 $finder-warn-light: #ebefea;
 $finder-warn-dark: #a4b4a3;
+
+$spacing-xlarge: 32px;
+$spacing-large: 25px;
+$spacing-default: 16px;
+$spacing-small: 8px;
+$spacing-xsmall: 4px;
+$spacing-tiny: 2px;
+
+$breakpoints: (
+  lg: 1200px,
+  md: 992px,
+  sm: 768px,
+  xs: 480px,
+);
+$screen-xs: map-get($breakpoints, xs);
+$screen-sm: map-get($breakpoints, sm);
+$screen-md: map-get($breakpoints, md);
+$screen-lg: map-get($breakpoints, lg);
+
+$screen-sm-max: ($screen-md - 1);
+$screen-xs-max: ($screen-sm - 1);
+$screen-md-max: ($screen-lg - 1);

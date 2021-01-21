@@ -1,0 +1,13 @@
+<div class="container">
+  <finder-table class="ele" [columns]="defaultColumns" [data]="example" rowHeight="70">
+    <ng-container matColumnDef="name">
+      <th *matHeaderCellDef mat-header-cell class="cell--location">Id</th>
+      <td *matCellDef="let element; let i = dataIndex" mat-cell>
+        {{ element.name }}
+      </td>
+    </ng-container>
+    <ng-container class="detail--table" *goExpandedDetailDef="let element">
+      {{ element.name }}
+    </ng-container>
+  </finder-table>
+</div>
