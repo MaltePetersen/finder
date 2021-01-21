@@ -16,50 +16,46 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   public getFolder() {
-    return this.http.get<[]>('http://localhost:3333/api/directory/:%2FUsers%2Fmpetersen%2FmodernWebDev');
+    return this.http.get<[]>('/api/directory/:%2FUsers%2Fmpetersen%2FmodernWebDev');
     /*.pipe(
       map((data) => data.map(entry => {name: `${entry}`; type: 'folder' } ))
     )*/
   }
   public getFileNode() {
-    return this.http.get<FileNode[]>('http://localhost:3333/api/directory/filenode');
+    return this.http.get<FileNode[]>('/api/directory/filenode');
   }
   getStatsOfFile(path: string) {
     path = this.transformSlashes(path);
-    return this.http.get<Stats<any>>(`http://localhost:3333/api/file/stats:${path}`);
+    return this.http.get<Stats<any>>(`/api/file/stats:${path}`);
   }
   transformSlashes(path: string) {
     return path.replace(/\//g, '%2F');
   }
   readFile(path: string) {
-    return this.http.get<any>(`http://localhost:3333/api/file/:${this.transformSlashes(path)}`);
+    return this.http.get<any>(`/api/file/:${this.transformSlashes(path)}`);
   }
   deleteFile(path: string) {
-    return this.http.delete(`http://localhost:3333/api/file/:${this.transformSlashes(path)}`);
+    return this.http.delete(`/api/file/:${this.transformSlashes(path)}`);
   }
   createFile(fileDTO: FileDTO) {
-    return this.http.post('http://localhost:3333/api/file', fileDTO);
+    return this.http.post('/api/file', fileDTO);
   }
   copyFile(fromPath: string, toPath: string) {
-    return this.http.get(
-      `http://localhost:3333/api/file/copy:${this.transformSlashes(fromPath)}:${this.transformSlashes(toPath)}`
-    );
+    return this.http.get(`/api/file/copy:${this.transformSlashes(fromPath)}:${this.transformSlashes(toPath)}`);
   }
   updateFileName(updateFileDTO: UpdateFileDTO) {
-    return this.http.put('http://localhost:3333/api/file', updateFileDTO);
+    return this.http.put('/api/file', updateFileDTO);
   }
   createDirectory(directoryDTO: DirectoryDTO) {
     return this.http.post('/api/directory', directoryDTO);
   }
   updateDirectory(updateDirectoryDTO: UpdateDirectoryDTO) {
-    return this.http.put('​http://localhost:3333/api​/directory', updateDirectoryDTO);
+    return this.http.put('​/api​/directory', updateDirectoryDTO);
   }
   deleteDirectory(path: string) {
-    return this.http.delete(`​http://localhost:3333/api​/directory;${this.transformSlashes(path)}`);
+    return this.http.delete(`​/api​/directory;${this.transformSlashes(path)}`);
   }
   copyDirectory(fromPath: string, toPath: string) {
-    return this.http.get(
-      `http://localhost:3333/api/directory/copy:${this.transformSlashes(fromPath)}:${this.transformSlashes(toPath)}`
-    );
+    return this.http.get(`/api/directory/copy:${this.transformSlashes(fromPath)}:${this.transformSlashes(toPath)}`);
   }
 }
