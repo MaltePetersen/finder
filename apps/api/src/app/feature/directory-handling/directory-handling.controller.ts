@@ -17,35 +17,23 @@ export class DirectoryHandlingController {
 
   @Post()
   async createDirectory(@Body() directoryDTO: DirectoryDTO) {
-    await this.directoryHandlingService.createDirectory(directoryDTO.path, directoryDTO.name);
+    await this.directoryHandlingService.createDirectory(directoryDTO.path);
     return await this.sharedDirectoryService.readDirectory(directoryDTO.path);
   }
 
   @Put()
   async updateDirectory(@Body() updateDirectoryDTO: UpdateDirectoryDTO) {
-    await this.directoryHandlingService.updateDirectoryName(
-      updateDirectoryDTO.path,
-      updateDirectoryDTO.name,
-      updateDirectoryDTO.newName
-    );
-    return await this.sharedDirectoryService.readDirectory(updateDirectoryDTO.path);
+    await this.directoryHandlingService.updateDirectoryName(updateDirectoryDTO.path, updateDirectoryDTO.newPath);
   }
 
-  @Delete('::name::path')
-  async deleteDirectory(@Param('name') directory: string, @Param('path') path: string) {
-    await this.directoryHandlingService.deleteDirectory(path, directory);
-    return await this.sharedDirectoryService.readDirectory(path);
+  @Delete('::path')
+  async deleteDirectory(@Param('path') path: string) {
+    await this.directoryHandlingService.deleteDirectory(path);
   }
 
-  @Get('/copy::from::to::name::newname')
-  async copyDirectory(
-    @Param('from') fromPath: string,
-    @Param('to') toPath: string,
-    @Param('name') name: string,
-    @Param('newname') newName: string
-  ) {
-    this.directoryHandlingService.copyDirectory(fromPath, name, toPath, newName);
-    return await this.sharedDirectoryService.readDirectory(fromPath);
+  @Get('/copy::from::to')
+  async copyDirectory(@Param('from') fromPath: string, @Param('to') toPath: string) {
+    this.directoryHandlingService.copyDirectory(fromPath, toPath);
   }
 
   @Get('/filenode')

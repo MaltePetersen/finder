@@ -1,20 +1,18 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavigationComponent } from './navigation/navigation.component';
+import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
-import { TreeComponent } from './tree/tree.component';
-import { MatTreeModule } from '@angular/material/tree';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-
+import { NavigationComponent } from './navigation/navigation.component';
+import { FileManagerToolbarComponent } from './file-manager-toolbar/file-manager-toolbar.component';
 @NgModule({
-  declarations: [NavigationComponent, TreeComponent],
+  declarations: [NavigationComponent, FileManagerToolbarComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -27,8 +25,7 @@ import { RouterModule } from '@angular/router';
     MatCardModule,
     MatMenuModule,
     MatButtonModule,
-    MatTreeModule,
   ],
-  exports: [NavigationComponent, TreeComponent],
+  exports: [NavigationComponent, FileManagerToolbarComponent],
 })
 export class UiModule {}

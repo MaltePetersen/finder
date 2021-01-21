@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Copy File</h2>
+
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field>
+    <input matInput placeholder="Name of File" formControlName="file" />
+  </mat-form-field>
+  <finder-folderchoser (changeCurrentFolder)="updateCurrentFolder($event)"></finder-folderchoser>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button (click)="close()">Cancel</button>
+  <button mat-raised-button [disabled]="!currentFolder || disabled" [color]="'primary'" (click)="copy()">
+    Confirm
+  </button>
+</mat-dialog-actions>

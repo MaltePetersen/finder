@@ -1,26 +1,63 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { FileManagerRoutingModule } from './file-manager-routing.module';
-import { FileManagerComponent } from './containers/file-manager-container/file-manager.component';
-import { UiModule } from '../../shared/ui/ui.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FileManagerToolbarComponent } from './components/file-manager-toolbar/file-manager-toolbar.component';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { FileComponent } from './components/file/file.component';
 import { MatCardModule } from '@angular/material/card';
-import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTreeModule } from '@angular/material/tree';
+import { UiModule } from '../../shared/ui/ui.module';
+import { FolderCardComponent } from '../file-manager/components/folderchoser/folder-card/folder-card.component';
+import { TreeComponent } from '../file-manager/components/tree/tree.component';
+import { CopyComponent } from './components/file/copy/copy.component';
+import { CutComponent } from './components/file/cut/cut.component';
+import { DeleteComponent } from './components/file/delete/delete.component';
+import { FileComponent } from './components/file/file.component';
+import { OpenComponent } from './components/file/open/open.component';
+import { FolderchoserComponent } from './components/folderchoser/folderchoser.component';
+import { CreateComponent } from './components/tree/create/create.component';
+import { FileManagerComponent } from './containers/file-manager-container/file-manager.component';
+import { FileManagerRoutingModule } from './file-manager-routing.module';
+import { ChangeNameComponent } from './components/file/change-name/change-name.component';
 
 @NgModule({
-  declarations: [FileManagerComponent, FileManagerToolbarComponent, FileComponent],
+  declarations: [
+    FileManagerComponent,
+    FileComponent,
+    OpenComponent,
+    CopyComponent,
+    CreateComponent,
+    DeleteComponent,
+    CutComponent,
+    FolderCardComponent,
+    TreeComponent,
+    FolderchoserComponent,
+    ChangeNameComponent,
+  ],
   imports: [
     CommonModule,
+    MatCardModule,
+    MatRadioModule,
+    MatProgressSpinnerModule,
+    MatTreeModule,
     HttpClientModule,
     FileManagerRoutingModule,
     MatIconModule,
+    MatDialogModule,
     UiModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
     MatListModule,
+    MatInputModule,
+    MatToolbarModule,
     MatButtonModule,
     MatCardModule,
   ],

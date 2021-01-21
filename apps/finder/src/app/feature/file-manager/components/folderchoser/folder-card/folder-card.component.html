@@ -1,0 +1,9 @@
+<mat-card [ngClass]="isCurrentFolder ? 'choosen-card' : 'card'">
+  <mat-list>
+    <mat-list-item>
+      <mat-icon mat-list-icon>folder</mat-icon>
+      <div mat-line>{{ folder.name }}</div>
+      <div mat-line>{{ folder.path }}</div>
+    </mat-list-item>
+  </mat-list>
+</mat-card>

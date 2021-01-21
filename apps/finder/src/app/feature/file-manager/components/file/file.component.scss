@@ -9,3 +9,10 @@
 .list2 {
   margin-top: 40px;
 }
+.overlay {
+  position: absolute;
+  display: block;
+  top: 40%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+}

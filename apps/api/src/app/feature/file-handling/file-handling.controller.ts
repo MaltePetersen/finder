@@ -15,9 +15,9 @@ export class FileHandlingController {
     return await this.filehandlerService.getStats(path);
   }
 
-  @Get('::path::file')
-  async getFile(@Param('path') path: string, @Param('file') file: string) {
-    return await this.filehandlerService.readFile(path, file);
+  @Get('::path')
+  async getFile(@Param('path') path: string) {
+    return { file: await this.filehandlerService.readFile(path) };
   }
 
   @Post()
@@ -28,24 +28,17 @@ export class FileHandlingController {
 
   @Put()
   async updateFileName(@Body() updateFileDTO: UpdateFileDTO) {
-    await this.filehandlerService.updateFileName(updateFileDTO.path, updateFileDTO.name, updateFileDTO.newName);
+    await this.filehandlerService.updateFileName(updateFileDTO.path, updateFileDTO.newPath);
     return await this.sharedDirectoryService.readDirectory(updateFileDTO.path);
   }
 
-  @Get('/copy::frompath::topath::name::newname')
-  async copy(
-    @Param('frompath') fromPath: string,
-    @Param('topath') toPath: string,
-    @Param('name') name: string,
-    @Param('newname') newName: string
-  ) {
-    await this.filehandlerService.copyFile(fromPath, name, toPath, newName);
-    return await this.sharedDirectoryService.readDirectory(toPath);
+  @Get('/copy::frompath::topath')
+  async copy(@Param('frompath') fromPath: string, @Param('topath') toPath: string) {
+    await this.filehandlerService.copyFile(fromPath, toPath);
   }
 
-  @Delete('::path::name')
-  async delete(@Param('path') path: string, @Param('name') name: string) {
-    await this.filehandlerService.deleteFile(path, name);
-    return await this.sharedDirectoryService.readDirectory(path);
+  @Delete('::path')
+  async delete(@Param('path') path: string) {
+    await this.filehandlerService.deleteFile(path);
   }
 }

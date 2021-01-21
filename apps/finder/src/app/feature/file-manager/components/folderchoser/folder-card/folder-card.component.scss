@@ -1,0 +1,16 @@
+@import '../../../../../../styles/variables';
+
+.icon {
+  font-size: 36px;
+}
+.card {
+  margin: 10px;
+}
+.choosen-card {
+  margin: 10px;
+  background-color: $finder-primary;
+}
+::ng-deep .mat-list .mat-list-item .mat-line {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}

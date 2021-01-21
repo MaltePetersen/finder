@@ -1,0 +1,20 @@
+/*::ng-deep .mat-tree-node {
+  background-color: #fafafa;
+}*/
+.type-icon {
+  color: #757575;
+  margin-right: 5px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.inner_container {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.button {
+  margin-left: 10px;
+}

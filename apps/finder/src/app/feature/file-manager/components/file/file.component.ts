@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { CommunicationService } from 'apps/finder/src/app/shared/ui/services/communication.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FileNode, Stats } from 'libs/shared/src/lib/api-dtos';
-import { from, Observable, of } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
-import { ApiService } from '../../services/api-service.service';
+import { Observable, of } from 'rxjs';
+import { delay, map, switchMap, tap } from 'rxjs/operators';
+import { ApiService } from '../../services/api/api-service.service';
+import { CurrentFileService } from '../../services/currentFile/current-file.service';
+import { CopyComponent } from './copy/copy.component';
+import { CutComponent } from './cut/cut.component';
+import { DeleteComponent } from './delete/delete.component';
+import { OpenComponent } from './open/open.component';
+import { ChangeNameComponent } from './change-name/change-name.component';
 @Component({
   selector: 'finder-file',
   templateUrl: './file.component.html',
@@ -11,10 +17,18 @@ import { ApiService } from '../../services/api-service.service';
 })
 export class FileComponent implements OnInit {
   file$: Observable<any>;
-  test: Stats<any>;
-  loading = true;
-  constructor(private communicationService: CommunicationService, private apiService: ApiService) {
-    this.file$ = this.communicationService.currentFile$.pipe(
+  dialogConfig = new MatDialogConfig();
+  isLoading = false;
+  constructor(
+    private currentFileService: CurrentFileService,
+    private apiService: ApiService,
+    private dialog: MatDialog
+  ) {
+    this.dialogConfig.disableClose = true;
+    this.dialogConfig.autoFocus = true;
+    this.file$ = this.currentFileService.currentFile$.pipe(
+      tap((data) => (data !== null ? (this.isLoading = true) : '')),
+      delay(300),
       switchMap((obs1: FileNode) => {
         if (obs1) {
           const obs2 = this.apiService.getStatsOfFile(obs1?.path);
@@ -22,9 +36,40 @@ export class FileComponent implements OnInit {
         }
         return of([null, null]);
       }),
-      tap((data) => console.log(data))
+      tap(() => (this.isLoading = false))
     );
   }
 
   ngOnInit(): void {}
+  open(file: FileNode) {
+    this.dialogConfig.data = {
+      file: file,
+    };
+    this.dialog.open(OpenComponent, this.dialogConfig);
+  }
+  change(file: FileNode) {
+    this.dialogConfig.data = {
+      file: file,
+    };
+    this.dialog.open(ChangeNameComponent, this.dialogConfig);
+  }
+
+  cut(file: FileNode) {
+    this.dialogConfig.data = {
+      file: file,
+    };
+    this.dialog.open(CutComponent, this.dialogConfig);
+  }
+  copy(file: FileNode) {
+    this.dialogConfig.data = {
+      file: file,
+    };
+    this.dialog.open(CopyComponent, this.dialogConfig);
+  }
+  delete(file: FileNode) {
+    this.dialogConfig.data = {
+      file: file,
+    };
+    this.dialog.open(DeleteComponent, this.dialogConfig);
+  }
 }

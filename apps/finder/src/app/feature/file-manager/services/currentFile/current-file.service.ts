@@ -5,15 +5,10 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class CommunicationService {
-  private fileNode$$ = new BehaviorSubject<FileNode[]>([]);
-  public fileNode$ = this.fileNode$$.asObservable();
+export class CurrentFileService {
   private currentFile$$ = new BehaviorSubject<FileNode>(null);
   public currentFile$ = this.currentFile$$.asObservable();
   constructor() {}
-  addFileNode(node: FileNode[]) {
-    this.fileNode$$.next(node);
-  }
   updateCurrentFile(node: FileNode) {
     this.currentFile$$.next(node);
   }

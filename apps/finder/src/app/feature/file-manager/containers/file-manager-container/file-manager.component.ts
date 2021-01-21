@@ -1,17 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api-service.service';
-import { CommunicationService } from '../../../../shared/ui/services/communication.service';
+import { FileNode } from 'libs/shared/src/lib/api-dtos';
+import { Observable } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
+import { ApiService } from '../../services/api/api-service.service';
+import { FileNodeService } from '../../services/filenode/filenode.service';
 @Component({
   selector: 'finder-file-manager',
   templateUrl: './file-manager.component.html',
   styleUrls: ['./file-manager.component.scss'],
 })
 export class FileManagerComponent implements OnInit {
-  files$ = this.api.getFileNode();
-
-  constructor(private api: ApiService, private communication: CommunicationService) {}
-  data$ = this.api.getFolder();
-  ngOnInit(): void {
-    this.files$.subscribe((data) => this.communication.addFileNode(data));
+  files$: Observable<FileNode[]>;
+  isLoading = true;
+  constructor(private fileNodeService: FileNodeService) {
+    this.files$ = this.fileNodeService.fileNode$.pipe(
+      tap((data) => console.log(data)),
+      tap((data) => (this.isLoading = data.length === 0))
+    );
   }
+  ngOnInit(): void {}
 }

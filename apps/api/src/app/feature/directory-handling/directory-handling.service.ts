@@ -7,25 +7,19 @@ import { mkdir, rename, rmdir } from 'fs/promises';
 export class DirectoryHandlingService {
   constructor(private sharedDirectoryService: SharedDirectoryService) {}
 
-  createDirectory(path: string, dir: string): Promise<any> {
-    return mkdir(this.sharedDirectoryService.constructPath(path, dir));
+  createDirectory(path: string): Promise<any> {
+    return mkdir(path);
   }
 
-  updateDirectoryName(path: string, dir: string, newdir: string): Promise<any> {
-    return rename(
-      this.sharedDirectoryService.constructPath(path, dir),
-      this.sharedDirectoryService.constructPath(path, newdir)
-    );
+  updateDirectoryName(path: string, newPath): Promise<any> {
+    return rename(path, newPath);
   }
 
-  copyDirectory(path: string, dir: string, newPath: string, newDir: string) {
-    copySync(
-      this.sharedDirectoryService.constructPath(path, dir),
-      this.sharedDirectoryService.constructPath(newPath, newDir)
-    );
+  copyDirectory(path: string, newPath: string) {
+    copySync(path, newPath);
   }
 
-  deleteDirectory(path: string, dir: string): Promise<any> {
-    return rmdir(this.sharedDirectoryService.constructPath(path, dir));
+  deleteDirectory(path: string): Promise<any> {
+    return rmdir(path);
   }
 }

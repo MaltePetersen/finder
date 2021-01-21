@@ -68,7 +68,42 @@
             </mat-list-item>
           </mat-list>
         </div>
+        <ng-container *ngIf="file[0].type === 'file'; else folder">
+          <mat-card-actions [align]="'start'">
+            <button class="flex-items" (click)="open(file[0])" mat-raised-button>Open</button>
+            <button class="flex-items" (click)="change(file[0])" mat-raised-button>Change Name</button>
+
+            <button class="flex-items" (click)="copy(file[0])" mat-raised-button color="primary">Copy</button>
+            <button class="flex-items" (click)="cut(file[0])" mat-raised-button color="accent">Cut</button>
+            <button class="flex-items" (click)="delete(file[0])" mat-raised-button color="warn">Delete</button>
+          </mat-card-actions>
+        </ng-container>
+        <ng-template #folder>
+          <mat-card-actions [align]="'start'">
+            <button class="flex-items" (click)="change(file[0])" mat-raised-button>Change Name</button>
+            <button class="flex-items" (click)="copy(file[0])" mat-raised-button color="primary">Copy</button>
+            <button
+              class="flex-items"
+              *ngIf="file[1].size < 100"
+              (click)="cut(file[0])"
+              mat-raised-button
+              color="accent"
+            >
+              Cut
+            </button>
+            <button
+              class="flex-items"
+              *ngIf="file[1].size < 100"
+              (click)="delete(file[0])"
+              mat-raised-button
+              color="warn"
+            >
+              Delete
+            </button>
+          </mat-card-actions>
+        </ng-template>
       </mat-card-content>
     </mat-card>
   </div>
 </div>
+<mat-spinner class="overlay" *ngIf="isLoading"></mat-spinner>
