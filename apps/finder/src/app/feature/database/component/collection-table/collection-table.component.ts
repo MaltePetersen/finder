@@ -15,8 +15,32 @@ export class CollectionTableComponent implements OnInit {
     { name: 'element2' },
     { name: 'element1' },
     { name: 'element2' },
+    { name: 'element1' },
+    { name: 'element2' },
+    { name: 'element1' },
+    { name: 'element2' },
+    { name: 'element1' },
+    { name: 'element2' },
+    { name: 'element1' },
+    { name: 'element2' },
+    { name: 'element1' },
+    { name: 'element2' },
+    { name: 'element1' },
+    { name: 'element2' },
+    { name: 'element1' },
+    { name: 'element2' },
+    { name: 'element1' },
+    { name: 'element2' },
+    { name: 'element1' },
+    { name: 'element2' },
+    { name: 'element1' },
+    { name: 'element2' },
+    { name: 'element1' },
+    { name: 'element2' },
+    { name: 'element1' },
+    { name: 'element2' },
   ];
-  defaultColumns = ['name'];
+  defaultColumns = ['id'];
   constructor() {}
 
   ngOnInit(): void {}

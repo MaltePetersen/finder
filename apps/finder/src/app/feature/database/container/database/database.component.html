@@ -1,9 +1,17 @@
 <finder-file-manager-toolbar [description]="'Database Manager'"></finder-file-manager-toolbar>
 <div class="container">
-  <div class="create">
-    <mat-card><finder-create-entry></finder-create-entry></mat-card>
+  <div class="selection">
+    <div class="current">
+      <mat-card> <finder-current-selection></finder-current-selection></mat-card>
+    </div>
+    <mat-card class="select"><finder-collection-selection></finder-collection-selection></mat-card>
   </div>
-  <div class="collections">
-    <finder-show-collections></finder-show-collections>
+  <div class="selection">
+    <div class="current">
+      <mat-card class="create"> <finder-create></finder-create></mat-card>
+      <mat-card class="delete"><finder-delete-collection></finder-delete-collection></mat-card>
+    </div>
+
+    <mat-card class="select"><finder-collection-table></finder-collection-table></mat-card>
   </div>
 </div>
