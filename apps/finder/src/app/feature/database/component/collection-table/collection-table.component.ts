@@ -12,9 +12,7 @@ import { UpdateEntryComponent } from './update-entry/update-entry.component';
 })
 export class CollectionTableComponent implements OnInit {
   @Input() set collection(value: any) {
-    if (value) {
-      this.dataSource = value;
-    }
+    this.dataSource = value;
   }
   dialogConfig = new MatDialogConfig();
   currentCollectionName: string;
