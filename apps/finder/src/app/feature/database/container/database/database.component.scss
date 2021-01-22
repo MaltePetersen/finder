@@ -8,6 +8,7 @@
 .selection {
   display: flex;
   flex-direction: row;
+  height: 100%;
 }
 .select {
   flex: 0.7;
@@ -25,4 +26,5 @@
 }
 mat-card {
   margin: 10px;
+  height: 100%;
 }
