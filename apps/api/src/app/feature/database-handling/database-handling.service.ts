@@ -22,10 +22,10 @@ export class DatabaseHandlingService {
       console.log(err.stack);
     }
   }
-  createCollection(name) {
+  async createCollection(name) {
     try {
       this.Client.db(this.Dbname).createCollection(name);
-      return true;
+      return this.getallCollections();
     } catch (err) {
       console.log(err.stack);
     }
@@ -63,9 +63,8 @@ export class DatabaseHandlingService {
 
   updateEntry(colname: string, id: string, entry: Object) {
     try {
-      return this.Client.db(this.Dbname)
-        .collection(colname)
-        .replaceOne({ _id: new ObjectId(id) }, { $set: entry }, { upsert: true });
+      this.deleteEntry(colname, id);
+      return this.createEntry(colname, entry);
     } catch (err) {
       console.log(err.stack);
     }

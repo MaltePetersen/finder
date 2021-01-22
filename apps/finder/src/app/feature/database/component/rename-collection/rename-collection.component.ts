@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AllCollectionsService } from '../../services/all-collections.service';
+import { CurrentCollectionService } from '../../services/current-collection.service';
+import { CurrentCollectionnNameService } from '../../services/current-collectionn-name.service';
 import { DatabaseApiService } from '../../services/database-api.service';
 
 @Component({
@@ -19,6 +21,8 @@ export class RenameCollectionComponent implements OnInit {
   constructor(
     private databaseApiService: DatabaseApiService,
     private allCollectionsService: AllCollectionsService,
+    private currentCollectionService: CurrentCollectionService,
+    private currenCollectionNameService: CurrentCollectionnNameService,
     private fb: FormBuilder
   ) {
     this.form = this.fb.group({
@@ -28,6 +32,10 @@ export class RenameCollectionComponent implements OnInit {
 
   ngOnInit(): void {}
   createCollection(newName: string) {
-    this.databaseApiService.updateCollection(this.name, newName).subscribe(() => this.allCollectionsService.load());
+    this.databaseApiService.updateCollection(this.name, newName).subscribe(() => {
+      this.allCollectionsService.load();
+      this.currentCollectionService.updateCurrentCollection(newName);
+      this.currenCollectionNameService.updateCurrentCollection(newName);
+    });
   }
 }

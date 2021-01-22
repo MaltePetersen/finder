@@ -14,7 +14,6 @@ import { TableModule } from './component/table/table.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CreateCollectionComponent } from './component/create-collection/create-collection.component';
-import { CurrentSelectionComponent } from './component/current-selection/current-selection.component';
 import { DeleteCollectionComponent } from './component/delete-collection/delete-collection.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -30,7 +29,6 @@ import { UpdateEntryComponent } from './component/collection-table/update-entry/
     CollectionTableComponent,
     CreateEntryComponent,
     CreateCollectionComponent,
-    CurrentSelectionComponent,
     DeleteCollectionComponent,
     RenameCollectionComponent,
     DeleteEntryComponent,

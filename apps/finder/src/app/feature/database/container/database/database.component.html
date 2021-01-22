@@ -3,8 +3,13 @@
   <div class="selection">
     <div class="current">
       <mat-card>
-        <finder-current-selection>{{ collectionNameInput }}</finder-current-selection></mat-card
-      >
+        <ng-container *ngIf="collectionName$ | async as name; else elseTemplate">
+          <h2>{{ name }}</h2>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <h2>No Collection selected</h2>
+        </ng-template>
+      </mat-card>
     </div>
     <div class="select">
       <mat-card
@@ -21,11 +26,11 @@
         <h2>Operations</h2>
         <h3>Collection Operations:</h3>
         <finder-create-collection></finder-create-collection>
-        <finder-rename-collection [collectionName]="collectionName"></finder-rename-collection>
-        <finder-delete-collection [collectionName]="collectionName"></finder-delete-collection>
+        <finder-rename-collection [collectionName]="collectionName$ | async"></finder-rename-collection>
+        <finder-delete-collection [collectionName]="collectionName$ | async"></finder-delete-collection>
         <mat-divider></mat-divider>
         <h3>Document Operations:</h3>
-        <finder-create-entry [collectionName]="collectionName"></finder-create-entry>
+        <finder-create-entry [collectionName]="collectionName$ | async"></finder-create-entry>
       </mat-card>
     </div>
     <div class="select">

@@ -11,8 +11,7 @@ import { CurrentCollectionnNameService } from '../../services/current-collection
 })
 export class DatabaseComponent implements OnInit {
   allCollections$: Observable<Collection[]>;
-  collectionName: string;
-  collectionNameInput: string = 'No Collection selected';
+  collectionName$: Observable<string>;
   currentCollection$: Observable<any>;
   constructor(
     private allCollectionsService: AllCollectionsService,
@@ -21,12 +20,10 @@ export class DatabaseComponent implements OnInit {
   ) {
     this.allCollections$ = allCollectionsService.collections$;
     this.currentCollection$ = currentCollectionService.currentCollection$;
+    this.collectionName$ = currentCollectionName.currentCollectionName$;
   }
   setCollection(collectionName: string) {
-    this.collectionName = collectionName;
-    this.collectionNameInput = `Current Collection: ${collectionName}`;
     this.currentCollectionService.updateCurrentCollection(collectionName);
-    this.currentCollectionName.updateCurrentCollection(collectionName);
   }
   ngOnInit(): void {}
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { delay } from 'rxjs/operators';
 import { AllCollectionsService } from '../../services/all-collections.service';
 import { DatabaseApiService } from '../../services/database-api.service';
 
@@ -22,6 +23,8 @@ export class CreateCollectionComponent implements OnInit {
 
   ngOnInit(): void {}
   createCollection(name: string) {
-    this.databaseApiService.createCollection(name).subscribe(() => this.allCollectionsService.load());
+    this.databaseApiService.createCollection(name).subscribe(() => {
+      this.allCollectionsService.load();
+    });
   }
 }

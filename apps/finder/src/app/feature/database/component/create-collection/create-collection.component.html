@@ -1,4 +1,4 @@
-<form class="form" [formGroup]="form" (ngSubmit)="createCollection(form.value.name)">
+<form class="form" [formGroup]="form" (ngSubmit)="createCollection(form.value.name); form.reset()">
   <mat-form-field class="input" appearance="fill">
     <mat-label>Create a new Collection</mat-label>
     <input formControlName="name" matInput />

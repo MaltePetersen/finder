@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AllCollectionsService } from '../../services/all-collections.service';
+import { CurrentCollectionService } from '../../services/current-collection.service';
 import { DatabaseApiService } from '../../services/database-api.service';
 
 @Component({
@@ -8,7 +9,11 @@ import { DatabaseApiService } from '../../services/database-api.service';
   styleUrls: ['./delete-collection.component.scss'],
 })
 export class DeleteCollectionComponent implements OnInit {
-  constructor(private databaseApiService: DatabaseApiService, private allCollectionsService: AllCollectionsService) {}
+  constructor(
+    private databaseApiService: DatabaseApiService,
+    private currentCollectionService: CurrentCollectionService,
+    private allCollectionsService: AllCollectionsService
+  ) {}
   @Input() set collectionName(value: string) {
     if (value) {
       this.name = value;
@@ -18,6 +23,9 @@ export class DeleteCollectionComponent implements OnInit {
   ngOnInit(): void {}
   deleteCollection() {
     console.log(this.name);
-    this.databaseApiService.deleteCollection(this.name).subscribe(() => this.allCollectionsService.load());
+    this.databaseApiService.deleteCollection(this.name).subscribe(() => {
+      this.allCollectionsService.load();
+      this.currentCollectionService.updateCurrentCollection(null);
+    });
   }
 }
