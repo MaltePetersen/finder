@@ -1,8 +1,11 @@
-<h3>Create Entry</h3>
-<form [formGroup]="form" (ngSubmit)="createEntry(form.value.entry); form.reset()">
-  <mat-form-field appearance="fill">
-    <mat-label>Textarea</mat-label>
-    <textarea required matInput formControlName="entry"></textarea>
+<form class="form" [formGroup]="form" (ngSubmit)="createEntry(form.value.entry); form.reset()">
+  <mat-form-field class="input" appearance="fill">
+    <mat-label>Create Entry in {{ name }}</mat-label>
+    <textarea [rows]="15" matInput formControlName="entry"></textarea>
   </mat-form-field>
-  <div><button class="button" [disabled]="!name || form.status === 'INVALID'" mat-raised-button>Submit</button></div>
+  <div>
+    <button class="button" [disabled]="!name || form.status === 'INVALID'" [color]="'primary'" mat-raised-button>
+      Create
+    </button>
+  </div>
 </form>

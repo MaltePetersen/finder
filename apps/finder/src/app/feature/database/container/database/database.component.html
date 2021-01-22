@@ -6,25 +6,30 @@
         <finder-current-selection>{{ collectionNameInput }}</finder-current-selection></mat-card
       >
     </div>
-    <mat-card class="select"
-      ><finder-collection-selection
-        (changeCollection)="setCollection($event)"
-        [collections]="allCollections$ | async"
-      ></finder-collection-selection
-    ></mat-card>
+    <div class="select">
+      <mat-card
+        ><finder-collection-selection
+          (changeCollection)="setCollection($event)"
+          [collections]="allCollections$ | async"
+        ></finder-collection-selection
+      ></mat-card>
+    </div>
   </div>
   <div class="selection">
     <div class="current">
       <mat-card class="create">
+        <h2>Operations</h2>
+        <h3>Collection Operations:</h3>
         <finder-create-collection></finder-create-collection>
-        <finder-delete-collection [collectionName]="collectionName"></finder-delete-collection>
-        <finder-create-entry [collectionName]="collectionName"></finder-create-entry>
         <finder-rename-collection [collectionName]="collectionName"></finder-rename-collection>
+        <finder-delete-collection [collectionName]="collectionName"></finder-delete-collection>
+        <mat-divider></mat-divider>
+        <h3>Document Operations:</h3>
+        <finder-create-entry [collectionName]="collectionName"></finder-create-entry>
       </mat-card>
     </div>
-
-    <mat-card class="select"
-      ><finder-collection-table [collection]="currentCollection$ | async"></finder-collection-table
-    ></mat-card>
+    <div class="select">
+      <mat-card><finder-collection-table [collection]="currentCollection$ | async"></finder-collection-table></mat-card>
+    </div>
   </div>
 </div>

@@ -1,8 +1,12 @@
 :host {
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.input {
+  width: 70%;
 }
 .button {
-  float: right;
+  height: 55px;
+  width: 100px;
 }

@@ -1,8 +1,11 @@
-<h3>Rename Current Collection</h3>
-<form [formGroup]="form" (ngSubmit)="createCollection(form.value.name); form.reset()">
-  <mat-form-field appearance="fill">
-    <mat-label>Collection name</mat-label>
+<form class="form" [formGroup]="form" (ngSubmit)="createCollection(form.value.name); form.reset()">
+  <mat-form-field class="input" appearance="fill">
+    <mat-label>Rename collection {{ name }}</mat-label>
     <input formControlName="name" matInput />
   </mat-form-field>
-  <button class="button" [disabled]="!name || form.value.name === ''" mat-raised-button>Submit</button>
+  <div>
+    <button class="button" [color]="'accent'" [disabled]="!name || form.value.name === ''" mat-raised-button>
+      Rename
+    </button>
+  </div>
 </form>

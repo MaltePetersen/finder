@@ -1,8 +1,7 @@
-<h3>Create Collection</h3>
-<form [formGroup]="form" (ngSubmit)="createCollection(form.value.name)">
-  <mat-form-field appearance="fill">
-    <mat-label>Collection name</mat-label>
+<form class="form" [formGroup]="form" (ngSubmit)="createCollection(form.value.name)">
+  <mat-form-field class="input" appearance="fill">
+    <mat-label>Create a new Collection</mat-label>
     <input formControlName="name" matInput />
   </mat-form-field>
-  <button class="button" mat-raised-button>Submit</button>
+  <div><button [color]="'primary'" class="button" mat-raised-button>Create</button></div>
 </form>

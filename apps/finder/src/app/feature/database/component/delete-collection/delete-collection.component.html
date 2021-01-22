@@ -1,2 +1,6 @@
-<h3>Delete Current Collection</h3>
-<div><button (click)="deleteCollection()" [disabled]="!name" class="button" mat-raised-button>Submit</button></div>
+<h3 class="input">Delete {{ name }} Collection:</h3>
+<div class="button">
+  <button (click)="deleteCollection()" [disabled]="!name" class="button" [color]="'warn'" mat-raised-button>
+    Delete
+  </button>
+</div>
