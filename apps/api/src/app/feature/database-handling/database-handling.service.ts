@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient, ObjectId } = require('mongodb');
 
 @Injectable()
 export class DatabaseHandlingService {
@@ -23,7 +23,20 @@ export class DatabaseHandlingService {
       console.log(err.stack);
     }
   }
-
+  createCollection(name) {
+    try {
+      return this.Client.db(this.Dbname).createCollection(name);
+    } catch (err) {
+      console.log(err.stack);
+    }
+  }
+  updateCollection(name: string, newName: string) {
+    try {
+      return this.Client.db(this.Dbname).collection(name).rename(newName).collection;
+    } catch (err) {
+      console.log(err.stack);
+    }
+  }
   getCollection(colname: string) {
     try {
       return this.Client.db(this.Dbname).collection(colname).find().toArray();
@@ -50,7 +63,9 @@ export class DatabaseHandlingService {
 
   updateEntry(colname: string, id: string, entry: Object) {
     try {
-      return this.Client.db(this.Dbname).collection(colname).updateOne({ _id: id }, { $set: entry }, { upsert: true });
+      return this.Client.db(this.Dbname)
+        .collection(colname)
+        .updateOne({ _id: new ObjectId(id) }, { $set: entry }, { upsert: true });
     } catch (err) {
       console.log(err.stack);
     }
@@ -58,7 +73,9 @@ export class DatabaseHandlingService {
 
   deleteEntry(colname: string, id: string) {
     try {
-      return this.Client.db(this.Dbname).collection(colname).deleteOne({ _id: id });
+      return this.Client.db(this.Dbname)
+        .collection(colname)
+        .deleteOne({ _id: new ObjectId(id) });
     } catch (err) {
       console.log(err.stack);
     }

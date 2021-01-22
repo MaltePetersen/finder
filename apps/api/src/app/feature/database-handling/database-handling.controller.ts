@@ -15,6 +15,15 @@ export class DatabaseHandlingController {
     return await this.databaseHandlingService.getCollection(colname);
   }
 
+  @Post('/collection')
+  async createCollection(@Body() col: { name: string }) {
+    return await this.databaseHandlingService.createCollection(col.name);
+  }
+  @Put('/collection')
+  async renameCollection(@Body() col: { name: string; newName: string }) {
+    return await this.databaseHandlingService.updateCollection(col.name, col.newName);
+  }
+
   @Delete('/collection::colname')
   async deleteCollection(@Param('colname') colname: string) {
     return await this.databaseHandlingService.deleteCollection(colname);
