@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,8 @@ export class DatabaseApiService {
   getAllCollections() {
     return this.http.get(this.path('collections'));
   }
-  getCollection(colname: string) {
-    return this.http.get(this.path(`collection:${colname}`));
+  getCollection(colname: string): Observable<Array<any>> {
+    return this.http.get<[]>(this.path(`collection:${colname}`));
   }
   createCollection(colname: string) {
     return this.http.post(this.path(`collection`), { name: colname });

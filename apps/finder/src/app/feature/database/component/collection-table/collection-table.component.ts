@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CurrentCollectionService } from '../../services/current-collection.service';
+import { CurrentCollectionnNameService } from '../../services/current-collectionn-name.service';
+import { DeleteEntryComponent } from './delete-entry/delete-entry.component';
+import { UpdateEntryComponent } from './update-entry/update-entry.component';
 
 @Component({
   selector: 'finder-collection-table',
@@ -6,42 +11,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./collection-table.component.scss'],
 })
 export class CollectionTableComponent implements OnInit {
-  example = [
-    { name: 'element1' },
-    { name: 'element2' },
-    { name: 'element1' },
-    { name: 'element2' },
-    { name: 'element1' },
-    { name: 'element2' },
-    { name: 'element1' },
-    { name: 'element2' },
-    { name: 'element1' },
-    { name: 'element2' },
-    { name: 'element1' },
-    { name: 'element2' },
-    { name: 'element1' },
-    { name: 'element2' },
-    { name: 'element1' },
-    { name: 'element2' },
-    { name: 'element1' },
-    { name: 'element2' },
-    { name: 'element1' },
-    { name: 'element2' },
-    { name: 'element1' },
-    { name: 'element2' },
-    { name: 'element1' },
-    { name: 'element2' },
-    { name: 'element1' },
-    { name: 'element2' },
-    { name: 'element1' },
-    { name: 'element2' },
-    { name: 'element1' },
-    { name: 'element2' },
-    { name: 'element1' },
-    { name: 'element2' },
-  ];
+  @Input() set collection(value: any) {
+    if (value) {
+      this.dataSource = value;
+    }
+  }
+  dialogConfig = new MatDialogConfig();
+  currentCollectionName: string;
+  dataSource = [];
   defaultColumns = ['id'];
-  constructor() {}
+  constructor(private dialog: MatDialog, private currentCollectionNameService: CurrentCollectionnNameService) {
+    this.dialogConfig.disableClose = true;
+    this.dialogConfig.autoFocus = true;
+    this.currentCollectionNameService.currentCollectionName$.subscribe(
+      (collection) => (this.currentCollectionName = collection)
+    );
+  }
 
   ngOnInit(): void {}
+  update(id: string) {
+    this.dialogConfig.data = {
+      id: id,
+      collectionName: this.currentCollectionName,
+    };
+    this.dialog.open(UpdateEntryComponent, this.dialogConfig);
+  }
+  delete(id: string) {
+    this.dialogConfig.data = {
+      id: id,
+      collectionName: this.currentCollectionName,
+    };
+    this.dialog.open(DeleteEntryComponent, this.dialogConfig);
+  }
 }

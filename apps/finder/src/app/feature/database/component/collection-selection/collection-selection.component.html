@@ -1,6 +1,12 @@
 <h3>Collections Selection</h3>
 <div class="container">
-  <button *ngFor="let collection of collections" mat-raised-button class="button" [color]="'accent'">
+  <button
+    (click)="setCollection(collection)"
+    *ngFor="let collection of collectionsList"
+    mat-raised-button
+    class="button"
+    [color]="collection === selectedCollection ? 'primary' : ''"
+  >
     {{ collection }}
   </button>
 </div>

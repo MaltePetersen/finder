@@ -1,13 +1,17 @@
 <div class="container">
-  <finder-table class="table" [columns]="defaultColumns" [data]="example" rowHeight="50">
+  <finder-table class="table" [columns]="defaultColumns" [data]="dataSource" rowHeight="50">
     <ng-container matColumnDef="id">
       <th *matHeaderCellDef mat-header-cell class="cell--location">Id</th>
       <td *matCellDef="let element; let i = dataIndex" mat-cell>
-        {{ element.name }}
+        {{ element._id }}
       </td>
     </ng-container>
-    <ng-container class="detail--table" *goExpandedDetailDef="let element">
-      {{ element.name }}
+    <ng-container class="container" *goExpandedDetailDef="let element">
+      {{ element | json }}
+      <div class="buttons">
+        <button (click)="update(element._id)" [color]="'accent'" mat-raised-button>Update</button>
+        <button class="button" (click)="delete(element._id)" [color]="'warn'" mat-raised-button>Delete</button>
+      </div>
     </ng-container>
   </finder-table>
 </div>

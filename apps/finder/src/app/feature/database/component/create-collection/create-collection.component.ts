@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { AllCollectionsService } from '../../services/all-collections.service';
+import { DatabaseApiService } from '../../services/database-api.service';
 
 @Component({
   selector: 'finder-create-collection',
@@ -6,7 +9,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-collection.component.scss'],
 })
 export class CreateCollectionComponent implements OnInit {
-  constructor() {}
+  form: FormGroup;
+  constructor(
+    private databaseApiService: DatabaseApiService,
+    private allCollectionsService: AllCollectionsService,
+    private fb: FormBuilder
+  ) {
+    this.form = this.fb.group({
+      name: [''],
+    });
+  }
 
   ngOnInit(): void {}
+  createCollection(name: string) {
+    this.databaseApiService.createCollection(name).subscribe(() => this.allCollectionsService.load());
+  }
 }

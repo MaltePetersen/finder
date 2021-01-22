@@ -1,2 +1,2 @@
 <h3>Delete Current Collection</h3>
-<div><button class="button" mat-raised-button>Submit</button></div>
+<div><button (click)="deleteCollection()" [disabled]="!name" class="button" mat-raised-button>Submit</button></div>

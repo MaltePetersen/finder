@@ -17,7 +17,6 @@ export class DatabaseHandlingService {
 
   getallCollections() {
     try {
-      console.log(this.Client.db(this.Dbname).listCollections().toArray());
       return this.Client.db(this.Dbname).listCollections().toArray();
     } catch (err) {
       console.log(err.stack);
@@ -25,7 +24,8 @@ export class DatabaseHandlingService {
   }
   createCollection(name) {
     try {
-      return this.Client.db(this.Dbname).createCollection(name);
+      this.Client.db(this.Dbname).createCollection(name);
+      return true;
     } catch (err) {
       console.log(err.stack);
     }
@@ -65,7 +65,7 @@ export class DatabaseHandlingService {
     try {
       return this.Client.db(this.Dbname)
         .collection(colname)
-        .updateOne({ _id: new ObjectId(id) }, { $set: entry }, { upsert: true });
+        .replaceOne({ _id: new ObjectId(id) }, { $set: entry }, { upsert: true });
     } catch (err) {
       console.log(err.stack);
     }

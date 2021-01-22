@@ -3,3 +3,16 @@
   width: 100%;
   height: 29em;
 }
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.buttons {
+  margin-top: 3%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.button {
+  margin-left: 3%;
+}

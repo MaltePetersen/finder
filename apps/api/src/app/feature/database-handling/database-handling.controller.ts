@@ -37,6 +37,8 @@ export class DatabaseHandlingController {
 
   @Put('/collection::colname/entry::id')
   async updateEntry(@Body() entry: Object, @Param('colname') colname: string, @Param('id') id: string) {
+    console.log(entry);
+    console.log(colname), console.log(id);
     return await this.databaseHandlingService.updateEntry(colname, id, entry);
   }
 
