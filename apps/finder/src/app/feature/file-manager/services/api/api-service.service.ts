@@ -59,4 +59,7 @@ export class ApiService {
   copyDirectory(fromPath: string, toPath: string) {
     return this.http.get(`/api/directory/copy:${this.transformSlashes(fromPath)}:${this.transformSlashes(toPath)}`);
   }
+  getWorkspace() {
+    return this.http.get('/api/directory/workspace');
+  }
 }

@@ -35,6 +35,10 @@ export class DirectoryHandlingController {
   async copyDirectory(@Param('from') fromPath: string, @Param('to') toPath: string) {
     this.directoryHandlingService.copyDirectory(fromPath, toPath);
   }
+  @Get('/workspace')
+  async getWorkspace() {
+    return { path: this.sharedDirectoryService.getWorkspace() };
+  }
 
   @Get('/filenode')
   async getFileNode() {

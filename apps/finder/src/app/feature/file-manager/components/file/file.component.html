@@ -91,13 +91,7 @@
             >
               Cut
             </button>
-            <button
-              class="flex-items"
-              *ngIf="file[1].size < 100"
-              (click)="delete(file[0])"
-              mat-raised-button
-              color="warn"
-            >
+            <button class="flex-items" (click)="delete(file[0])" mat-raised-button color="warn">
               Delete
             </button>
           </mat-card-actions>

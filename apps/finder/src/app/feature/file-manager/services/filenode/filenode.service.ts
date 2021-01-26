@@ -1,52 +1,57 @@
+import { FnParam } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
 import { FileNode } from 'libs/shared/src/lib/api-dtos';
-import { BehaviorSubject, timer } from 'rxjs';
-import { delay, delayWhen, map, startWith, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, timer } from 'rxjs';
+import { delayWhen, map, startWith } from 'rxjs/operators';
 import { ApiService } from '../api/api-service.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FileNodeService {
+  constructor(private apiService: ApiService) {
+    this.load();
+  }
   private fileNode$$ = new BehaviorSubject<FileNode[]>([]);
   public fileNode$ = this.fileNode$$.asObservable();
   private files$ = this.apiService.getFileNode();
-  public folders$ = this.fileNode$.pipe(
+
+  public subFolders$ = this.fileNode$.pipe(
     map((fileNodes: FileNode[]) => {
       return this.recursiveFolderSearch(fileNodes);
-    }),
-    map((fileNodes: FileNode[]) => {
-      if (fileNodes.length !== 0) {
-        fileNodes.unshift({
-          name: 'Workspace',
-          type: 'folder',
-          path: fileNodes[0].path.substring(0, fileNodes[0].path.lastIndexOf('/')),
-        });
-      }
-
+    })
+  );
+  public workspace$ = this.apiService.getWorkspace().pipe(
+    map((workspace: any) => {
+      return { name: 'Workspace', type: 'folder', path: workspace.path };
+    })
+  );
+  public folders$ = combineLatest([this.subFolders$, this.workspace$]).pipe(
+    map(([fileNodes, fileNode]) => {
+      fileNodes.unshift(fileNode);
       return fileNodes;
     })
   );
   recursiveFolderSearch(fileNodes: FileNode[]) {
     let folders = [];
-    fileNodes.forEach((fileNode: FileNode) => {
-      if (fileNode.type === 'folder') {
-        folders.push({ name: fileNode.name, path: fileNode.path });
-        folders.push(...this.recursiveFolderSearch(fileNode.children));
-      }
-    });
+    if (fileNodes !== null) {
+      fileNodes.forEach((fileNode: FileNode) => {
+        if (fileNode.type === 'folder') {
+          folders.push({ name: fileNode.name, path: fileNode.path });
+          folders.push(...this.recursiveFolderSearch(fileNode.children));
+        }
+      });
+    }
     return folders;
   }
-  constructor(private apiService: ApiService) {
-    this.load();
-  }
+
   load() {
-    this.files$
-      .pipe(startWith([]), delayWhen(this.delayForFiveSeconds))
-      .subscribe((fileNodes: FileNode[]) => this.fileNode$$.next(fileNodes));
+    this.files$.pipe(startWith(null), delayWhen(this.delayForFiveSeconds)).subscribe((fileNodes: FileNode[]) => {
+      this.fileNode$$.next(fileNodes);
+    });
   }
   delayForFiveSeconds = (data) => {
-    if (data.length === 0) {
+    if (data === null) {
       return timer(0);
     }
     return timer(1000);

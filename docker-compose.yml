@@ -4,6 +4,8 @@ services:
   backend:
     container_name: backend
     image: backend
+    volumes:
+      - workspace:/Users/root/finder_workspace
     ports:
       - '3333:3333'
     networks:
@@ -18,6 +20,9 @@ services:
       - backend
     networks:
       - backend
+
+volumes:
+  workspace:
 
 networks:
   backend:

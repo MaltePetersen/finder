@@ -15,7 +15,7 @@ export class FileManagerComponent implements OnInit {
   constructor(private fileNodeService: FileNodeService) {
     this.files$ = this.fileNodeService.fileNode$.pipe(
       tap((data) => console.log(data)),
-      tap((data) => (this.isLoading = data.length === 0))
+      tap((data) => (this.isLoading = data === null))
     );
   }
   ngOnInit(): void {}

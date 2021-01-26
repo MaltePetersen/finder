@@ -20,6 +20,6 @@ export class DirectoryHandlingService {
   }
 
   deleteDirectory(path: string): Promise<any> {
-    return rmdir(path);
+    return rmdir(path, { recursive: true });
   }
 }
