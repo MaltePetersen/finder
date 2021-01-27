@@ -31,14 +31,11 @@ export class DatabaseHandlingController {
 
   @Post('/collection::colname/entry')
   async createEntry(@Body() entry: Object, @Param('colname') colname: string) {
-    console.log(entry);
     return await this.databaseHandlingService.createEntry(colname, entry);
   }
 
   @Put('/collection::colname/entry::id')
   async updateEntry(@Body() entry: Object, @Param('colname') colname: string, @Param('id') id: string) {
-    console.log(entry);
-    console.log(colname), console.log(id);
     return await this.databaseHandlingService.updateEntry(colname, id, entry);
   }
 

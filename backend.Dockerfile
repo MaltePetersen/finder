@@ -12,7 +12,6 @@ FROM node:14.15.4-alpine as builder
 WORKDIR /app
 COPY --from=dev-dependencies /app /app
 COPY apps/api apps/api
-COPY libs/api-interfaces libs/api-interfaces
 COPY libs/shared libs/shared
 COPY angular.json nx.json tsconfig.base.json ./
 ENV NODE_ENV production

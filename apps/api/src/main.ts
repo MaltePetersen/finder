@@ -3,7 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ErrnoExeptionFilter } from './app/common/exeptions/nodejs.exception';
 import { AppModule } from './app/app.module';
-import { logger } from './app/common/logger/logger.middleware';
+import { logger } from './app/common/request-logger/logger.middleware';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
