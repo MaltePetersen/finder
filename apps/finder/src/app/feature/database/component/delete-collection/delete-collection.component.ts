@@ -21,7 +21,6 @@ export class DeleteCollectionComponent implements OnInit {
   name: string = null;
   ngOnInit(): void {}
   deleteCollection() {
-    console.log(this.name);
     this.databaseApiService.deleteCollection(this.name).subscribe(() => {
       this.allCollectionsService.load();
       this.currentCollectionService.updateCurrentCollection(null);

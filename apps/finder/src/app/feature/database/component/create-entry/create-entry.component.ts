@@ -29,7 +29,6 @@ export class CreateEntryComponent implements OnInit {
 
   ngOnInit(): void {}
   createEntry(entry: string) {
-    console.log(entry);
     this.databaseApiService
       .createEntry(JSON.parse(entry), this.name)
       .subscribe(() => this.currentSelectionService.updateCurrentCollection(this.name));

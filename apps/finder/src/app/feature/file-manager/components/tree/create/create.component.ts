@@ -31,13 +31,10 @@ export class CreateComponent implements OnInit {
   ngOnInit(): void {}
   create() {
     if (this.form.get('radio').value === 'file') {
-      this.apiService
-        .createFile({ name: this.form.get('fileName').value, path: this.currentFolder.path })
-        .subscribe((data) => console.log(data));
+      this.apiService.createFile({ name: this.form.get('fileName').value, path: this.currentFolder.path }).subscribe();
     } else {
       const path = `${this.currentFolder.path}/${this.form.get('fileName').value}`;
-      console.log(path);
-      this.apiService.createDirectory({ path: path }).subscribe((data) => console.log(data));
+      this.apiService.createDirectory({ path: path }).subscribe();
     }
     this.fileNodeService.load();
     this.dialogRef.close();

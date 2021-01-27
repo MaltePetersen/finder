@@ -30,9 +30,9 @@ export class SharedDirectoryService {
     return await this.extractDirectoryContent(fileNodes, path);
   }
 
-  private async extractDirectoryContent(content: FileNode[], path: string): Promise<any> {
+  private async extractDirectoryContent(fileNodes: FileNode[], path: string): Promise<FileNode[]> {
     let fileNode = await Promise.all(
-      content.map(async (node) => {
+      fileNodes.map(async (node: FileNode) => {
         if (node.type === 'folder') {
           let nodes = await this.constructNodes(
             path + '/' + node.name,
@@ -49,16 +49,16 @@ export class SharedDirectoryService {
     return fileNode;
   }
 
-  private async constructNodes(path: string, content: any): Promise<FileNode[]> {
+  private async constructNodes(path: string, names: string[]): Promise<FileNode[]> {
     let fileNodes = new Array<FileNode>();
     fileNodes = await Promise.all(
-      content.map(async (data) => {
-        const isFolder = (await this.isFolder(path, data)) == 'folder';
+      names.map(async (name: string) => {
+        const isFolder = (await this.isFolder(path, name)) == 'folder';
         if (isFolder) {
-          let a = await { name: data, type: 'folder', path: `${path}/${data}`, children: [] };
+          let a = await { name: name, type: 'folder', path: `${path}/${name}`, children: [] };
           return Promise.resolve(a);
         } else {
-          let a = await { name: data, type: 'file', path: `${path}/${data}` };
+          let a = await { name: name, type: 'file', path: `${path}/${name}` };
           return Promise.resolve(a);
         }
       })

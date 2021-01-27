@@ -3,18 +3,9 @@ import { Component, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { FileNode } from 'libs/shared/src/lib/api-dtos';
-import { tap } from 'rxjs/operators';
+import { FlatTreeNode } from '../../model/flattreenode.interface';
 import { CurrentFileService } from '../../services/currentFile/current-file.service';
-import { FileNodeService } from '../../services/filenode/filenode.service';
 import { CreateComponent } from './create/create.component';
-
-export interface FlatTreeNode {
-  name: string;
-  type: string;
-  path: string;
-  level: number;
-  expandable: boolean;
-}
 
 @Component({
   selector: 'finder-tree',
@@ -29,13 +20,10 @@ export class TreeComponent {
   }
 
   isLoading = true;
-  /** The TreeControl controls the expand/collapse state of tree nodes.  */
   treeControl: FlatTreeControl<FlatTreeNode>;
 
-  /** The TreeFlattener is used to generate the flat list of items from hierarchical data. */
   treeFlattener: MatTreeFlattener<FileNode, FlatTreeNode>;
 
-  /** The MatTreeFlatDataSource connects the control and flattener to provide data. */
   dataSource: MatTreeFlatDataSource<FileNode, FlatTreeNode>;
   dialogConfig = new MatDialogConfig();
 
@@ -51,7 +39,6 @@ export class TreeComponent {
     this.dialog.open(CreateComponent, this.dialogConfig);
   }
 
-  /** Transform the data to something the tree can read. */
   transformer(node: FileNode, level: number) {
     return {
       name: node.name,
@@ -62,17 +49,14 @@ export class TreeComponent {
     };
   }
 
-  /** Get the level of the node */
   getLevel(node: FlatTreeNode) {
     return node.level;
   }
 
-  /** Get whether the node is expanded or not. */
   isExpandable(node: FlatTreeNode) {
     return node.expandable;
   }
 
-  /** Get whether the node has children or not. */
   hasChild(index: number, node: FlatTreeNode) {
     return node.expandable;
   }
