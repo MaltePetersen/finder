@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, timer } from 'rxjs';
 import { delayWhen, startWith, take } from 'rxjs/operators';
-import { CurrentCollectionnNameService } from './current-collectionn-name.service';
-import { DatabaseApiService } from './database-api.service';
+import { CurrentCollectionnNameService } from '../current-collectionn-name/current-collectionn-name.service';
+import { DatabaseApiService } from '../database-api/database-api.service';
 
 @Injectable({
   providedIn: 'root',

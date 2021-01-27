@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AllCollectionsService } from '../../services/all-collections.service';
-import { CurrentCollectionService } from '../../services/current-collection.service';
-import { CurrentCollectionnNameService } from '../../services/current-collectionn-name.service';
-import { DatabaseApiService } from '../../services/database-api.service';
+import { AllCollectionsService } from '../../services/all-collections/all-collections.service';
+import { CurrentCollectionService } from '../../services/current-collection/current-collection.service';
+import { CurrentCollectionnNameService } from '../../services/current-collectionn-name/current-collectionn-name.service';
+import { DatabaseApiService } from '../../services/database-api/database-api.service';
 
 @Component({
   selector: 'finder-rename-collection',

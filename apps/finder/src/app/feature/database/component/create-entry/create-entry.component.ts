@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AllCollectionsService } from '../../services/all-collections.service';
-import { CurrentCollectionService } from '../../services/current-collection.service';
-import { DatabaseApiService } from '../../services/database-api.service';
+import { CurrentCollectionService } from '../../services/current-collection/current-collection.service';
+import { DatabaseApiService } from '../../services/database-api/database-api.service';
 import { jsonValidator } from '../../util/json-validator';
 @Component({
   selector: 'finder-create-entry',

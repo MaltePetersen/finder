@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { CurrentCollectionService } from '../../services/current-collection.service';
-import { CurrentCollectionnNameService } from '../../services/current-collectionn-name.service';
+import { CurrentCollectionnNameService } from '../../services/current-collectionn-name/current-collectionn-name.service';
 import { DeleteEntryComponent } from './delete-entry/delete-entry.component';
 import { UpdateEntryComponent } from './update-entry/update-entry.component';
 

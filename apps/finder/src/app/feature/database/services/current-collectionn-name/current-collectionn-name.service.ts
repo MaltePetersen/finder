@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { DatabaseApiService } from './database-api.service';
+import { DatabaseApiService } from '../database-api/database-api.service';
 
 @Injectable({
   providedIn: 'root',

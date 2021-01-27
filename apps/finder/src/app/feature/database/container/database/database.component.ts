@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Collection } from '../../models/collection.interface';
-import { AllCollectionsService } from '../../services/all-collections.service';
-import { CurrentCollectionService } from '../../services/current-collection.service';
-import { CurrentCollectionnNameService } from '../../services/current-collectionn-name.service';
+import { AllCollectionsService } from '../../services/all-collections/all-collections.service';
+import { CurrentCollectionService } from '../../services/current-collection/current-collection.service';
+import { CurrentCollectionnNameService } from '../../services/current-collectionn-name/current-collectionn-name.service';
 @Component({
   selector: 'finder-database',
   templateUrl: './database.component.html',

@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AllCollectionsService } from '../../services/all-collections.service';
-import { CurrentCollectionService } from '../../services/current-collection.service';
-import { DatabaseApiService } from '../../services/database-api.service';
-
+import { AllCollectionsService } from '../../services/all-collections/all-collections.service';
+import { CurrentCollectionService } from '../../services/current-collection/current-collection.service';
+import { DatabaseApiService } from '../../services/database-api/database-api.service';
 @Component({
   selector: 'finder-delete-collection',
   templateUrl: './delete-collection.component.html',

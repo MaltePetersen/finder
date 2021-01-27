@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CurrentCollectionService } from '../../../services/current-collection.service';
-import { DatabaseApiService } from '../../../services/database-api.service';
+import { CurrentCollectionService } from '../../../services/current-collection/current-collection.service';
+import { DatabaseApiService } from '../../../services/database-api/database-api.service';
 
 @Component({
   selector: 'finder-delete-entry',

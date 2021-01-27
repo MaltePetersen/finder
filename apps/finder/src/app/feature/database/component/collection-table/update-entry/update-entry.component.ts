@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CurrentCollectionService } from '../../../services/current-collection.service';
-import { DatabaseApiService } from '../../../services/database-api.service';
+import { CurrentCollectionService } from '../../../services/current-collection/current-collection.service';
+import { DatabaseApiService } from '../../../services/database-api/database-api.service';
 import { jsonValidator } from '../../../util/json-validator';
 
 @Component({

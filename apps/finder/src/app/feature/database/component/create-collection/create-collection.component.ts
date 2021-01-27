@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { delay } from 'rxjs/operators';
-import { AllCollectionsService } from '../../services/all-collections.service';
-import { DatabaseApiService } from '../../services/database-api.service';
+import { AllCollectionsService } from '../../services/all-collections/all-collections.service';
+import { DatabaseApiService } from '../../services/database-api/database-api.service';
 
 @Component({
   selector: 'finder-create-collection',

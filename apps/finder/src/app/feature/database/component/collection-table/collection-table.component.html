@@ -7,7 +7,7 @@
       </td>
     </ng-container>
     <ng-container class="container" *finderExpandedDetailDef="let element">
-      {{ element | json }}
+      <pre>{{ element | json }}</pre>
       <div class="buttons">
         <button (click)="update(element._id)" [color]="'accent'" mat-raised-button>Update</button>
         <button class="button" (click)="delete(element._id)" [color]="'warn'" mat-raised-button>Delete</button>

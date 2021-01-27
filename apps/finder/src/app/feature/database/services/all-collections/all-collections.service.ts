@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { DatabaseApiService } from './database-api.service';
-import { Collection } from '../models/collection.interface';
+import { DatabaseApiService } from '../database-api/database-api.service';
+import { Collection } from '../../models/collection.interface';
 @Injectable({
   providedIn: 'root',
 })
