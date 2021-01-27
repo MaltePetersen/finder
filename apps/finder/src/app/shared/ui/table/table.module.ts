@@ -8,12 +8,11 @@ import { TableComponent } from './table.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ExpandedDetailDefDirective } from './directives/expanded-detail-def.directive';
-import { ColSpanDirective } from './directives/col-span.directive';
 import { ExpandedDetailContainerComponent } from './expanded-detail-container/expanded-detail-container.component';
 import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [TableComponent, ExpandedDetailDefDirective, ExpandedDetailContainerComponent, ColSpanDirective],
+  declarations: [TableComponent, ExpandedDetailDefDirective, ExpandedDetailContainerComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -30,7 +29,6 @@ import { MatButtonModule } from '@angular/material/button';
     ScrollingModule,
     TableVirtualScrollModule,
     ExpandedDetailDefDirective,
-    ColSpanDirective,
   ],
 })
 export class TableModule {}
