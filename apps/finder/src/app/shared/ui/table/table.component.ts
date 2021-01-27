@@ -16,7 +16,6 @@ import {
 import { MatColumnDef, MatHeaderRowDef, MatRowDef, MatTable } from '@angular/material/table';
 import { TableVirtualScrollDataSource } from 'ng-table-virtual-scroll';
 import { ExpandedDetailDefDirective } from './directives/expanded-detail-def.directive';
-import { LoadMorePropeties } from './table-load-more.interface';
 const columnFilterKeyword = '[USE_COLUMN_FILTER]';
 
 @Component({
@@ -60,7 +59,6 @@ export class TableComponent<T> implements AfterContentInit, OnInit {
   @ContentChild(ExpandedDetailDefDirective) expandedDetailDef?: ExpandedDetailDefDirective;
 
   @ViewChild(MatTable, { static: true }) table: MatTable<T>;
-  @Input() loadMore: LoadMorePropeties = { isSet: false, numberOfItemsPerPage: 31 };
   @Output() loadNewData = new EventEmitter<boolean>();
   @Input() highlightProperty = '__highlightPropertyNotSet';
   @Input() highlightAnimatedProperty = '__highlightPropertyNotSet';

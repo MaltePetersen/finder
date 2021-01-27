@@ -6,7 +6,7 @@
         {{ element._id }}
       </td>
     </ng-container>
-    <ng-container class="container" *goExpandedDetailDef="let element">
+    <ng-container class="container" *finderExpandedDetailDef="let element">
       {{ element | json }}
       <div class="buttons">
         <button (click)="update(element._id)" [color]="'accent'" mat-raised-button>Update</button>
