@@ -1,19 +1,6 @@
-$highlight-color: blanchedalmond;
-$highlight-animated-color: pink;
-
 @mixin expansionArrowTransform($rotation) {
   transform: translateX(-10px) scale(0.5) rotate($rotation);
 }
-
-@keyframes backgroundAnimation {
-  0% {
-    background-color: $highlight-animated-color;
-  }
-  100% {
-    background-color: $highlight-color;
-  }
-}
-
 :host {
   display: block;
   position: relative;
@@ -43,16 +30,6 @@ $highlight-animated-color: pink;
     border-bottom-width: 0;
     border-bottom-style: none;
   }
-
-  &--highlighted {
-    background-color: $highlight-color;
-  }
-
-  &--highlighted-animated {
-    animation: backgroundAnimation 5s linear 1s;
-    background-color: $highlight-color;
-  }
-
   &--with-open-details .expansion-arrow {
     @include expansionArrowTransform(90deg);
   }
@@ -84,16 +61,4 @@ $highlight-animated-color: pink;
 .expanded-detail-cell {
   padding-left: 0 !important; // found no other way to convince material
   padding-right: 0 !important;
-
-  &--highlighted {
-    background-color: $highlight-color;
-  }
-
-  &--highlighted-animated {
-    animation: backgroundAnimation 5s linear 1s;
-    background-color: $highlight-color;
-  }
-}
-.button {
-  width: 100%;
 }

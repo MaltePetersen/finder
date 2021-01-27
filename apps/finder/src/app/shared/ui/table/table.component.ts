@@ -57,8 +57,6 @@ export class TableComponent<T> implements AfterContentInit, OnInit {
   @ViewChild(MatTable, { static: true }) table: MatTable<T>;
   private columnsWithoutExpansionArrow: string[] = [];
 
-  @Input() hasHeader = true;
-
   @Input() rowHeight?: number;
 
   @Input() noDataText = 'Keine Daten verfügbar.';

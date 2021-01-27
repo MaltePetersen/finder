@@ -4,10 +4,10 @@ import { render, screen } from '@testing-library/angular';
 import { TableModule } from './table.module';
 
 @Component({
-  template: `<go-table rowHeight="50" noDataText="no data test">
+  template: `<finder-table rowHeight="50" noDataText="no data test">
     <ng-container matColumnDef="testColumn"> </ng-container>
     <tr *matRowDef="let row; columns: columns" mat-row></tr>
-  </go-table>`,
+  </finder-table>`,
 })
 class TestHostComponent {}
 
