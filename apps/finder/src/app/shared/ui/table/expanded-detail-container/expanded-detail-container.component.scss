@@ -7,8 +7,6 @@
   padding-left: $spacing-xlarge;
   padding-right: $spacing-xlarge;
   padding-bottom: $spacing-default;
-
-  @include handsetTable($screen-xs);
 }
 
 .content {
