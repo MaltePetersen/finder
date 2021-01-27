@@ -10,7 +10,6 @@ export class CurrentCollectionnNameService {
   public currentCollectionName$ = this.currentCollectionName$$.asObservable();
   constructor() {}
   updateCurrentCollection(collection: string) {
-    console.log(collection);
     this.currentCollectionName$$.next(collection);
   }
 }

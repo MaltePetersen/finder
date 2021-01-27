@@ -10,7 +10,6 @@ import { CollectionSelectionComponent } from './component/collection-selection/c
 import { CollectionTableComponent } from './component/collection-table/collection-table.component';
 import { MatButtonModule } from '@angular/material/button';
 import { CreateEntryComponent } from './component/create-entry/create-entry.component';
-import { TableModule } from './component/table/table.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CreateCollectionComponent } from './component/create-collection/create-collection.component';
@@ -41,7 +40,6 @@ import { UpdateEntryComponent } from './component/collection-table/update-entry/
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
-    TableModule,
     MatDialogModule,
     DatabaseRoutingModule,
     MatToolbarModule,

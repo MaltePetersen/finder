@@ -44,8 +44,6 @@ export class TableComponent<T> implements AfterContentInit, OnInit {
       : this.columnsWithoutExpansionArrow;
   }
   @Input() set data(value: T[] | void) {
-    console.log('here');
-    console.log(value);
     if (!value) {
       this.isLoading = true;
     } else {

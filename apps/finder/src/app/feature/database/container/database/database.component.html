@@ -4,7 +4,7 @@
     <div class="current">
       <mat-card>
         <ng-container *ngIf="collectionName$ | async as name; else elseTemplate">
-          <h2>{{ name }}</h2>
+          <h2>Current Selection: {{ name }}</h2>
         </ng-container>
         <ng-template #elseTemplate>
           <h2>No Collection selected</h2>

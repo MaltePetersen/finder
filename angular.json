@@ -33,7 +33,10 @@
             "aot": true,
             "assets": ["apps/finder/src/favicon.ico", "apps/finder/src/assets"],
             "styles": ["apps/finder/src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": ["projects/finder/src/styles"]
+            }
           },
           "configurations": {
             "production": {
@@ -99,7 +102,10 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/finder/jest.config.js",
-            "passWithNoTests": true
+            "passWithNoTests": true,
+            "stylePreprocessorOptions": {
+              "includePaths": ["projects/finder/src/styles"]
+            }
           }
         }
       }

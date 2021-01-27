@@ -46,11 +46,11 @@ export class FileNodeService {
   }
 
   load() {
-    this.files$.pipe(startWith(null), delayWhen(this.delayForFiveSeconds)).subscribe((fileNodes: FileNode[]) => {
+    this.files$.pipe(startWith(null), delayWhen(this.delay)).subscribe((fileNodes: FileNode[]) => {
       this.fileNode$$.next(fileNodes);
     });
   }
-  delayForFiveSeconds = (data) => {
+  delay = (data) => {
     if (data === null) {
       return timer(0);
     }

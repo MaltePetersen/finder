@@ -11,6 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FileManagerToolbarComponent } from './file-manager-toolbar/file-manager-toolbar.component';
+import { TableModule } from './table/table.module';
 @NgModule({
   declarations: [NavigationComponent, FileManagerToolbarComponent],
   imports: [
@@ -18,6 +19,7 @@ import { FileManagerToolbarComponent } from './file-manager-toolbar/file-manager
     RouterModule,
     MatToolbarModule,
     MatButtonModule,
+    TableModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
@@ -26,6 +28,6 @@ import { FileManagerToolbarComponent } from './file-manager-toolbar/file-manager
     MatMenuModule,
     MatButtonModule,
   ],
-  exports: [NavigationComponent, FileManagerToolbarComponent],
+  exports: [NavigationComponent, TableModule, FileManagerToolbarComponent],
 })
 export class UiModule {}
