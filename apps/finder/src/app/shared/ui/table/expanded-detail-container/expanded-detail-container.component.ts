@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 @Component({
-  selector: 'go-expanded-detail-container',
+  selector: 'finder-expanded-detail-container',
   templateUrl: './expanded-detail-container.component.html',
   styleUrls: ['./expanded-detail-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -6,10 +6,8 @@ import {
   Component,
   ContentChild,
   ContentChildren,
-  EventEmitter,
   Input,
   OnInit,
-  Output,
   QueryList,
   ViewChild,
 } from '@angular/core';
@@ -66,8 +64,6 @@ export class TableComponent<T> implements AfterContentInit, OnInit {
   @Input() noDataText = 'Keine Daten verfügbar.';
 
   isLoading = false;
-  dataLength: number;
-
   /**
    * The datasource for the virtual scroller.
    * This holds version of originalData that might me sorted.

@@ -16,11 +16,11 @@
           [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'"
           class="expanded-row__detail"
         >
-          <go-expanded-detail-container>
+          <finder-expanded-detail-container>
             <ng-container
               *ngTemplateOutlet="expandedDetailDef?.templateRef; context: { $implicit: element }"
             ></ng-container>
-          </go-expanded-detail-container>
+          </finder-expanded-detail-container>
         </div>
       </td>
     </ng-container>
