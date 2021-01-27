@@ -16,7 +16,6 @@ import {
 import { MatColumnDef, MatHeaderRowDef, MatRowDef, MatTable } from '@angular/material/table';
 import { TableVirtualScrollDataSource } from 'ng-table-virtual-scroll';
 import { ExpandedDetailDefDirective } from './directives/expanded-detail-def.directive';
-const columnFilterKeyword = '[USE_COLUMN_FILTER]';
 
 @Component({
   selector: 'finder-table',
