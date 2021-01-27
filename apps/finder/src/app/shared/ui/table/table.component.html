@@ -1,5 +1,5 @@
 <cdk-virtual-scroll-viewport class="scroll-viewport mat-elevation-z8" [tvsItemSize]="rowHeight" bufferMultiplier="10">
-  <table [dataSource]="dataSource" class="table" mat-table matSort multiTemplateDataRows>
+  <table [dataSource]="dataSource" class="table" mat-table multiTemplateDataRows>
     <ng-container matColumnDef="expansion-arrow">
       <th *matHeaderCellDef mat-header-cell class="expansion-arrow-headercell"></th>
       <td *matCellDef="let element" mat-cell class="expansion-arrow-cell">
@@ -10,14 +10,7 @@
     <ng-content></ng-content>
 
     <ng-container matColumnDef="expandedDetail">
-      <td
-        *matCellDef="let element"
-        [attr.colspan]="'' + columns.length"
-        class="expanded-detail-cell"
-        [class.expanded-detail-cell--highlighted]="element[highlightProperty]"
-        [class.expanded-detail-cell--highlighted-animated]="element[highlightAnimatedProperty]"
-        mat-cell
-      >
+      <td *matCellDef="let element" [attr.colspan]="'' + columns.length" class="expanded-detail-cell" mat-cell>
         <div
           *ngIf="element === expandedElement"
           [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'"
@@ -40,8 +33,6 @@
       mat-row
       class="row"
       [style.height.px]="rowHeight"
-      [class.row--highlighted]="element[highlightProperty]"
-      [class.row--highlighted-animated]="element[highlightAnimatedProperty]"
       [class.row--with-open-details]="expandedElement === element"
       (click)="expandedElement = expandedElement === element ? null : element"
     ></tr>

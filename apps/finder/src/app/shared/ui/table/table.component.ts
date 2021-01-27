@@ -48,7 +48,6 @@ export class TableComponent<T> implements AfterContentInit, OnInit {
       this.isLoading = false;
       this.updateDataSource(value);
     }
-    console.log(this.isLoading);
   }
 
   constructor(private cdr: ChangeDetectorRef) {}
@@ -58,9 +57,6 @@ export class TableComponent<T> implements AfterContentInit, OnInit {
   @ContentChild(ExpandedDetailDefDirective) expandedDetailDef?: ExpandedDetailDefDirective;
 
   @ViewChild(MatTable, { static: true }) table: MatTable<T>;
-  @Output() loadNewData = new EventEmitter<boolean>();
-  @Input() highlightProperty = '__highlightPropertyNotSet';
-  @Input() highlightAnimatedProperty = '__highlightPropertyNotSet';
   private columnsWithoutExpansionArrow: string[] = [];
 
   @Input() hasHeader = true;
