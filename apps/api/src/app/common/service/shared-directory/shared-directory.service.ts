@@ -1,7 +1,6 @@
 import { FileNode } from '@finder/shared';
 import { Injectable } from '@nestjs/common';
 import { environment } from 'apps/api/src/environments/environment.prod';
-import { BehaviorSubject } from 'rxjs';
 import { readdir, stat } from 'fs/promises';
 import { userInfo } from 'os';
 
@@ -10,9 +9,6 @@ export class SharedDirectoryService {
   constructor() {
     this.getDirectoryContent(this.getWorkspace());
   }
-
-  private fileNode$$ = new BehaviorSubject<FileNode[]>(null);
-  public fileNode$ = this.fileNode$$.asObservable();
   async readDirectory(path: string): Promise<string[]> {
     return readdir(path);
   }

@@ -5,21 +5,21 @@ import { mkdir, rename, rmdir } from 'fs/promises';
 
 @Injectable()
 export class DirectoryHandlingService {
-  constructor(private sharedDirectoryService: SharedDirectoryService) {}
+  constructor() {}
 
-  createDirectory(path: string): Promise<any> {
+  createDirectory(path: string): Promise<void> {
     return mkdir(path);
   }
 
-  updateDirectoryName(path: string, newPath): Promise<any> {
+  updateDirectoryName(path: string, newPath): Promise<void> {
     return rename(path, newPath);
   }
 
-  copyDirectory(path: string, newPath: string) {
+  copyDirectory(path: string, newPath: string): void {
     copySync(path, newPath);
   }
 
-  deleteDirectory(path: string): Promise<any> {
+  deleteDirectory(path: string): Promise<void> {
     return rmdir(path, { recursive: true });
   }
 }

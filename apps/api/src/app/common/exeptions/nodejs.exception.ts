@@ -1,11 +1,10 @@
 import { ExceptionFilter, Catch, ArgumentsHost, Logger } from '@nestjs/common';
-import { throwError } from 'rxjs';
-import { logger } from '../logger/logger.middleware';
+import { inspect } from 'util';
 
 @Catch()
 export class ErrnoExeptionFilter implements ExceptionFilter {
   catch(exeption: NodeJS.ErrnoException, host: ArgumentsHost) {
     let logger = new Logger();
-    logger.error(exeption);
+    logger.error(inspect(exeption));
   }
 }
