@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { Folder } from '../../../model/folder.interface';
-import { ApiService } from '../../../services/api/api-service.service';
+import { FileManagerApiService } from '../../../services/file-manager-api/file-manager-api.service';
 import { FileNodeService } from '../../../services/filenode/filenode.service';
 @Component({
   selector: 'finder-create',
@@ -19,7 +19,7 @@ export class CreateComponent implements OnInit {
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<CreateComponent>,
     private fileNodeService: FileNodeService,
-    private apiService: ApiService
+    private apiService: FileManagerApiService
   ) {
     this.folders$ = this.fileNodeService.folders$;
     this.form = this.fb.group({

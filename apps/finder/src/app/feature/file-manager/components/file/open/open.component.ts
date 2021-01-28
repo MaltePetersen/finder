@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { ApiService } from '../../../services/api/api-service.service';
+import { FileManagerApiService } from '../../../services/file-manager-api/file-manager-api.service';
 
 @Component({
   selector: 'finder-open',
@@ -14,7 +14,7 @@ export class OpenComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<OpenComponent>,
     @Inject(MAT_DIALOG_DATA) data,
-    private apiService: ApiService
+    private apiService: FileManagerApiService
   ) {
     this.contentsOfFile$ = this.apiService.readFile(data.file.path);
   }

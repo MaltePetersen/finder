@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { FileNode } from 'libs/shared/src/lib/api-dtos';
 import { BehaviorSubject, combineLatest, timer } from 'rxjs';
 import { delayWhen, map, startWith } from 'rxjs/operators';
-import { ApiService } from '../api/api-service.service';
+import { FileManagerApiService } from '../file-manager-api/file-manager-api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FileNodeService {
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: FileManagerApiService) {
     this.load();
   }
   private fileNode$$ = new BehaviorSubject<FileNode[]>([]);

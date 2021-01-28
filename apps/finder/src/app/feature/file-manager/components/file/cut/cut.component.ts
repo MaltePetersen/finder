@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Folder } from '../../../model/folder.interface';
-import { ApiService } from '../../../services/api/api-service.service';
+import { FileManagerApiService } from '../../../services/file-manager-api/file-manager-api.service';
 import { CurrentFileService } from '../../../services/currentFile/current-file.service';
 import { FileNodeService } from '../../../services/filenode/filenode.service';
 import { CopyComponent } from '../copy/copy.component';
@@ -20,7 +20,7 @@ export class CutComponent implements OnInit {
     private fileNodeService: FileNodeService,
     private currentFileService: CurrentFileService,
     @Inject(MAT_DIALOG_DATA) private data,
-    private apiService: ApiService,
+    private apiService: FileManagerApiService,
     private dialogRef: MatDialogRef<CopyComponent>
   ) {}
 

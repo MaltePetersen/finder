@@ -3,7 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FileNode, Stats } from 'libs/shared/src/lib/api-dtos';
 import { Observable, of } from 'rxjs';
 import { delay, map, switchMap, tap } from 'rxjs/operators';
-import { ApiService } from '../../services/api/api-service.service';
+import { FileManagerApiService } from '../../services/file-manager-api/file-manager-api.service';
 import { CurrentFileService } from '../../services/currentFile/current-file.service';
 import { CopyComponent } from './copy/copy.component';
 import { CutComponent } from './cut/cut.component';
@@ -21,7 +21,7 @@ export class FileComponent implements OnInit {
   isLoading = false;
   constructor(
     private currentFileService: CurrentFileService,
-    private apiService: ApiService,
+    private apiService: FileManagerApiService,
     private dialog: MatDialog
   ) {
     this.dialogConfig.disableClose = true;

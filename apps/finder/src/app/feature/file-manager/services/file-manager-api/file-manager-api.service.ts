@@ -12,7 +12,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class ApiService {
+export class FileManagerApiService {
   constructor(private http: HttpClient) {}
 
   public getFolder() {
