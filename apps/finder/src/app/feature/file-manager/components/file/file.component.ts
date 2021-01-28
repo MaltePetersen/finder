@@ -32,9 +32,13 @@ export class FileComponent implements OnInit {
       switchMap((fileNode: FileNode) => {
         if (fileNode) {
           const fileStats = this.apiService.getStatsOfFile(fileNode?.path);
-          return fileStats.pipe(map((stats) => [fileNode, stats]));
+          return fileStats.pipe(
+            map((stats) => {
+              return { fileNode: fileNode, stats: stats };
+            })
+          );
         }
-        return of([null, null]);
+        return of(null);
       }),
       tap(() => (this.isLoading = false))
     );

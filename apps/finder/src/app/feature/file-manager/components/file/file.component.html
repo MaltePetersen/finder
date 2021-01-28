@@ -1,97 +1,91 @@
 <div *ngIf="file$ | async as file">
-  <div *ngIf="file[0]">
+  <div *ngIf="file">
     <mat-card class="example-card">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{ file[0].name }}</mat-card-title>
-        <mat-card-subtitle>{{ file[0].type | titlecase }}</mat-card-subtitle>
+        <mat-card-title>{{ file.fileNode.name }}</mat-card-title>
+        <mat-card-subtitle>{{ file.fileNode.type | titlecase }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <div class="container">
           <mat-list>
             <div mat-subheader>File Information</div>
             <mat-list-item>
-              <div mat-line>dev: {{ file[1].dev }}</div>
+              <div mat-line>dev: {{ file.stats.dev }}</div>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>atime: {{ file[1].atime }}</div>
+              <div mat-line>atime: {{ file.stats.atime }}</div>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>atimeMs: {{ file[1].atimeMs }}</div>
+              <div mat-line>atimeMs: {{ file.stats.atimeMs }}</div>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>birthtime: {{ file[1].birthtime }}</div>
+              <div mat-line>birthtime: {{ file.stats.birthtime }}</div>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>birthtimeMs: {{ file[1].birthtimeMs }}</div>
+              <div mat-line>birthtimeMs: {{ file.stats.birthtimeMs }}</div>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>blksize: {{ file[1].blksize }}</div>
+              <div mat-line>blksize: {{ file.stats.blksize }}</div>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>blocks: {{ file[1].blocks }}</div>
+              <div mat-line>blocks: {{ file.stats.blocks }}</div>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>ctime: {{ file[1].ctime }}</div>
+              <div mat-line>ctime: {{ file.stats.ctime }}</div>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>ctimeMs: {{ file[1].ctimeMs }}</div>
+              <div mat-line>ctimeMs: {{ file.stats.ctimeMs }}</div>
             </mat-list-item>
           </mat-list>
           <mat-list class="list2">
             <mat-list-item>
-              <div mat-line>gid: {{ file[1].gid }}</div>
+              <div mat-line>gid: {{ file.stats.gid }}</div>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>ino: {{ file[1].ino }}</div>
+              <div mat-line>ino: {{ file.stats.ino }}</div>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>mode: {{ file[1].mode }}</div>
+              <div mat-line>mode: {{ file.stats.mode }}</div>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>mtime: {{ file[1].mtime }}</div>
+              <div mat-line>mtime: {{ file.stats.mtime }}</div>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>mtimeMs: {{ file[1].mtimeMs }}</div>
+              <div mat-line>mtimeMs: {{ file.stats.mtimeMs }}</div>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>nlink: {{ file[1].nlink }}</div>
+              <div mat-line>nlink: {{ file.stats.nlink }}</div>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>rdev: {{ file[1].rdev }}</div>
+              <div mat-line>rdev: {{ file.stats.rdev }}</div>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>size: {{ file[1].size }}</div>
+              <div mat-line>size: {{ file.stats.size }}</div>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>uid: {{ file[1].uid }}</div>
+              <div mat-line>uid: {{ file.stats.uid }}</div>
             </mat-list-item>
           </mat-list>
         </div>
-        <ng-container *ngIf="file[0].type === 'file'; else folder">
+        <ng-container *ngIf="file.fileNode.type === 'file'; else folder">
           <mat-card-actions [align]="'start'">
-            <button class="flex-items" (click)="open(file[0])" mat-raised-button>Open</button>
-            <button class="flex-items" (click)="change(file[0])" mat-raised-button>Change Name</button>
+            <button class="flex-items" (click)="open(file.fileNode)" mat-raised-button>Open</button>
+            <button class="flex-items" (click)="change(file.fileNode)" mat-raised-button>Change Name</button>
 
-            <button class="flex-items" (click)="copy(file[0])" mat-raised-button color="primary">Copy</button>
-            <button class="flex-items" (click)="cut(file[0])" mat-raised-button color="accent">Cut</button>
-            <button class="flex-items" (click)="delete(file[0])" mat-raised-button color="warn">Delete</button>
+            <button class="flex-items" (click)="copy(file.fileNode)" mat-raised-button color="primary">Copy</button>
+            <button class="flex-items" (click)="cut(file.fileNode)" mat-raised-button color="accent">Cut</button>
+            <button class="flex-items" (click)="delete(file.fileNode)" mat-raised-button color="warn">Delete</button>
           </mat-card-actions>
         </ng-container>
         <ng-template #folder>
           <mat-card-actions [align]="'start'">
-            <button class="flex-items" (click)="change(file[0])" mat-raised-button>Change Name</button>
-            <button class="flex-items" (click)="copy(file[0])" mat-raised-button color="primary">Copy</button>
-            <button
-              class="flex-items"
-              *ngIf="file[1].size < 100"
-              (click)="cut(file[0])"
-              mat-raised-button
-              color="accent"
-            >
+            <button class="flex-items" (click)="change(file.fileNode)" mat-raised-button>Change Name</button>
+            <button class="flex-items" (click)="copy(file.fileNode)" mat-raised-button color="primary">Copy</button>
+            <button class="flex-items" (click)="cut(file.fileNode)" mat-raised-button color="accent">
               Cut
             </button>
-            <button class="flex-items" (click)="delete(file[0])" mat-raised-button color="warn">
+            <button class="flex-items" (click)="delete(file.fileNode)" mat-raised-button color="warn">
               Delete
             </button>
           </mat-card-actions>
