@@ -50,8 +50,8 @@ export class FileNodeService {
       this.fileNode$$.next(fileNodes);
     });
   }
-  delay = (data) => {
-    if (data === null) {
+  delay = (fileNodes: FileNode[]) => {
+    if (fileNodes === null) {
       return timer(0);
     }
     return timer(1000);

@@ -27,12 +27,12 @@ export class FileComponent implements OnInit {
     this.dialogConfig.disableClose = true;
     this.dialogConfig.autoFocus = true;
     this.file$ = this.currentFileService.currentFile$.pipe(
-      tap((data) => (data !== null ? (this.isLoading = true) : '')),
+      tap((fileNode: FileNode) => (fileNode !== null ? (this.isLoading = true) : '')),
       delay(300),
-      switchMap((obs1: FileNode) => {
-        if (obs1) {
-          const obs2 = this.apiService.getStatsOfFile(obs1?.path);
-          return obs2.pipe(map((value) => [obs1, value]));
+      switchMap((fileNode: FileNode) => {
+        if (fileNode) {
+          const fileStats = this.apiService.getStatsOfFile(fileNode?.path);
+          return fileStats.pipe(map((stats) => [fileNode, stats]));
         }
         return of([null, null]);
       }),

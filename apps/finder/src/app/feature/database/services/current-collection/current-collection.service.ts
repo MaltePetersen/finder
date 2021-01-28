@@ -19,13 +19,13 @@ export class CurrentCollectionService {
     this.currentCollectionNameService.updateCurrentCollection(collection);
     this.databaseApiService
       .getCollection(collection)
-      .pipe(startWith(null), delayWhen(this.delayForFiveSeconds), take(2))
+      .pipe(startWith(null), delayWhen(this.delay), take(2))
       .subscribe((collectionDocuments: Array<any>) => {
         this.currentCollection$$.next(collectionDocuments);
       });
   }
-  delayForFiveSeconds = (data) => {
-    if (!data) {
+  delay = (collection: any) => {
+    if (!collection) {
       return timer(0);
     }
     return timer(500);

@@ -17,9 +17,6 @@ export class FileManagerApiService {
 
   public getFolder() {
     return this.http.get<[]>('/api/directory/:%2FUsers%2Fmpetersen%2FmodernWebDev');
-    /*.pipe(
-      map((data) => data.map(entry => {name: `${entry}`; type: 'folder' } ))
-    )*/
   }
   public getFileNode() {
     return this.http.get<FileNode[]>('/api/directory/filenode');
