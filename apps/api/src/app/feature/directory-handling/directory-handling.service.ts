@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { copySync } from 'fs-extra';
-import { SharedDirectoryService } from '../../common/service/shared-directory/shared-directory.service';
 import { mkdir, rename, rmdir } from 'fs/promises';
 
 @Injectable()

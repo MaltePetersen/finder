@@ -1,0 +1,25 @@
+export enum ApiEndpoints {
+  //file and folder handling
+  API_GET_STATS = '/api/file/stats:{path}',
+  API_GET_FILE = '/api/file/:{path}',
+  API_DELETE_FILE = '/api/file/:{path}',
+  API_POST_FILE = '/api​/file',
+  API_PUT_FILE = '/api​/file',
+  API_GET_FILE_COPY = '​/api​/file​/copy:{frompath}:{topath}',
+  API_GET_DIR = '​/api​/directory​/:{path}',
+  API_DELETE_DIR = '​/api​/directory​/:{path}',
+  API_POST_DIR = '​/api​/directory​',
+  API_PUT_DIR = '​/api​/directory​',
+  API_GET_DIR_COPY = '​/api/directory/copy:{from}:{to}',
+  API_GET_WORKSPACE = '​/api​/directory​/workspace',
+  API_GET_DIR_FILENODE = '/api/directory/filenode',
+  // Mongodb
+  API_GET_COLLECTIONS = '​/api​/database-handling​/collections',
+  API_GET_COLLECTION = '​/api​/database-handling​/collection:{colname}',
+  API_DELETE_COLLECTION = '​/api​/database-handling​/collection:{colname}',
+  API_POST_COLLECTION = '​/api​/database-handling​/collection',
+  API_PUT_COLLECTION = '​/api​/database-handling​/collection',
+  API_POST_ENTRY = '​/api​/database-handling​/collection:{colname}​/entry',
+  API_PUT_ENTRY = '​/api​/database-handling​/collection:{colname}​/entry:{id}',
+  API_DELETE_ENTRY = '​/api​/database-handling​/collection:{colname}​/entry:{id}',
+}
