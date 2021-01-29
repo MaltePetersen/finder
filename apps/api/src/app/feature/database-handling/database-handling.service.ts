@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { environment } from 'apps/api/src/environments/environment.prod';
+import { environment } from 'apps/api/src/environments/environment';
 import { MongoClient, ObjectId } from 'mongodb';
 import { inspect } from 'util';
 

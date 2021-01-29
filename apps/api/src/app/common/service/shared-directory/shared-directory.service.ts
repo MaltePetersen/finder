@@ -1,6 +1,6 @@
 import { FileNode } from '@finder/shared';
 import { Injectable } from '@nestjs/common';
-import { environment } from 'apps/api/src/environments/environment.prod';
+import { environment } from 'apps/api/src/environments/environment';
 import { readdir, stat } from 'fs/promises';
 import { userInfo } from 'os';
 

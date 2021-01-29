@@ -1,5 +1,7 @@
 import { FnParam } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
+import { ApiEndpoints } from 'apps/finder/src/app/shared/models/api-endpoints.enum';
+import { ApiService } from 'apps/finder/src/app/shared/services/api/api.service';
 import { FileNode } from 'libs/shared/src/lib/api-dtos';
 import { BehaviorSubject, combineLatest, timer } from 'rxjs';
 import { delayWhen, map, startWith } from 'rxjs/operators';
@@ -9,7 +11,7 @@ import { FileManagerApiService } from '../file-manager-api/file-manager-api.serv
   providedIn: 'root',
 })
 export class FileNodeService {
-  constructor(private apiService: FileManagerApiService) {
+  constructor(private apiService: FileManagerApiService, private testApi: ApiService) {
     this.load();
   }
   private fileNode$$ = new BehaviorSubject<FileNode[]>([]);
