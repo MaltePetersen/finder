@@ -15,7 +15,7 @@ COPY apps/api apps/api
 COPY libs/shared libs/shared
 COPY angular.json nx.json tsconfig.base.json ./
 ENV NODE_ENV production
-RUN $(npm bin)/ng build api --prod
+RUN $(npm bin)/ng build api --prod --configuration=docker
 RUN cd dist/apps/api && ls
 
 CMD ["node", "dist/apps/api/main.js"]
