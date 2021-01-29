@@ -20,9 +20,19 @@ services:
       - backend
     networks:
       - backend
+  db:
+    image: mongo
+    container_name: mongo
+    volumes:
+      - mongodata:/data/db
+    ports:
+      - '27017:27017'
+    networks:
+      - backend
 
 volumes:
   workspace:
+  mongodata:
 
 networks:
   backend:
