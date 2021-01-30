@@ -10,12 +10,12 @@ export class FileHandlingController {
     private sharedDirectoryService: SharedDirectoryService
   ) {}
 
-  @Get('/stats::path')
+  @Get('/stats/:path')
   async getStats(@Param('path') path: string) {
     return await this.filehandlerService.getStats(path);
   }
 
-  @Get('::path')
+  @Get('/:path')
   async getFile(@Param('path') path: string) {
     return { file: await this.filehandlerService.readFile(path) };
   }
@@ -32,12 +32,12 @@ export class FileHandlingController {
     return await this.sharedDirectoryService.readDirectory(updateFileDTO.path);
   }
 
-  @Get('/copy::frompath::topath')
+  @Get('/copy/:frompath/:topath')
   async copy(@Param('frompath') fromPath: string, @Param('topath') toPath: string) {
     await this.filehandlerService.copyFile(fromPath, toPath);
   }
 
-  @Delete('::path')
+  @Delete('/:path')
   async delete(@Param('path') path: string) {
     await this.filehandlerService.deleteFile(path);
   }

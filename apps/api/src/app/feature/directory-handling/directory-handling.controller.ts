@@ -10,7 +10,7 @@ export class DirectoryHandlingController {
     private sharedDirectoryService: SharedDirectoryService
   ) {}
 
-  @Get('::path')
+  @Get('/path')
   async readDirectory(@Param('path') path: string) {
     return await this.sharedDirectoryService.readDirectory(path);
   }
@@ -26,12 +26,12 @@ export class DirectoryHandlingController {
     await this.directoryHandlingService.updateDirectoryName(updateDirectoryDTO.path, updateDirectoryDTO.newPath);
   }
 
-  @Delete('::path')
+  @Delete('/:path')
   async deleteDirectory(@Param('path') path: string) {
     await this.directoryHandlingService.deleteDirectory(path);
   }
 
-  @Get('/copy::from::to')
+  @Get('/copy/:from/:to')
   async copyDirectory(@Param('from') fromPath: string, @Param('to') toPath: string) {
     this.directoryHandlingService.copyDirectory(fromPath, toPath);
   }

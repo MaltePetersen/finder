@@ -8,7 +8,7 @@ export class ApiService {
   private readonly host: string;
   constructor() {}
   public url(endpoint: ApiEndpoints, params: { [key: string]: any } = {}): string {
-    return `${this.replaceParams(endpoint, params)}`;
+    return `${environment.api}/${this.replaceParams(endpoint, params)}`;
   }
 
   private replaceParams(input: string, params: { [key: string]: any } = {}): string {
