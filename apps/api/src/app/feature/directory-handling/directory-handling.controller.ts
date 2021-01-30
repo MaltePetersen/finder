@@ -3,6 +3,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { SharedDirectoryService } from '../../common/service/shared-directory/shared-directory.service';
 import { DirectoryHandlingService } from './directory-handling.service';
 
+//TODO Copy nach folgendem Schema RESTFUL machen https://stackoverflow.com/questions/30804876/rest-api-design-for-cloning-a-resource
 @Controller('directory')
 export class DirectoryHandlingController {
   constructor(
