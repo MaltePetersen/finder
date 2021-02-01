@@ -1,10 +1,10 @@
 <h2 mat-dialog-title>Cut File</h2>
 
 <mat-dialog-content>
-  <finder-folderchoser (changeCurrentFolder)="updateCurrentFolder($event)"></finder-folderchoser>
-</mat-dialog-content>
+  <finder-folderchooser (changeCurrentFolder)="updateCurrentFolder($event)"></finder-folderchooser>
 
-<mat-dialog-actions>
-  <button mat-raised-button (click)="close()">Cancel</button>
-  <button mat-raised-button [disabled]="!currentFolder" [color]="'primary'" (click)="cut()">Confirm</button>
-</mat-dialog-actions>
+  <mat-dialog-actions>
+    <button mat-raised-button (click)="close()">Cancel</button>
+    <button mat-raised-button [disabled]="!currentFolder" [color]="'primary'" (click)="cut()">Confirm</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

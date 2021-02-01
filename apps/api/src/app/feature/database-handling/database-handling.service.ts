@@ -32,7 +32,7 @@ export class DatabaseHandlingService {
       this.error(err, 'getAllCollections');
     }
   }
-  async createCollection(name) {
+  async createCollection(name: string) {
     try {
       this.db.createCollection(name);
       return this.getallCollections();

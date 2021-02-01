@@ -4,11 +4,11 @@ import { Folder } from '../../model/folder.interface';
 import { FileNodeService } from '../../services/filenode/filenode.service';
 
 @Component({
-  selector: 'finder-folderchoser',
-  templateUrl: './folderchoser.component.html',
-  styleUrls: ['./folderchoser.component.scss'],
+  selector: 'finder-folderchooser',
+  templateUrl: './folderchooser.component.html',
+  styleUrls: ['./folderchooser.component.scss'],
 })
-export class FolderchoserComponent implements OnInit {
+export class FolderchooserComponent implements OnInit {
   folders$: Observable<Folder[]>;
   currentFolder: Folder;
   @Output() changeCurrentFolder = new EventEmitter<Folder>();
