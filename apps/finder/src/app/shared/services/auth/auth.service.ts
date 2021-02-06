@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../../models/user.interface';
 @Injectable({
@@ -8,7 +9,7 @@ export class AuthService {
   fakeBackenddata = [{ name: 'Malte', password: '12345' }];
   private readonly user$$ = new BehaviorSubject<User | null>(null);
   public readonly user$ = this.user$$.asObservable();
-  constructor() {
+  constructor(private router: Router) {
     const user = localStorage.getItem('user');
     if (user) {
       this.login(JSON.parse(user));
@@ -26,7 +27,9 @@ export class AuthService {
     return false;
   }
   logout() {
+    this.user$$.next(null);
     localStorage.clear();
+    this.router.navigate(['/login']);
   }
   isAuthenticated() {
     return this.user$$.value === null ? false : true;
