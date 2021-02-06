@@ -1,4 +1,6 @@
 export enum ApiEndpoints {
+  //auth
+  API_GET_AUTH = 'auth/login',
   //file and folder handling
   API_GET_STATS = 'file/stats/{path}',
   API_GET_FILE = 'file/{path}',

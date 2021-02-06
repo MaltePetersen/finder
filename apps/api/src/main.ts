@@ -4,12 +4,14 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ErrnoExeptionFilter } from './app/common/exeptions/nodejs.exception';
 import { AppModule } from './app/app.module';
 import { logger } from './app/common/request-logger/logger.middleware';
+import { HttpExceptionFilter } from './app/common/exeptions/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
   app.useGlobalFilters(new ErrnoExeptionFilter());
+  app.useGlobalFilters(new HttpExceptionFilter());
   const options = new DocumentBuilder()
     .setTitle('Finder API')
     .setDescription('This is the finder api Default path: /Users/mpetersen/finder/dist/apps/api')

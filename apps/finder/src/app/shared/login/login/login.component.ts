@@ -1,4 +1,5 @@
 import { ConnectedPositionStrategy } from '@angular/cdk/overlay';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,7 +12,12 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {
     this.form = this.formBuilder.group({
       username: [''],
       password: [''],
@@ -20,8 +26,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
   submit() {
-    console.log();
-    if (this.authService.login({ name: this.form.value.username, password: this.form.value.password })) {
+    if (this.authService.login({ username: this.form.value.username, password: this.form.value.password })) {
       this.router.navigate(['/file-manager']);
     }
   }
