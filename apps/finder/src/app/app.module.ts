@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginModule } from './shared/login/login.module';
 import { UiModule } from './shared/ui/ui.module';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { UiModule } from './shared/ui/ui.module';
     BrowserAnimationsModule,
     UiModule,
     AppRoutingModule,
+    LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

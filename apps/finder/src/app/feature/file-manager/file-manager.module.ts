@@ -41,5 +41,7 @@ import { FileManagerRoutingModule } from './file-manager-routing.module';
     UiModule,
     MatListModule,
   ],
+  providers: [],
+  exports: [],
 })
 export class FileManagerModule {}
