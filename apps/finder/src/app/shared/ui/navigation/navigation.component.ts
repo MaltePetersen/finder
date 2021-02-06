@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '../../services/auth/auth.service';
+import { User } from '../../models/user.interface';
 
 @Component({
   selector: 'finder-navigation',
@@ -14,8 +15,10 @@ export class NavigationComponent {
     map((result) => result.matches),
     shareReplay()
   );
-
-  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService) {}
+  user$: Observable<User>;
+  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService) {
+    this.user$ = authService.user$;
+  }
 
   logout() {
     this.authService.logout();
