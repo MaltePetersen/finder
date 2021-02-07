@@ -26,8 +26,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
   submit() {
-    if (this.authService.login({ username: this.form.value.username, password: this.form.value.password })) {
-      this.router.navigate(['/file-manager']);
+    this.authService.login({ username: this.form.value.username, password: this.form.value.password }); {
     }
   }
 }

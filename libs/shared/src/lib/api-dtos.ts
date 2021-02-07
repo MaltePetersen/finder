@@ -34,3 +34,6 @@ export type Stats<T> = {
   ctime: Date;
   birthtime: Date;
 };
+export type AccessToken = {
+  access_token: string;
+}

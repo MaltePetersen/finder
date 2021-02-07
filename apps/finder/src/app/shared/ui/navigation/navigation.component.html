@@ -11,13 +11,13 @@
   <div class="buffer"></div>
   <mat-icon class="icon">explore</mat-icon>
   <span>finder</span>
-  <div *ngIf="user$ | async" class="container">
+  <div *ngIf="accessToken$ | async" class="container">
     <button mat-button (click)="logout()">Logout</button>
   </div>
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
-    *ngIf="(user$ | async) !== null"
+    *ngIf="accessToken$ | async"
     #drawer
     class="sidenav"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"

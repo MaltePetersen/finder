@@ -1,52 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { AccessToken } from 'libs/shared/src/lib/api-dtos';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../../models/user.interface';
 import { ApiAuthService } from '../api-auth/api-auth.service';
+import { first } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  fakeBackenddata = [{ name: 'Malte', password: '12345' }];
-  private readonly user$$ = new BehaviorSubject<User | null>(null);
-  public readonly user$ = this.user$$.asObservable();
   private accessToken$$ = new BehaviorSubject<string>('');
   public accessToken$ = this.accessToken$$.asObservable();
   constructor(private router: Router, private authApi: ApiAuthService) {
-    const user = localStorage.getItem('user');
-    if (user) {
-      this.login(JSON.parse(user));
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken) {
+      this.accessToken$$.next(JSON.parse(accessToken));
     }
   }
   login(user: User) {
-    this.authApi.login(user).subscribe({
-      next: (data) => {
-        this.accessToken$$.next(data.accessToken);
+        this.authApi.login(user).subscribe({
+      next: (accessToken: AccessToken) => {
+        this.accessToken$$.next(accessToken.access_token);
+        localStorage.setItem('access_token', JSON.stringify(accessToken.access_token));
+        this.router.navigate(['/file-manager']);
       },
       error: (err) => console.error('wrong password'),
     });
-    return true;
-    /*  if (      ) {
-      this.user$$.next(user);
-      localStorage.setItem('user', JSON.stringify(user));
-      return true;
-    }
-    this.user$$.next(null);
-    return false;*/
   }
   logout() {
-    this.user$$.next(null);
+    this.accessToken$$.next('');
     localStorage.clear();
     this.router.navigate(['/login']);
   }
   isAuthenticated() {
-    return this.user$$.value === null ? false : true;
+    return this.accessToken$$.value === '' ? false : true;
   }
 
-  public get user(): User | null {
-    return this.user$$.value;
-  }
   getToken() {
-    return '';
+    return this.accessToken$$.value;
   }
 }

@@ -11,10 +11,6 @@ import { UsersModule } from './users/users.module';
   controllers: [AppController],
   providers: [
     SharedDirectoryService,
-    {
-      provide: APP_GUARD,
-      useClass: JwtAuthGuard,
-    },
   ],
   exports: [SharedDirectoryService],
 })
