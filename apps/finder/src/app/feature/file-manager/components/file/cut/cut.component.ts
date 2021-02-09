@@ -16,13 +16,17 @@ import { CopyComponent } from '../copy/copy.component';
 export class CutComponent implements OnInit {
   form: FormGroup;
   currentFolder: Folder;
+  type: string;
   constructor(
     private fileNodeService: FileNodeService,
     private currentFileService: CurrentFileService,
     @Inject(MAT_DIALOG_DATA) private data,
     private apiService: FileManagerApiService,
     private dialogRef: MatDialogRef<CopyComponent>
-  ) {}
+  ) {
+this.type =    data.file.type;
+
+  }
 
   ngOnInit(): void {}
   cut() {

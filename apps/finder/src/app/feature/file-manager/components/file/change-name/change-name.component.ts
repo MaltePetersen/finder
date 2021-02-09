@@ -16,6 +16,7 @@ export class ChangeNameComponent implements OnInit {
   form: FormGroup;
   currentFolder: Folder;
   disabled = true;
+  type: string;
   constructor(
     private fileNodeService: FileNodeService,
     private currentFileService: CurrentFileService,
@@ -24,6 +25,7 @@ export class ChangeNameComponent implements OnInit {
     private apiService: FileManagerApiService,
     private dialogRef: MatDialogRef<CopyComponent>
   ) {
+    this.type = data.file.type;
     this.form = this.fb.group({
       file: [''],
     });

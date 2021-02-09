@@ -15,6 +15,7 @@ import { FileNodeService } from '../../../services/filenode/filenode.service';
 export class DeleteComponent implements OnInit {
   form: FormGroup;
   delete$: Observable<any>;
+  type: string;
   constructor(
     private fileNodeService: FileNodeService,
     private currentFileService: CurrentFileService,
@@ -23,6 +24,7 @@ export class DeleteComponent implements OnInit {
     private apiService: FileManagerApiService,
     private dialogRef: MatDialogRef<DeleteComponent>
   ) {
+    this.type = data.file.type;
     this.delete$ =
       data.file.type === 'file'
         ? this.apiService.deleteFile(data.file.path)

@@ -8,7 +8,6 @@ export class JWTInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log(`Bearer ${this.authService.getToken()}`);
     request = request.clone({
       setHeaders: {
         Authorization: `Bearer ${this.authService.getToken()}`,
