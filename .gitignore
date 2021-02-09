@@ -4,8 +4,8 @@
 /dist
 /tmp
 /out-tsc
-/documentation
-/documentationNest
+/documentationFinder
+/documentationAPI
 # dependencies
 /node_modules
 
