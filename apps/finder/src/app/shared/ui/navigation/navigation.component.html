@@ -4,9 +4,9 @@
     aria-label="Toggle sidenav"
     mat-icon-button
     (click)="drawer.toggle()"
-    *ngIf="isHandset$ | async"
+    *ngIf="(isHandset$ | async)"
   >
-    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    <mat-icon *ngIf="accessToken$ | async" aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
   <div class="buffer"></div>
   <mat-icon class="icon">explore</mat-icon>
@@ -17,12 +17,11 @@
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
-    *ngIf="accessToken$ | async"
     #drawer
     class="sidenav"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false"
+    [attr.role]="(isHandset$ | async)  ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async)  ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)  &&  (accessToken$ | async)"
   >
     <mat-nav-list>
       <a mat-list-item [routerLink]="['/file-manager']" routerLinkActive="router-link-active">File Manager</a>
