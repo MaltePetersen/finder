@@ -10,7 +10,7 @@ WORKDIR /app
 COPY --from=dev-dependencies /app /app
 COPY . .
 RUN npm install -g nx
-RUN nx build finder
+RUN nx build finder --prod
 
 ### STAGE 3: Run ###
 
